@@ -6,11 +6,11 @@ import { CardComponent } from "@angular-monorepo/card";
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule, HeaderComponent, CardComponent],
+  imports: [NxWelcomeComponent, RouterModule,HeaderComponent, CardComponent],
   selector: 'angular-monorepo-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'library-app';
+  title = 'store-app';
 }

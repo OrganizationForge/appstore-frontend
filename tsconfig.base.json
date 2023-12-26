@@ -41,7 +41,9 @@
       ],
       "@angular-monorepo/book-list": [
         "libs/library-app/book/feature-books-list/src/index.ts"
-      ]
+      ],
+      "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
+      "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

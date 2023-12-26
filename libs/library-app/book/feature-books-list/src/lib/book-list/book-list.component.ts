@@ -8,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css',
 })
-export class BookListComponent {}
+export class BookListComponent {
+  title = "Prueba Titulo";
+}
