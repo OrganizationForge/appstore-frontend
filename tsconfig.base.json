@@ -14,7 +14,35 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-monorepo/auth-data-access": [
+        "libs/shared/auth/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/autor": [
+        "libs/library-app/autor/feature-autor/src/index.ts"
+      ],
+      "@angular-monorepo/autor-data-access": [
+        "libs/library-app/autor/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/autor-edit": [
+        "libs/library-app/autor/feature-autor-edit/src/index.ts"
+      ],
+      "@angular-monorepo/autor-list": [
+        "libs/library-app/autor/feature-autors-list/src/index.ts"
+      ],
+      "@angular-monorepo/book": [
+        "libs/library-app/book/feature-book/src/index.ts"
+      ],
+      "@angular-monorepo/book-data-access": [
+        "libs/library-app/book/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/book-edit": [
+        "libs/library-app/book/feature-books-edit/src/index.ts"
+      ],
+      "@angular-monorepo/book-list": [
+        "libs/library-app/book/feature-books-list/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
