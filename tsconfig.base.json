@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@angular-monorepo/auth-data-access": [
-        "libs/shared/auth/data-access/src/index.ts"
+        "libs/shared/auth-lib/data-access/src/index.ts"
       ],
       "@angular-monorepo/autor": [
         "libs/library-app/autor/feature-autor/src/index.ts"
@@ -30,19 +30,10 @@
       "@angular-monorepo/autor-list": [
         "libs/library-app/autor/feature-autors-list/src/index.ts"
       ],
-      "@angular-monorepo/book": [
-        "libs/library-app/book/feature-book/src/index.ts"
-      ],
-      "@angular-monorepo/book-data-access": [
-        "libs/library-app/book/data-access/src/index.ts"
-      ],
-      "@angular-monorepo/book-edit": [
-        "libs/library-app/book/feature-books-edit/src/index.ts"
-      ],
-      "@angular-monorepo/book-list": [
-        "libs/library-app/book/feature-books-list/src/index.ts"
-      ],
       "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
+      "@angular-monorepo/feature-login": [
+        "libs/shared/auth-lib/feature-login/src/index.ts"
+      ],
       "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"]
     }
   },

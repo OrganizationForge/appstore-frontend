@@ -2,9 +2,9 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
-    path: 'books',
+    path: '',
     loadComponent: () =>
-      import('@angular-monorepo/book-list').then((m) => m.BookListComponent),
+      import('@angular-monorepo/feature-login').then((m) => m.FeatureLoginComponent),
   },
 
 ];
