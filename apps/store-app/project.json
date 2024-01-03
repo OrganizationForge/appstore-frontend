@@ -20,7 +20,8 @@
           "apps/store-app/src/favicon.ico",
           "apps/store-app/src/assets"
         ],
-        "styles": ["apps/store-app/src/styles.scss"],
+        "styles": [
+          "apps/store-app/src/styles.scss"],
         "scripts": []
       },
       "configurations": {

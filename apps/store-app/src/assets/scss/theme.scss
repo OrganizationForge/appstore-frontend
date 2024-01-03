@@ -1,0 +1,25 @@
+/*
+ * Cartzilla | Bootstrap E-Commerce Template
+ * Copyright 2022 Createx Studio
+ * Theme styles
+ */
+
+// User variables
+@import 'user-variables';
+
+// Configuration & utilities
+@import 'variables';
+@import 'mixins';
+@import 'utilities';
+
+// Layout & components
+@import 'reboot';
+@import 'components';
+
+// User custom styles
+@import 'user';
+
+
+// $theme-colors: (
+//   "primary" : grey
+// )
