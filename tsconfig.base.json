@@ -31,10 +31,16 @@
         "libs/library-app/autor/feature-autors-list/src/index.ts"
       ],
       "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
+      "@angular-monorepo/error-handler": [
+        "libs/shared/core/error-handler-lib/src/index.ts"
+      ],
       "@angular-monorepo/feature-login": [
         "libs/shared/auth-lib/feature-login/src/index.ts"
       ],
-      "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"]
+      "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"],
+      "@angular-monorepo/http-client": [
+        "libs/shared/core/http-client-lib/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

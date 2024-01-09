@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AuthStore } from "@angular-monorepo/auth-data-access";
 
 @Component({
   selector: 'angular-monorepo-feature-login',
@@ -19,6 +20,8 @@ export class FeatureLoginComponent implements OnInit {
   submit = false;
 
   constructor(private formBuilder: UntypedFormBuilder) { }
+
+  private readonly authStore = inject(AuthStore);
 
   ngOnInit(): void {
     /**
@@ -56,6 +59,8 @@ export class FeatureLoginComponent implements OnInit {
      if (this.loginForm.invalid) {
        return;
      }
+
+     this.authStore.login();
    }
 
     //------------------ Sign Up Form ---------------------//
