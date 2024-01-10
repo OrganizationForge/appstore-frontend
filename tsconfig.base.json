@@ -14,7 +14,34 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-monorepo/auth-data-access": [
+        "libs/shared/auth-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/autor": [
+        "libs/library-app/autor/feature-autor/src/index.ts"
+      ],
+      "@angular-monorepo/autor-data-access": [
+        "libs/library-app/autor/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/autor-edit": [
+        "libs/library-app/autor/feature-autor-edit/src/index.ts"
+      ],
+      "@angular-monorepo/autor-list": [
+        "libs/library-app/autor/feature-autors-list/src/index.ts"
+      ],
+      "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
+      "@angular-monorepo/error-handler": [
+        "libs/shared/core/error-handler-lib/src/index.ts"
+      ],
+      "@angular-monorepo/feature-login": [
+        "libs/shared/auth-lib/feature-login/src/index.ts"
+      ],
+      "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"],
+      "@angular-monorepo/http-client": [
+        "libs/shared/core/http-client-lib/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
