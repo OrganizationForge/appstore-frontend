@@ -18,10 +18,17 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/store-app/src/favicon.ico",
+          {
+            "glob": "**/*",
+            "input": "./libs/shared/assets",
+            "output": "./assets"
+          },
           "apps/store-app/src/assets"
         ],
         "styles": [
-          "apps/store-app/src/styles.scss"],
+          "libs/shared/assets/scss/theme.scss",
+          "apps/store-app/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {

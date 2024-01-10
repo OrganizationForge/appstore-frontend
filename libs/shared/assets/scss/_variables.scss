@@ -4,7 +4,7 @@
 
 
 // Import Bootstrap functions to use inside variables values
-@import '../../../../../node_modules/bootstrap/scss/functions';
+@import 'bootstrap/scss/functions';
 
 
 // Prefix for :root CSS variables
@@ -225,7 +225,7 @@ $blockquote-footer-font-size: $font-size-sm !default;
 // Icons
 
 $icons-font-family:           'cartzilla-icons' !default;
-$icons-font-path:             'assets/fonts' !default;
+$icons-font-path:             '../fonts' !default;
 
 
 // Tables
