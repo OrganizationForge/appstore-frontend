@@ -9,7 +9,8 @@ export interface NewUser {
 }
 
 export interface LoginUserRequest {
-  user: LoginUser;
+  email: string;
+  password: string;
 }
 
 export interface LoginUser {

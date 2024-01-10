@@ -1,9 +1,9 @@
 export interface User {
+  userName: string;
   email: string;
-  token: string;
-  username: string;
-  bio: string;
-  image: string;
+  jwToken: string;
+  // bio: string;
+  // image: string;
 }
 
 export interface UserResponse {

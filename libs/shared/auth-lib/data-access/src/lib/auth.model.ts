@@ -2,18 +2,18 @@ import { User } from "./models/user";
 
 export type AuthState = {
   loggedIn: boolean;
-  user: User;
+  data: User;
 };
 
 export const initialUserValue: User = {
+  userName: '',
   email: '',
-  token: '',
-  username: '',
-  bio: '',
-  image: '',
+  jwToken: '',
+  // bio: '',
+  // image: '',
 };
 
 export const authInitialState: AuthState = {
   loggedIn: false,
-  user: initialUserValue,
+  data: initialUserValue,
 };

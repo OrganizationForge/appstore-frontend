@@ -25,7 +25,7 @@ export const AuthStore = signalStore(
       getUser: rxMethod<void>(
         pipe(
           switchMap(() => authService.user()),
-          tap(({ user }) => patchState(store, { user, loggedIn: true })),
+          tap(({ data }) => patchState(store, { data, loggedIn: true })),
         ),
       ),
       login: rxMethod<void>(
@@ -34,10 +34,10 @@ export const AuthStore = signalStore(
           exhaustMap(([, data]) =>
             authService.login(data).pipe(
               tapResponse({
-                next: ({ user }) => {
-                  patchState(store, { user, loggedIn: true });
-                  localStorageService.setItem(user.token);
-                  router.navigateByUrl('/');
+                next: ({ data }) => {
+                  patchState(store, { data, loggedIn: true });
+                  localStorageService.setItem(data.jwToken);
+                  router.navigateByUrl('dashboard');
                 },
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
               }),
@@ -51,9 +51,9 @@ export const AuthStore = signalStore(
           exhaustMap(([, data]) =>
             authService.register(data).pipe(
               tapResponse({
-                next: ({ user }) => {
-                  patchState(store, { user, loggedIn: true });
-                  localStorageService.setItem(user.token);
+                next: ({ data }) => {
+                  patchState(store, { data, loggedIn: true });
+                  localStorageService.setItem(data.jwToken);
                   router.navigateByUrl('/');
                 },
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
@@ -63,7 +63,7 @@ export const AuthStore = signalStore(
         ),
       ),
       logout: () => {
-        patchState(store, { user: initialUserValue, loggedIn: false });
+        patchState(store, { data: initialUserValue, loggedIn: false });
         localStorageService.removeItem();
         router.navigateByUrl('login');
       },
