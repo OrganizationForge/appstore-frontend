@@ -15,7 +15,13 @@ export const appRoutes: Route[] = [
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('@angular-monorepo/header').then((m) => m.HeaderComponent),
+      import('@angular-monorepo/home-store-app').then((m) => m.HomeStoreAppComponent),
       canActivate: [authGuard],
   },
+  {
+    path: 'shop',
+    loadChildren: () =>
+      import('@angular-monorepo/shop-grid-ls').then((m) => m.shopGridLsRoutes)
+
+  }
 ];

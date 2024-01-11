@@ -30,6 +30,9 @@
       "@angular-monorepo/autor-list": [
         "libs/library-app/autor/feature-autors-list/src/index.ts"
       ],
+      "@angular-monorepo/brand-logos": [
+        "libs/shared/ui/brand-logos-lib/src/index.ts"
+      ],
       "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
       "@angular-monorepo/error-handler": [
         "libs/shared/core/error-handler-lib/src/index.ts"
@@ -38,9 +41,19 @@
         "libs/shared/auth-lib/feature-login/src/index.ts"
       ],
       "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"],
+      "@angular-monorepo/home-store-app": [
+        "libs/store-app/home-lib/src/index.ts"
+      ],
       "@angular-monorepo/http-client": [
         "libs/shared/core/http-client-lib/src/index.ts"
-      ]
+      ],
+      "@angular-monorepo/product-slider": [
+        "libs/shared/ui/product-slider-lib/src/index.ts"
+      ],
+      "@angular-monorepo/shop-grid-ls": [
+        "libs/shared/shop-grid-lib/src/index.ts"
+      ],
+      "@angular-monorepo/trending": ["libs/shared/ui/trending-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
