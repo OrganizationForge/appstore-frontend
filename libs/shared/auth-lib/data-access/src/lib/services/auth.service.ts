@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiService } from '@angular-monorepo/http-client';
-import { User} from '../models/user';
-import { LoginUser, LoginUserRequest, NewUser, NewUserRequest } from '../models/auth';
+import { User } from '../models/user';
+import { LoginUser, LoginUserRequest, NewUser } from '../models/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,6 +17,14 @@ export class AuthService {
   }
 
   register(credentials: NewUser): Observable<ApiResponse<User>> {
-    return this.apiService.post<ApiResponse<User>, NewUserRequest>('/users', { user: credentials });
+    return this.apiService.post<ApiResponse<User>, NewUser>('/Account/Register',
+      {
+        nombre: credentials.nombre,
+        apellido: credentials.apellido,
+        email: credentials.email,
+        userName: credentials.userName,
+        password: credentials.password,
+        confirmPassword: credentials.confirmPassword
+      });
   }
 }

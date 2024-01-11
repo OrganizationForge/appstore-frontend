@@ -54,7 +54,7 @@ export const AuthStore = signalStore(
                 next: ({ data }) => {
                   patchState(store, { data, loggedIn: true });
                   localStorageService.setItem(data.jwToken);
-                  router.navigateByUrl('/');
+                  router.navigateByUrl('dashboard');
                 },
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
               }),

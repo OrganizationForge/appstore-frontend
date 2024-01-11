@@ -15,7 +15,7 @@ export class FeatureLoginComponent implements OnInit, OnDestroy {
   private readonly authStore = inject(AuthStore);
   private readonly store = inject(Store);
 
-  
+
   // Login Form
   loginForm!: UntypedFormGroup;
   submitted = false;
@@ -32,61 +32,63 @@ export class FeatureLoginComponent implements OnInit, OnDestroy {
     /**
      * Form Validatyion
      */
-     this.loginForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', Validators.required],
     });
 
-     /**
-     * Form Validatyion
-     */
-      this.SignupForm = this.formBuilder.group({
-        f_name: ['', [Validators.required]],
-        l_name: ['', [Validators.required]],
-        email: ['', Validators.required],
-        phone: ['', Validators.required],
-        password: ['', Validators.required],
-        cpassword: ['', Validators.required],
-      });
+    /**
+    * Form Validatyion
+    */
+    this.SignupForm = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      email: ['', Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    });
   }
 
   //------------------ Sign In Form ---------------------//
-   // convenience getter for easy access to form fields
-   get f() { return this.loginForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
 
-   /**
-    * Form submit
-    */
-    onSubmit() {
-     this.submitted = true;
+  /**
+   * Form submit
+   */
+  onSubmit() {
+    this.submitted = true;
 
-     // stop here if form is invalid
-     if (this.loginForm.invalid) {
-       return;
-     }
-     this.store.dispatch(formsActions.updateData({ data: this.loginForm.value }));
-     this.authStore.login();
-   }
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.store.dispatch(formsActions.updateData({ data: this.loginForm.value }));
+    this.authStore.login();
+  }
 
 
   ngOnDestroy() {
     this.store.dispatch(formsActions.initializeForm());
   }
 
-    //------------------ Sign Up Form ---------------------//
+  //------------------ Sign Up Form ---------------------//
 
-   // convenience getter for easy access to form fields
-   get fa() { return this.SignupForm.controls; }
+  // convenience getter for easy access to form fields
+  get fa() { return this.SignupForm.controls; }
 
-   /**
-    * Form submit
-    */
-    SignupSubmit() {
-     this.submit = true;
+  /**
+   * Form submit
+   */
+  SignupSubmit() {
+    this.submit = true;
 
-     // stop here if form is invalid
-     if (this.SignupForm.invalid) {
-       return;
-     }
-   }
+    // stop here if form is invalid
+    if (this.SignupForm.invalid) {
+      return;
+    }
+    this.store.dispatch(formsActions.updateData({ data: this.SignupForm.value }));
+    this.authStore.register();
+  }
 }

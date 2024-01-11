@@ -47,12 +47,12 @@
           <div class="row gx-4 gy-3">
             <div class="col-sm-6">
               <label class="form-label" for="reg-fn">First Name</label>
-              <input class="form-control" type="text" required id="reg-fn" formControlName="f_name" [ngClass]="{ 'is-invalid': submit && fa['f_name'].errors }">
+              <input class="form-control" type="text" required id="reg-fn" formControlName="nombre" [ngClass]="{ 'is-invalid': submit && fa['nombre'].errors }">
               <div class="invalid-feedback">Please enter your first name!</div>
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="reg-ln">Last Name</label>
-              <input class="form-control" type="text" required id="reg-ln" formControlName="l_name" [ngClass]="{ 'is-invalid': submit && fa['l_name'].errors }">
+              <input class="form-control" type="text" required id="reg-ln" formControlName="apellido" [ngClass]="{ 'is-invalid': submit && fa['apellido'].errors }">
               <div class="invalid-feedback">Please enter your last name!</div>
             </div>
             <div class="col-sm-6">
@@ -61,9 +61,9 @@
               <div class="invalid-feedback">Please enter valid email address!</div>
             </div>
             <div class="col-sm-6">
-              <label class="form-label" for="reg-phone">Phone Number</label>
-              <input class="form-control" type="text" required id="reg-phone" formControlName="phone" [ngClass]="{ 'is-invalid': submit && fa['phone'].errors }">
-              <div class="invalid-feedback">Please enter your phone number!</div>
+              <label class="form-label" for="reg-userName">Username</label>
+              <input class="form-control" type="text" required id="reg-userName" formControlName="userName" [ngClass]="{ 'is-invalid': submit && fa['userName'].errors }">
+              <div class="invalid-feedback">Please enter username!</div>
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="reg-password">Password</label>
@@ -72,7 +72,7 @@
             </div>
             <div class="col-sm-6">
               <label class="form-label" for="reg-password-confirm">Confirm Password</label>
-              <input class="form-control" type="password" required id="reg-password-confirm" formControlName="cpassword" [ngClass]="{ 'is-invalid': submit && fa['cpassword'].errors }">
+              <input class="form-control" type="password" required id="reg-password-confirm" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submit && fa['confirmPassword'].errors }">
               <div class="invalid-feedback">Passwords do not match!</div>
             </div>
             <div class="col-12 text-end">
