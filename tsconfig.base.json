@@ -40,7 +40,8 @@
       "@angular-monorepo/feature-login": [
         "libs/shared/auth-lib/feature-login/src/index.ts"
       ],
-      "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"],
+      "@angular-monorepo/footer": ["libs/shared/footer-lib/src/index.ts"],
+      "@angular-monorepo/header": ["libs/shared/header-lib/src/index.ts"],
       "@angular-monorepo/home-store-app": [
         "libs/store-app/home-lib/src/index.ts"
       ],
