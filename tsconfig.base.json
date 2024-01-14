@@ -34,8 +34,14 @@
         "libs/shared/ui/brand-logos-lib/src/index.ts"
       ],
       "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
+      "@angular-monorepo/dashboard-data-access": [
+        "libs/shared/dashboard-lib/data-access/src/index.ts"
+      ],
       "@angular-monorepo/error-handler": [
         "libs/shared/core/error-handler-lib/src/index.ts"
+      ],
+      "@angular-monorepo/feature-dashboard": [
+        "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
       ],
       "@angular-monorepo/feature-login": [
         "libs/shared/auth-lib/feature-login/src/index.ts"
@@ -51,8 +57,11 @@
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
       ],
-      "@angular-monorepo/shop-grid-ls": [
-        "libs/shared/shop-grid-lib/src/index.ts"
+      "@angular-monorepo/shop": [
+        "libs/shared/shop-lib/feature-shop/src/index.ts"
+      ],
+      "@angular-monorepo/shop-data-access": [
+        "libs/shared/shop-lib/data-access/src/index.ts"
       ],
       "@angular-monorepo/trending": ["libs/shared/ui/trending-lib/src/index.ts"]
     }

@@ -4,7 +4,7 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo : 'login',
+    redirectTo : 'home',
     pathMatch: 'full'
   },
   {
@@ -13,7 +13,7 @@ export const appRoutes: Route[] = [
       import('@angular-monorepo/feature-login').then((m) => m.FeatureLoginComponent),
   },
   {
-    path: 'dashboard',
+    path: 'home',
     loadComponent: () =>
       import('@angular-monorepo/home-store-app').then((m) => m.HomeStoreAppComponent),
       canActivate: [authGuard],
@@ -21,7 +21,11 @@ export const appRoutes: Route[] = [
   {
     path: 'shop',
     loadChildren: () =>
-      import('@angular-monorepo/shop-grid-ls').then((m) => m.shopGridLsRoutes)
-
+      import('@angular-monorepo/shop').then((m) => m.shopRoutes)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import ('@angular-monorepo/feature-dashboard').then((m) => m.featureDashboardRoutes)
   }
 ];
