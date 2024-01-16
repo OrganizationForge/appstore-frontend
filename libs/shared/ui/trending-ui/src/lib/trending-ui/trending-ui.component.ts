@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-trending-ui',
   standalone: true,
-  imports: [CommonModule, ProductUiComponent],
+  imports: [CommonModule, ProductUiComponent, RouterModule],
   templateUrl: './trending-ui.component.html',
   styleUrl: './trending-ui.component.scss',
 })

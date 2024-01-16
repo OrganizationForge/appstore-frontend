@@ -9,6 +9,11 @@ export const shopRoutes: Route[] = [{
     {
       path: 'grid-ls',
       component: ShopGridLsComponent
+    },
+    {
+      path: 'product-detail',
+      loadComponent: () =>
+        import('@angular-monorepo/shared/shop-lib/feature-product-detail').then((m) => m.FeatureProductDetailComponent)
     }
   ]
 }

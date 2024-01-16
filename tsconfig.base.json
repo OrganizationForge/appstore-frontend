@@ -69,6 +69,9 @@
       "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
         "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
       ],
+      "@angular-monorepo/shared/shop-lib/feature-product-detail": [
+        "libs/shared/shop-lib/feature-product-detail/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/brand-logos-ui": [
         "libs/shared/ui/brand-logos-ui/src/index.ts"
       ],

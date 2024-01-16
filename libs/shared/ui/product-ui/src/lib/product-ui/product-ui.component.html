@@ -3,9 +3,9 @@
         <span class="badge bg-danger badge-shadow">Oferta</span>
         }
       <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image[0]}}" alt="Product"></a> -->
-      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image[0]}}" alt="Product"></a>
+      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="{{data.image[0]}}" alt="Product"></a>
       <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category}}</a>
-        <h3 class="product-title fs-sm"><a routerLink="/shop/single-v1">{{data.name}}</a></h3>
+        <h3 class="product-title fs-sm"><a routerLink="/shop/product-detail">{{data.name}}</a></h3>
         <div class="d-flex justify-content-between">
 
           @if(data.price == ''){
@@ -76,7 +76,7 @@
      }
 
      @if(data.type == 'details'){
-      <div class="card-body card-body-hidden"><a class="btn btn-secondary btn-sm d-block w-100 mb-2" routerLink="/shop/single-v1">View details</a>
+      <div class="card-body card-body-hidden"><a class="btn btn-secondary btn-sm d-block w-100 mb-2" routerLink="/shop/product-detail">View details</a>
         <div class="text-center"><a class="nav-link-style fs-ms" href="javascript:void(0);" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
       </div>
       }
