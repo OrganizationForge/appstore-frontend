@@ -64,6 +64,15 @@
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
       ],
+      "@angular-monorepo/shared/dashboard-lib/feature-add-prod": [
+        "libs/shared/dashboard-lib/feature-add-product/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-profile": [
+        "libs/shared/dashboard-lib/feature-profile/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
+        "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
+      ],
       "@angular-monorepo/shop": [
         "libs/shared/shop-lib/feature-shop/src/index.ts"
       ],

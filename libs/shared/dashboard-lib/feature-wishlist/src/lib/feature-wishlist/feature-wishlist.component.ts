@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { wishlistData } from './data';
 import Swal from 'sweetalert2';
+import { wishlistData } from '../data';
 
 @Component({
   selector: 'lib-feature-wishlist',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './feature-wishlist.component.html',
-  styleUrl: './feature-wishlist.component.scss',
+  styleUrl: './feature-wishlist.component.css',
 })
 export class FeatureWishlistComponent {
   wishlistDatas:any;

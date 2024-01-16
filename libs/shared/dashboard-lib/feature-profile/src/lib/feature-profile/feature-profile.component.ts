@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './feature-profile.component.html',
-  styleUrl: './feature-profile.component.scss',
+  styleUrl: './feature-profile.component.css',
 })
 export class FeatureProfileComponent {
   NPasswordType!: boolean;

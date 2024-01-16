@@ -1,8 +1,5 @@
-import { FeatureWishlistComponent } from './feature-wishlist/feature-wishlist.component';
 import { Route } from '@angular/router';
 import { FeatureDashboardComponent } from './feature-dashboard/feature-dashboard.component';
-import { FeatureProfileComponent } from './feature-profile/feature-profile.component';
-import { FeatureAddProductComponent } from './feature-add-product/feature-add-product.component';
 
 export const featureDashboardRoutes: Route[] = [
   {
@@ -11,15 +8,18 @@ export const featureDashboardRoutes: Route[] = [
     children: [
       {
         path: 'profile',
-        component: FeatureProfileComponent,
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-profile').then((m) => m.FeatureProfileComponent)
       },
       {
         path: 'wishlist',
-        component: FeatureWishlistComponent,
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-wishlist').then((m) => m.FeatureWishlistComponent)
       },
       {
         path: 'add-product',
-        component: FeatureAddProductComponent,
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-add-prod').then((m) => m.FeatureAddProductComponent)
       }
     ]
   },
