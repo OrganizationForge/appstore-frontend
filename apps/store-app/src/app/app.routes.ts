@@ -26,6 +26,6 @@ export const appRoutes: Route[] = [
   {
     path: 'dashboard',
     loadChildren: () =>
-      import ('@angular-monorepo/feature-dashboard').then((m) => m.featureDashboardRoutes)
+      import ('@angular-monorepo/shared/dashboard-lib/feature-dashboard').then((m) => m.featureDashboardRoutes)
   }
 ];

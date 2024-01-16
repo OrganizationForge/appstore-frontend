@@ -15,6 +15,21 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular-monorepo/dashboard-data-access": [
+        "libs/shared/dashboard-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
+        "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-add-prod": [
+        "libs/shared/dashboard-lib/feature-add-product/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-profile": [
+        "libs/shared/dashboard-lib/feature-profile/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
+        "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
+      ],
       "@angular-monorepo/auth-data-access": [
         "libs/shared/auth-lib/data-access/src/index.ts"
       ],
@@ -34,14 +49,9 @@
         "libs/shared/ui/brand-logos-lib/src/index.ts"
       ],
       "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
-      "@angular-monorepo/dashboard-data-access": [
-        "libs/shared/dashboard-lib/data-access/src/index.ts"
-      ],
+
       "@angular-monorepo/error-handler": [
         "libs/shared/core/error-handler-lib/src/index.ts"
-      ],
-      "@angular-monorepo/feature-dashboard": [
-        "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
       ],
       "@angular-monorepo/feature-login": [
         "libs/shared/auth-lib/feature-login/src/index.ts"
@@ -63,15 +73,6 @@
       "@angular-monorepo/product": ["libs/shared/ui/product-lib/src/index.ts"],
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-add-prod": [
-        "libs/shared/dashboard-lib/feature-add-product/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-profile": [
-        "libs/shared/dashboard-lib/feature-profile/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
-        "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
       ],
       "@angular-monorepo/shop": [
         "libs/shared/shop-lib/feature-shop/src/index.ts"
