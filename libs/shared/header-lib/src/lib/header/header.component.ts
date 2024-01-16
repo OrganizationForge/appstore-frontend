@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FeatureMenuComponent } from '@angular-monorepo/feature-menu';
 
 @Component({
   selector: 'angular-monorepo-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FeatureMenuComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ProductComponent } from '@angular-monorepo/product';
 
 @Component({
   selector: 'angular-monorepo-trending',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ProductComponent],
   templateUrl: './trending.component.html',
   styleUrl: './trending.component.css',
 })

@@ -46,6 +46,9 @@
       "@angular-monorepo/feature-login": [
         "libs/shared/auth-lib/feature-login/src/index.ts"
       ],
+      "@angular-monorepo/feature-menu": [
+        "libs/shared/menu-lib/feature-menu/src/index.ts"
+      ],
       "@angular-monorepo/footer": ["libs/shared/footer-lib/src/index.ts"],
       "@angular-monorepo/header": ["libs/shared/header-lib/src/index.ts"],
       "@angular-monorepo/home-store-app": [
@@ -54,6 +57,10 @@
       "@angular-monorepo/http-client": [
         "libs/shared/core/http-client-lib/src/index.ts"
       ],
+      "@angular-monorepo/menu-data-access": [
+        "libs/shared/menu-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/product": ["libs/shared/ui/product-lib/src/index.ts"],
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
       ],

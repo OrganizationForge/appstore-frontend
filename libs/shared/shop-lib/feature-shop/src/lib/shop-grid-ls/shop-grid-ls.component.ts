@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopGridLsdata } from '@angular-monorepo/shop-data-access';
 import { Options } from '@angular-slider/ngx-slider';
+import { ProductComponent } from '@angular-monorepo/product';
 
 @Component({
   selector: 'angular-monorepo-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ProductComponent],
   templateUrl: './shop-grid-ls.component.html',
   styleUrl: './shop-grid-ls.component.scss',
 })
