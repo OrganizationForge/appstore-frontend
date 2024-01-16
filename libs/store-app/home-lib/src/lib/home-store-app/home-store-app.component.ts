@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { TrendingComponent } from '@angular-monorepo/trending';
 import { ProductSliderComponent } from '@angular-monorepo/product-slider';
-import { BrandLogosComponent } from '@angular-monorepo/brand-logos';
 import { RouterModule } from '@angular/router';
+import { TrendingUiComponent } from '@angular-monorepo/shared/ui/trending-ui';
+import { BrandLogosUiComponent } from '@angular-monorepo/shared/ui/brand-logos-ui';
 
 @Component({
   selector: 'angular-monorepo-home-store-app',
   standalone: true,
-  imports: [CommonModule, RouterModule, SlickCarouselModule, TrendingComponent, ProductSliderComponent, BrandLogosComponent],
+  imports: [CommonModule, RouterModule, SlickCarouselModule, TrendingUiComponent, ProductSliderComponent, BrandLogosUiComponent],
   templateUrl: './home-store-app.component.html',
   styleUrl: './home-store-app.component.css',
 })

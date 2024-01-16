@@ -15,21 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@angular-monorepo/dashboard-data-access": [
-        "libs/shared/dashboard-lib/data-access/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
-        "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-add-prod": [
-        "libs/shared/dashboard-lib/feature-add-product/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-profile": [
-        "libs/shared/dashboard-lib/feature-profile/src/index.ts"
-      ],
-      "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
-        "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
-      ],
       "@angular-monorepo/auth-data-access": [
         "libs/shared/auth-lib/data-access/src/index.ts"
       ],
@@ -45,11 +30,7 @@
       "@angular-monorepo/autor-list": [
         "libs/library-app/autor/feature-autors-list/src/index.ts"
       ],
-      "@angular-monorepo/brand-logos": [
-        "libs/shared/ui/brand-logos-lib/src/index.ts"
-      ],
       "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
-
       "@angular-monorepo/error-handler": [
         "libs/shared/core/error-handler-lib/src/index.ts"
       ],
@@ -70,17 +51,39 @@
       "@angular-monorepo/menu-data-access": [
         "libs/shared/menu-lib/data-access/src/index.ts"
       ],
-      "@angular-monorepo/product": ["libs/shared/ui/product-lib/src/index.ts"],
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/data-access": [
+        "libs/shared/dashboard-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-add-prod": [
+        "libs/shared/dashboard-lib/feature-add-product/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
+        "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-profile": [
+        "libs/shared/dashboard-lib/feature-profile/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
+        "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/brand-logos-ui": [
+        "libs/shared/ui/brand-logos-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/product-ui": [
+        "libs/shared/ui/product-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/trending-ui": [
+        "libs/shared/ui/trending-ui/src/index.ts"
       ],
       "@angular-monorepo/shop": [
         "libs/shared/shop-lib/feature-shop/src/index.ts"
       ],
       "@angular-monorepo/shop-data-access": [
         "libs/shared/shop-lib/data-access/src/index.ts"
-      ],
-      "@angular-monorepo/trending": ["libs/shared/ui/trending-lib/src/index.ts"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
