@@ -1,3 +1,3 @@
 export * from './lib/lib.routes';
 
-export * from './lib/shop/shop.component';
+export * from './lib/feature-shop.component';

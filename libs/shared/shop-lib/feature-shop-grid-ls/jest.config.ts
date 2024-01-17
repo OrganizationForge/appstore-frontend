@@ -1,9 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'feature-shop',
+  displayName: 'feature-shop-grid-ls',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/shared/shop-lib/feature-shop',
+  coverageDirectory:
+    '../../../../coverage/libs/shared/shop-lib/feature-shop-grid-ls',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

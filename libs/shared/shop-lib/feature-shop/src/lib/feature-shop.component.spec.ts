@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ShopGridLsComponent } from './shop-grid-ls.component';
+import { FeatureShopComponent } from './feature-shop.component';
 
-describe('ShopGridLsComponent', () => {
-  let component: ShopGridLsComponent;
-  let fixture: ComponentFixture<ShopGridLsComponent>;
+describe('FeatureShopComponent', () => {
+  let component: FeatureShopComponent;
+  let fixture: ComponentFixture<FeatureShopComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShopGridLsComponent],
+      imports: [FeatureShopComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ShopGridLsComponent);
+    fixture = TestBed.createComponent(FeatureShopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

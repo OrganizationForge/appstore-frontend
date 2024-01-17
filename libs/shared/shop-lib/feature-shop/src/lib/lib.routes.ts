@@ -1,20 +1,21 @@
 import { Route } from '@angular/router';
-import { ShopComponent } from './shop/shop.component';
-import { ShopGridLsComponent } from './shop-grid-ls/shop-grid-ls.component';
+import { FeatureShopComponent } from './feature-shop.component';
 
-export const shopRoutes: Route[] = [{
-  path: '',
-  component: ShopComponent,
-  children: [
-    {
-      path: 'grid-ls',
-      component: ShopGridLsComponent
-    },
-    {
-      path: 'product-detail',
-      loadComponent: () =>
-        import('@angular-monorepo/shared/shop-lib/feature-product-detail').then((m) => m.FeatureProductDetailComponent)
-    }
-  ]
-}
+export const featureShopRoutes: Route[] = [
+  {
+    path: '',
+    component: FeatureShopComponent,
+    children: [
+      {
+        path: 'grid-ls',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/shop-lib/feature-shop-grid-ls').then((m) => m.FeatureShopGridLsComponent)
+      },
+      {
+        path: 'product-detail',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/shop-lib/feature-product-detail').then((m) => m.FeatureProductDetailComponent)
+      }
+    ]
+  },
 ];

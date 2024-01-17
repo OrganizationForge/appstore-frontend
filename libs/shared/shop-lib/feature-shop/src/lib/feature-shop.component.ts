@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'angular-monorepo-shop',
+  selector: 'lib-feature-shop',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css',
+  templateUrl: './feature-shop.component.html',
+  styleUrl: './feature-shop.component.scss',
 })
-export class ShopComponent {}
+export class FeatureShopComponent {}

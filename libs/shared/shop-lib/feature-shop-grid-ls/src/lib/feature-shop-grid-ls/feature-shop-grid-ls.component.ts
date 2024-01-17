@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
 import { ShopGridLsdata } from '@angular-monorepo/shop-data-access';
 import { Options } from '@angular-slider/ngx-slider';
-import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'angular-monorepo-shop-grid-ls',
+  selector: 'lib-feature-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule,ProductUiComponent],
-  templateUrl: './shop-grid-ls.component.html',
-  styleUrl: './shop-grid-ls.component.scss',
+  imports: [CommonModule, ProductUiComponent, NgbAccordionModule],
+  templateUrl: './feature-shop-grid-ls.component.html',
+  styleUrl: './feature-shop-grid-ls.component.scss',
 })
-export class ShopGridLsComponent implements OnInit {
+export class FeatureShopGridLsComponent implements OnInit {
   // Table data
   content?: any;
   Gridlists?: any;

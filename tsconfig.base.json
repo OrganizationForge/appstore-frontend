@@ -72,6 +72,12 @@
       "@angular-monorepo/shared/shop-lib/feature-product-detail": [
         "libs/shared/shop-lib/feature-product-detail/src/index.ts"
       ],
+      "@angular-monorepo/shared/shop-lib/feature-shop": [
+        "libs/shared/shop-lib/feature-shop/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-shop-grid-ls": [
+        "libs/shared/shop-lib/feature-shop-grid-ls/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/brand-logos-ui": [
         "libs/shared/ui/brand-logos-ui/src/index.ts"
       ],
@@ -80,9 +86,6 @@
       ],
       "@angular-monorepo/shared/ui/trending-ui": [
         "libs/shared/ui/trending-ui/src/index.ts"
-      ],
-      "@angular-monorepo/shop": [
-        "libs/shared/shop-lib/feature-shop/src/index.ts"
       ],
       "@angular-monorepo/shop-data-access": [
         "libs/shared/shop-lib/data-access/src/index.ts"
