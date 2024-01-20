@@ -20,6 +20,11 @@ export const featureDashboardRoutes: Route[] = [
         path: 'add-product',
         loadComponent: () =>
           import('@angular-monorepo/shared/dashboard-lib/feature-add-prod').then((m) => m.FeatureAddProductComponent)
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-settings').then((m) => m.FeatureSettingsComponent)
       }
     ]
   },

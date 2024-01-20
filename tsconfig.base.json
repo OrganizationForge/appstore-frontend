@@ -66,6 +66,9 @@
       "@angular-monorepo/shared/dashboard-lib/feature-profile": [
         "libs/shared/dashboard-lib/feature-profile/src/index.ts"
       ],
+      "@angular-monorepo/shared/dashboard-lib/feature-settings": [
+        "libs/shared/dashboard-lib/feature-settings/src/index.ts"
+      ],
       "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
         "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
       ],

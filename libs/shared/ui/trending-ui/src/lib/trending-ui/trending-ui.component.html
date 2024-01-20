@@ -3,7 +3,7 @@
   <h2 class="h3 text-center">Trending products</h2>
   <div class="row pt-4 mx-n2">
     <!-- Product-->
-    @for(data of productData;track $index){
+    @for(data of itemsData;track $index){
       <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
         <lib-product-ui [data]="data"></lib-product-ui>
       </div>
@@ -49,13 +49,12 @@
                     <span class="half" [style.width.%]="fill">★</span>☆
                   </span>
                 </ng-template>
-                <!-- <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="singleData.rating" [starTemplate]="t" [readonly]="true" [max]="5">
-                </ngb-rating> -->
+                <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="singleData.rating" [starTemplate]="t" [readonly]="true" [max]="5">
+                </ngb-rating>
               </div>
               <span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">{{singleData.review}} Reviews</span>
             </a>
-            <!-- <button class="btn-wishlist" placement="top" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button> -->
-            <button class="btn-wishlist" placement="top"><i class="ci-heart"></i></button>
+            <button class="btn-wishlist" placement="top" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button>
           </div>
           <div class="mb-3"><span class="h3 fw-normal text-accent me-1">${{singleData.price}}</span>
             @if(singleData.discount){

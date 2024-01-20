@@ -3,39 +3,32 @@
         <span class="badge bg-danger badge-shadow">Oferta</span>
         }
       <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image[0]}}" alt="Product"></a> -->
-      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="{{data.image[0]}}" alt="Product"></a>
-      <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category}}</a>
-        <h3 class="product-title fs-sm"><a routerLink="/shop/product-detail">{{data.name}}</a></h3>
+      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="{{data.urlImage}}" alt="Product"></a>
+      <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category.categoryName}}</a>
+        <h3 class="product-title fs-sm"><a routerLink="/shop/product-detail">{{data.productName}}</a></h3>
         <div class="d-flex justify-content-between">
 
-          @if(data.price == ''){
+          @if(data.availability.id == 2){
             <div class="product-price"><span class="text-muted fs-sm">Out of stock</span></div>
           } @else {
             <div class="product-price"><span class="text-accent">${{data.price}}</span>
-              @if(data.discount){
-              <del class="fs-sm text-muted"> ${{data.discount}}</del>
+              @if(data.price < data.priceBase){
+              <del class="fs-sm text-muted"> ${{data.priceBase}}</del>
               }
             </div>
           }
           <div class="star-rating">
-            <!-- <ng-template #t let-fill="fill">
+            <ng-template #t let-fill="fill">
               <span class="star" [class.full]="fill === 100">
                 <span class="half" [style.width.%]="fill">★</span>☆
               </span>
-            </ng-template> -->
-            <i class="star-rating-icon ci-star-filled active"></i>
-            <i class="star-rating-icon ci-star-filled active"></i>
-            <i class="star-rating-icon ci-star-filled active"></i>
-            <i class="star-rating-icon ci-star-half active"></i>
-            <i class="star-rating-icon ci-star"></i>
-            <!-- <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="data.rating"
-              [starTemplate]="t" [readonly]="true" [max]="5">
-            </ngb-rating> -->
+            </ng-template>
+            <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="data.rating"[readonly]="true" [max]="5" [starTemplate]="t"></ngb-rating>
           </div>
         </div>
       </div>
 
-      @if(data.type == 'size'){
+      @if(data.availability.id == 1){
       <div class="card-body card-body-hidden">
         <div class="text-center pb-2">
           @for(size of data.size;track $index){
@@ -75,7 +68,7 @@
       </div>
      }
 
-     @if(data.type == 'details'){
+     @if(data.availability.id == 2){
       <div class="card-body card-body-hidden"><a class="btn btn-secondary btn-sm d-block w-100 mb-2" routerLink="/shop/product-detail">View details</a>
         <div class="text-center"><a class="nav-link-style fs-ms" href="javascript:void(0);" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
       </div>

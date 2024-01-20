@@ -74,7 +74,9 @@
 
 <!-- Products grid (Trending products)-->
 <!-- <app-trending></app-trending> -->
-<lib-trending-ui></lib-trending-ui>
+@if(listProducts$ | async; as products){
+  <lib-trending-ui [itemsData]="products"></lib-trending-ui>
+}
 
 <!-- Banners-->
 <section class="container pb-4 mb-md-3">
