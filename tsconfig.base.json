@@ -84,8 +84,14 @@
       "@angular-monorepo/shared/ui/brand-logos-ui": [
         "libs/shared/ui/brand-logos-ui/src/index.ts"
       ],
+      "@angular-monorepo/shared/ui/product-gallery-ui": [
+        "libs/shared/ui/product-gallery-ui/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/product-ui": [
         "libs/shared/ui/product-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/spec-card-ui": [
+        "libs/shared/ui/spec-card-ui/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/trending-ui": [
         "libs/shared/ui/trending-ui/src/index.ts"

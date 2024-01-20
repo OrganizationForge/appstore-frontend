@@ -1,0 +1,22 @@
+<div class="product-gallery">
+  <div class="product-gallery-preview order-sm-2">
+      <div class="product-gallery-preview-item active" id="first">
+        <!-- <img class="image-zoom" src="assets/img/shop/single/gallery/05.jpg" data-zoom="assets/img/shop/single/gallery/05.jpg" alt="Product image"> -->
+        <img class="image-zoom" src="{{dataImages[0]}}" data-zoom="assets/img/shop/single/gallery/05.jpg" alt="Product image">
+        <div class="image-zoom-pane"></div>
+      </div>
+  </div>
+  <div class="product-gallery-thumblist order-sm-1">
+    @for(image of dataImages; track $index){
+      <a class="product-gallery-thumblist-item active" href="javascript:void(0);" (click)="filterImg($event,image)">
+        <img src="{{image}}" alt="Product thumb">
+      </a>
+    }
+      <!--
+      <a class="product-gallery-thumblist-item" href="javascript:void(0);"
+          (click)="filterImg($event,'assets/img/shop/single/gallery/08.jpg')"><img
+              src="assets/img/shop/single/gallery/th08.jpg" alt="Product thumb">
+      </a>
+      -->
+  </div>
+</div>
