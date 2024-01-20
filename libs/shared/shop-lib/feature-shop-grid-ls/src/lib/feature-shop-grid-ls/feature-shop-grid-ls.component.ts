@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
-import { ShopGridLsdata } from '@angular-monorepo/shop-data-access';
+import { Product, ProductService, ShopGridLsdata } from '@angular-monorepo/shop-data-access';
 import { Options } from '@angular-slider/ngx-slider';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-feature-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule, ProductUiComponent, NgbAccordionModule],
+  imports: [CommonModule, ProductUiComponent, NgbAccordionModule, NgbPaginationModule],
   templateUrl: './feature-shop-grid-ls.component.html',
   styleUrl: './feature-shop-grid-ls.component.scss',
 })
 export class FeatureShopGridLsComponent implements OnInit {
   // Table data
   content?: any;
-  Gridlists?: any;
+  // Gridlists?: any;
+  gridList$!: Observable<Product[]>;
   total: any;
 
   // Custom Data
@@ -28,9 +30,9 @@ export class FeatureShopGridLsComponent implements OnInit {
   AllGridSize: any;
   AllGridColor: any;
 
-  // constructor(private modalService: NgbModal) {
-  //   // this.gridLsList = service.gridLsList$;
-  // }
+  constructor(private modalService: NgbModal, private productService : ProductService) {
+    // this.gridLsList = service.gridLsList$;
+  }
 
   ngOnInit(): void {
     this.totalRecords = ShopGridLsdata.length;
@@ -39,9 +41,10 @@ export class FeatureShopGridLsComponent implements OnInit {
     if (this.endIndex > this.totalRecords) {
       this.endIndex = this.totalRecords;
     }
-    this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
+    // this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
+    this.gridList$ = this.productService.getProducts();
     this.total = this.totalRecords;
-    this.AllGridlists = Object.assign([], this.Gridlists);
+    this.AllGridlists = Object.assign([], this.gridList$);
     this.AllGridSize = Object.assign([]);
     this.AllGridColor = Object.assign([]);
     document.querySelector('.data-blank')?.classList.add('d-none')
@@ -61,7 +64,8 @@ export class FeatureShopGridLsComponent implements OnInit {
     if (this.endIndex > this.totalRecords) {
       this.endIndex = this.totalRecords;
     }
-    this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
+    // this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
+    this.gridList$ = this.productService.getProducts();
   }
 
   /**
@@ -69,16 +73,16 @@ export class FeatureShopGridLsComponent implements OnInit {
    * @param centerDataModal center modal data
    */
   product_img: any;
-  singleData: any;
+  singleData!: Product;
   centerModal(centerDataModal: any, id: any) {
-    this.singleData = this.Gridlists[id];
-    this.product_img = this.singleData.image[0];
+    // this.singleData = this.gridList$[id];
+    this.product_img = this.singleData.urlImage;
     // this.modalService.open(centerDataModal, { size: 'xl', centered: true });
   }
 
   // Image Click Filtering
   filterImg(id: any) {
-    this.product_img = this.singleData.image[id]
+    this.product_img = this.singleData.urlImage
   }
 
   /**
@@ -99,27 +103,27 @@ export class FeatureShopGridLsComponent implements OnInit {
       this.minValue = value;
     } else {
       this.maxValue = value;
-      this.Gridlists = ShopGridLsdata.filter((data: any) => {
-        data.price = data.price.replace(/,/g, '')
-        return data.price >= this.minValue && data.price <= this.maxValue;
-      });
-      this.total = this.Gridlists.length;
+      // this.Gridlists = ShopGridLsdata.filter((data: any) => {
+      //   data.price = data.price.replace(/,/g, '')
+      //   return data.price >= this.minValue && data.price <= this.maxValue;
+      // });
+      // this.total = this.Gridlists.length;
     }
   }
 
   // Category Filtering
   categoryFilter(e: any, name: any) {
     if (name != 'All') {
-      this.Gridlists = ShopGridLsdata.filter((product: any) => {
-        return product.cat === name;
-      });
+      // this.Gridlists = ShopGridLsdata.filter((product: any) => {
+      //   return product.cat === name;
+      // });
 
-      this.total = this.Gridlists.length;
+      // this.total = this.Gridlists.length;
       this.total != 0 ? document.querySelector('.data-blank')?.classList.add('d-none') : document.querySelector('.data-blank')?.classList.remove('d-none');
 
     } else {
       this.total = ShopGridLsdata.length;
-      return this.Gridlists = this.AllGridlists;
+      // return this.Gridlists = this.AllGridlists;
     }
   }
 
@@ -136,14 +140,14 @@ export class FeatureShopGridLsComponent implements OnInit {
       }
     }
     if (this.checkedVal.length > 0) {
-      this.Gridlists = ShopGridLsdata.filter((product: any) => {
-        return this.checkedVal.includes(product.brand);
-      });
-      this.total = this.Gridlists.length;
+      // this.Gridlists = ShopGridLsdata.filter((product: any) => {
+      //   return this.checkedVal.includes(product.brand);
+      // });
+      // this.total = this.Gridlists.length;
     }
     else {
       this.total = ShopGridLsdata.length;
-      return this.Gridlists = this.AllGridlists;
+      // return this.Gridlists = this.AllGridlists;
     }
   }
 
@@ -162,21 +166,21 @@ export class FeatureShopGridLsComponent implements OnInit {
     // check box check wise data get
     this.AllGridSize = [];
     if (this.checkedVal.length > 0) {
-      this.Gridlists = ShopGridLsdata.filter((product: any) => {
-        for (let i = 0; i < product.size.length; i++) {
-          for (let j = 0; j < this.checkedVal.length; j++) {
-            if (product.size[i] == this.checkedVal[j]) {
-              this.AllGridSize.push(product)
-            }
-          }
-        }
-      });
-      this.AllGridSize = [...new Map(this.AllGridSize.map((item: any) => [item['id'], item])).values()]
-      this.Gridlists = this.AllGridSize
-      this.total = this.Gridlists.length;
+      // this.Gridlists = ShopGridLsdata.filter((product: any) => {
+      //   for (let i = 0; i < product.size.length; i++) {
+      //     for (let j = 0; j < this.checkedVal.length; j++) {
+      //       if (product.size[i] == this.checkedVal[j]) {
+      //         this.AllGridSize.push(product)
+      //       }
+      //     }
+      //   }
+      // });
+      // this.AllGridSize = [...new Map(this.AllGridSize.map((item: any) => [item['id'], item])).values()]
+      // this.Gridlists = this.AllGridSize
+      // this.total = this.Gridlists.length;
     }
     else {
-      return this.Gridlists = this.AllGridlists;
+      // return this.Gridlists = this.AllGridlists;
     }
   }
 
@@ -194,24 +198,24 @@ export class FeatureShopGridLsComponent implements OnInit {
     }
     // check box check wise data get
     this.AllGridColor = [];
-    if (this.checkedVal.length > 0) {
-      this.Gridlists = ShopGridLsdata.filter((product: any) => {
-        for (let i = 0; i < product.colors.length; i++) {
-          for (let j = 0; j < this.checkedVal.length; j++) {
-            if (product.colors[i] == this.checkedVal[j]) {
-              this.AllGridColor.push(product)
-            }
-          }
-        }
-      });
-      this.AllGridColor = [...new Map(this.AllGridColor.map((item: any) => [item['id'], item])).values()]
-      this.Gridlists = this.AllGridColor
-      this.total = this.Gridlists.length;
-    }
-    else {
-      this.total = ShopGridLsdata.length;
-      return this.Gridlists = this.AllGridlists;
-    }
+    // if (this.checkedVal.length > 0) {
+    //   this.Gridlists = ShopGridLsdata.filter((product: any) => {
+    //     for (let i = 0; i < product.colors.length; i++) {
+    //       for (let j = 0; j < this.checkedVal.length; j++) {
+    //         if (product.colors[i] == this.checkedVal[j]) {
+    //           this.AllGridColor.push(product)
+    //         }
+    //       }
+    //     }
+    //   });
+    //   this.AllGridColor = [...new Map(this.AllGridColor.map((item: any) => [item['id'], item])).values()]
+    //   this.Gridlists = this.AllGridColor
+    //   this.total = this.Gridlists.length;
+    // }
+    // else {
+    //   this.total = ShopGridLsdata.length;
+    //   return this.Gridlists = this.AllGridlists;
+    // }
   }
 
   // Sidebar Close

@@ -1,12 +1,12 @@
 import { ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Product } from './product.model';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class ProductService {
   private readonly apiService = inject(ApiService);
   constructor() { }
 
