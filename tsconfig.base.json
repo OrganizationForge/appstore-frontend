@@ -54,6 +54,9 @@
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
       ],
+      "@angular-monorepo/shared/category-lib/feature-category": [
+        "libs/shared/category-lib/feature-category/src/index.ts"
+      ],
       "@angular-monorepo/shared/dashboard-lib/data-access": [
         "libs/shared/dashboard-lib/data-access/src/index.ts"
       ],
@@ -83,6 +86,9 @@
       ],
       "@angular-monorepo/shared/ui/brand-logos-ui": [
         "libs/shared/ui/brand-logos-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/dynamic-form-ui": [
+        "libs/shared/ui/dynamic-form-ui/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/product-gallery-ui": [
         "libs/shared/ui/product-gallery-ui/src/index.ts"

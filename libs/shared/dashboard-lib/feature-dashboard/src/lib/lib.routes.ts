@@ -25,6 +25,11 @@ export const featureDashboardRoutes: Route[] = [
         path: 'settings',
         loadComponent: () =>
           import('@angular-monorepo/shared/dashboard-lib/feature-settings').then((m) => m.FeatureSettingsComponent)
+      },
+      {
+        path: 'dynamic-forms',
+        loadChildren: () =>
+          import('@angular-monorepo/shared/category-lib/feature-category').then((m) => m.featureCategoryRoutes)
       }
     ]
   },

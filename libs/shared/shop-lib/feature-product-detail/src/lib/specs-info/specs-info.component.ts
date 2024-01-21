@@ -83,14 +83,4 @@ export class SpecsInfoComponent {
       ]
     }
   ]
-
-// dataSpec = {
-//     title: 'General specs',
-//     specs: [
-//       { nameSpec: 'Model', value: 'Amazfit Smartwatch', },
-//       { nameSpec: 'Gender', value: 'Unisex', },
-//       { nameSpec: 'Smartphone app', value: 'Amazfit Watch', },
-//       { nameSpec: 'OS campitibility', value: 'Android / iOS', },
-//     ]
-//   }
 }
