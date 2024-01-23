@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { product } from '../data';
+import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
 
 @Component({
   selector: 'lib-feature-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, DropzoneCdkModule],
   templateUrl: './feature-add-product.component.html',
   styleUrl: './feature-add-product.component.scss',
 })
@@ -26,13 +27,15 @@ export class FeatureAddProductComponent implements OnInit {
      */
     this.productForm = this.formBuilder.group({
       ids: [''],
-      name: ['', [Validators.required]],
-      productss: ['', [Validators.required]],
+      productName: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      standardliprice: ['', [Validators.required]],
-      extendedliprice: ['', [Validators.required]],
-      tags: ['', [Validators.required]],
-      salefile: ['', [Validators.required]],
+      priceBase: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      urlImage: ['', [Validators.required]],
+      brandId: ['', [Validators.required]],
+      categoryId: ['', [Validators.required]],
+      stock: ['',[Validators.required]],
+      warranty: ['']
     });
   }
 
