@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NewProduct, ProductService } from '@angular-monorepo/shop-data-access';
 
 @Component({
   selector: 'lib-feature-add-product',
@@ -14,7 +15,7 @@ export class FeatureAddProductComponent implements OnInit {
   productForm!: UntypedFormGroup;
   submitted = false;
 
-  constructor(private formBuilder: UntypedFormBuilder) { }
+  constructor(private formBuilder: UntypedFormBuilder, private productService : ProductService) { }
 
   ngOnInit(): void {
 
@@ -31,13 +32,13 @@ export class FeatureAddProductComponent implements OnInit {
       priceBase: ['', [Validators.required]],
       price: ['', [Validators.required]],
       urlImage: [''],
-      brandId: ['1'],
-      categoryId: ['0', [Validators.required]],
+      brandId: [1],
+      categoryId: [0, [Validators.required]],
       stock: ['',[Validators.required]],
       warranty: [''],
       barcode: [''],
-      quantityType: ['1'],
-      pricePercent: ['0']
+      quantityTypeId: [1],
+      pricePercent: [0]
     });
   }
 
@@ -79,6 +80,29 @@ export class FeatureAddProductComponent implements OnInit {
       urlImage: file != undefined ? file.name : ''
     });
     console.log(this.productForm.value);
+
+    const newProduct: NewProduct = {
+      productName: this.productForm.value.productName,
+      description: this.productForm.value.description,
+      priceBase: this.productForm.value.priceBase,
+      price: this.productForm.value.price,
+      urlImage: 'assets/img/shop/catalog/01.jpg',
+      brandId: this.productForm.value.brandId,
+      availabilityId: 1,
+      categoryId: this.productForm.value.categoryId,
+      quantityTypeId: this.productForm.value.quantityTypeId,
+      weight: 0,
+      stock: this.productForm.value.stock,
+      barcode: this.productForm.value.barcode
+    }
+    this.productService.createProduct(newProduct)
+      .subscribe(res => {
+        if (res.succeded)
+          alert("Guardado Ok");
+        else
+          (res.errors);
+      });
+
   }
 
   files: File[] = [];
@@ -96,7 +120,7 @@ export class FeatureAddProductComponent implements OnInit {
     const priceBase = this.productForm.get('priceBase')?.value
 
     this.productForm.patchValue({
-      price: (priceBase / (1- (percent/100))).toFixed(2)
+      price: Number(priceBase / (1- (percent/100))).toFixed(2)
     });
   }
 }

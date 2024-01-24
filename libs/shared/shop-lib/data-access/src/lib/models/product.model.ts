@@ -18,3 +18,18 @@ export interface Product {
   weight: number;
 }
 
+export interface NewProduct {
+  productName: string,
+  description: string,
+  priceBase: number,
+  price?: number,
+  urlImage: string ,
+  brandId: number,
+  availabilityId: number,
+  categoryId: number,
+  quantityTypeId: number,
+  weight: number,
+  stock: number,
+  barcode: string
+}
+

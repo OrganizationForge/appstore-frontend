@@ -1,7 +1,7 @@
 import { ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Product } from '../models/product.model';
+import { NewProduct, Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,14 @@ export class ProductService {
           return []
       })
     );;
+  }
+
+  createProduct(newProduct: NewProduct): Observable<ApiResponse<number>> {
+    return this.apiService.post<ApiResponse<number>,NewProduct>('/v1/Products',newProduct)
+    .pipe(
+      map(res => {
+        return res
+      })
+    )
   }
 }
