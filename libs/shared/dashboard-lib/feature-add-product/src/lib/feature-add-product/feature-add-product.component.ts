@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { product } from '../data';
-import { DropzoneCdkModule } from '@ngx-dropzone/cdk';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @Component({
   selector: 'lib-feature-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, DropzoneCdkModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxDropzoneModule],
   templateUrl: './feature-add-product.component.html',
   styleUrl: './feature-add-product.component.scss',
 })
@@ -28,14 +27,17 @@ export class FeatureAddProductComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       ids: [''],
       productName: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: [''],
       priceBase: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      urlImage: ['', [Validators.required]],
-      brandId: ['', [Validators.required]],
-      categoryId: ['', [Validators.required]],
+      urlImage: [''],
+      brandId: ['1'],
+      categoryId: ['0', [Validators.required]],
       stock: ['',[Validators.required]],
-      warranty: ['']
+      warranty: [''],
+      barcode: [''],
+      quantityType: ['1'],
+      pricePercent: ['0']
     });
   }
 
@@ -71,8 +73,14 @@ export class FeatureAddProductComponent implements OnInit {
    */
   AddProduct() {
     this.submitted = true;
-    product.push(this.productForm.value);
+    // product.push(this.productForm.value);
+    const file: File = this.files[0];
+    this.productForm.patchValue({
+      urlImage: file != undefined ? file.name : ''
+    });
+    console.log(this.productForm.value);
   }
+
   files: File[] = [];
 
   onSelect(event: any) {
@@ -81,5 +89,14 @@ export class FeatureAddProductComponent implements OnInit {
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  onSelectChange(){
+    const percent = this.productForm.get('pricePercent')?.value
+    const priceBase = this.productForm.get('priceBase')?.value
+
+    this.productForm.patchValue({
+      price: (priceBase / (1- (percent/100))).toFixed(2)
+    });
   }
 }

@@ -3,27 +3,30 @@
     routerLink="/account/signin"><i class="ci-sign-out me-2"></i>Sign out</a>
 </div>
     <!-- Title -->
-    <div class="d-sm-flex flex-wrap justify-content-start align-items-center pb-2">
-      <!-- <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Product</h2> -->
-      <div class="py-2">
-        <select class="form-select me-2" id="unp-category">
-          <option>Seleccionar categoría</option>
-          <option>Photos</option>
-          <option>Graphics</option>
-          <option>UI Design</option>
-          <option>Web Themes</option>
-          <option>Fonts</option>
-          <option>Add-Ons</option>
-        </select>
-      </div>
-    </div>
+
     <form method="post" (ngSubmit)="AddProduct()" [formGroup]="productForm">
+
+      <div class="d-sm-flex flex-wrap justify-content-end align-items-center pb-2">
+        <!-- <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Product</h2> -->
+        <div class="py-2">
+          <select class="form-select me-2" id="unp-category" formControlName="categoryId">
+            <option value="0">Seleccionar categoría</option>
+            <option value="1">Photos</option>
+            <option value="2">Graphics</option>
+            <option value="3">UI Design</option>
+            <option value="4">Web Themes</option>
+            <option value="5">Fonts</option>
+            <option value="6">Add-Ons</option>
+          </select>
+        </div>
+      </div>
+
       <div class="row">
         <div class="mb-3 pb-2">
           <label class=" form-label" for="unp-product-name">
             Nombre del Producto
           </label>
-          <input class="form-control" type="text" id="unp-product-name" formControlName="productName">
+          <input class="form-control" type="text" id="unp-product-name" formControlName="productName" required>
           <div class="form-text">
             Maximo 100 carácteres
           </div>
@@ -31,24 +34,26 @@
       </div>
 
       <!-- Drag and drop file upload -->
-      <!-- <div class="file-drop-area">
-        <div class="file-drop-icon ci-cloud-upload"></div>
-        <span class="file-drop-message">Drag and drop here to upload</span>
-        <input type="file" class="file-drop-input">
-        <button type="button" class="file-drop-btn btn btn-primary btn-sm">Or select file</button>
-      </div>
-       -->
-
-      <ngx-dropzone (change)="onSelect($event)">
-        <ngx-dropzone-label><i class="display-4 text-muted bx bxs-cloud-upload"></i>
-          <h4>Drag and drop here to upload product screenshot</h4>
+       <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png">
+        <ngx-dropzone-label>
+          <i class="d-block display-6 text-muted bx ci-cloud-upload "></i>
+          <span class="d-block mb-3">Arrastre aqui las imagenes del nuevo producto</span>
+          <button class="btn btn-primary btn-sm mb-2" type="button">
+            O seleccione el archivo
+          </button>
+          <div class="form-text mb-2">
+            1000 x 800px ideal size for hi-res displays
+          </div>
         </ngx-dropzone-label>
         @for(f of files;track $index){
-        <ngx-dropzone-preview [removable]="true" (removed)="onRemove(f)">
-          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-        </ngx-dropzone-preview>
-      }
+          <!-- <ngx-dropzone-preview [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview> -->
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" (removed)="onRemove(f)" [file]="f">
+          </ngx-dropzone-image-preview>
+        }
       </ngx-dropzone>
+
       <div class="mb-3 py-2">
         <label class="form-label" for="unp-product-description">
           Descripción del producto
@@ -73,7 +78,7 @@
             <span class="input-group-text">
               <i class="ci-dollar"></i>
             </span>
-            <input class="form-control" type="text" id="unp-standard-price" formControlName="priceBase">
+            <input class="form-control" type="number" step="0.01" id="unp-standard-price" formControlName="priceBase" (change)="onSelectChange();">
           </div>
           <div class="form-text">
             Precio inicial del proveedor
@@ -87,7 +92,7 @@
             <span class="input-group-text">
               <i class="ci-dollar"></i>
             </span>
-            <input class="form-control" type="text" id="unp-extended-price" formControlName="price">
+            <input class="form-control" type="number" step="0.01" id="unp-extended-price" formControlName="price">
           </div>
           <div class="form-text">
             Precio de edición manual
@@ -97,26 +102,26 @@
           <label class="form-label" for="unp-price-percent">
             Margen
            </label>
-          <select class="form-select me-2" id="unp-price-percent">
-            <option>0%</option>
-            <option>5%</option>
-            <option>10%</option>
-            <option>15%</option>
-            <option>20%</option>
-            <option>25%</option>
-            <option>30%</option>
-            <option>35%</option>
-            <option>40%</option>
-            <option>45%</option>
+          <select class="form-select me-2" id="unp-price-percent" (change)="onSelectChange();" formControlName="pricePercent">
+            <option value="0">0%</option>
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+            <option value="15">15%</option>
+            <option value="20">20%</option>
+            <option value="25">25%</option>
+            <option value="30">30%</option>
+            <option value="35">35%</option>
+            <option value="40">40%</option>
+            <option value="45">45%</option>
           </select>
         </div>
         <div class="col-sm-4 mb-3">
           <label class="form-label" for="unp-unit-type">
             Tipo
            </label>
-          <select class="form-select me-2" id="unp-unit-type">
-            <option>Unidad</option>
-            <option>Fracción</option>
+          <select class="form-select me-2" id="unp-unit-type" formControlName="quantityType">
+            <option value="1">Unidad</option>
+            <option value="2">Fracción</option>
           </select>
           <div class="form-text">
             Producto por unidad o fracción(kg, metro, etc)
@@ -147,7 +152,7 @@
             <!-- <span class="input-group-text">
               <i class="ci-dollar"></i>
             </span> -->
-            <input class="form-control" type="text" id="unp-codigo-barra" formControlName="standardliprice">
+            <input class="form-control" type="text" id="unp-codigo-barra" formControlName="barcode">
             <button class="btn btn-primary" type="button">
               <i class="ci-cloud-upload fs-lg me-2"></i>
             </button>
@@ -175,7 +180,7 @@
         <input class="form-control" id="unp-product-files" type="file" accept="image/png, image/gif, image/jpeg" formControlName="salefile" (change)="fileChange($event)">
         <div class="form-text">Maximum file size is 1GB</div>
       </div> -->
-      <button class="btn btn-primary d-block w-100" type="submit">
+      <button [disabled]="!productForm.valid" class="btn btn-primary d-block w-100" type="submit">
         <i class="ci-cloud-upload fs-lg me-2"></i>
         Guardar Producto
       </button>
