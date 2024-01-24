@@ -35,6 +35,8 @@ export class FeatureShopGridLsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.gridList$ = this.productService.getProducts(`PageNumber=${this.page}&PageSize=${this.pageSize}`);
+
     this.totalRecords = ShopGridLsdata.length;
     this.startIndex = (this.page - 1) * this.pageSize + 1;
     this.endIndex = (this.page - 1) * this.pageSize + this.pageSize;
@@ -42,7 +44,6 @@ export class FeatureShopGridLsComponent implements OnInit {
       this.endIndex = this.totalRecords;
     }
     // this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
-    this.gridList$ = this.productService.getProducts();
     this.total = this.totalRecords;
     this.AllGridlists = Object.assign([], this.gridList$);
     this.AllGridSize = Object.assign([]);
@@ -65,7 +66,7 @@ export class FeatureShopGridLsComponent implements OnInit {
       this.endIndex = this.totalRecords;
     }
     // this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
-    this.gridList$ = this.productService.getProducts();
+    this.gridList$ = this.productService.getProducts(`PageNumber=${page}&PageSize=${this.pageSize}`);
   }
 
   /**

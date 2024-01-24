@@ -10,8 +10,12 @@ export class ProductService {
   private readonly apiService = inject(ApiService);
   constructor() { }
 
-  getProducts(): Observable<Product[]> {
-    return this.apiService.get<ApiResponse<Product[]>>('/v1/Products')
+  getProducts(params: string): Observable<Product[]> {
+    let paramsUrl: string = "";
+    if (params)
+      paramsUrl = '?' + params;
+
+    return this.apiService.get<ApiResponse<Product[]>>(`/v1/Products${paramsUrl}`)
     .pipe(
       map(res => {
         if (res.succeded)

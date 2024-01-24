@@ -23,7 +23,7 @@ export class HomeStoreAppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.listProducts$ = this.service.getProducts();
+    this.listProducts$ = this.service.getProducts("PageNumber=1&PageSize=10");
   }
 
   Coverflow = {
