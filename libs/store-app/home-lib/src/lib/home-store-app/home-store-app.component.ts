@@ -5,7 +5,7 @@ import { ProductSliderComponent } from '@angular-monorepo/product-slider';
 import { RouterModule } from '@angular/router';
 import { TrendingUiComponent } from '@angular-monorepo/shared/ui/trending-ui';
 import { BrandLogosUiComponent } from '@angular-monorepo/shared/ui/brand-logos-ui';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Product, ProductService } from '@angular-monorepo/shop-data-access';
 
 @Component({
@@ -23,7 +23,15 @@ export class HomeStoreAppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.listProducts$ = this.service.getProducts("PageNumber=1&PageSize=10");
+    this.listProducts$ = this.service.getProducts("PageNumber=1&PageSize=10")
+    .pipe(
+      map(res => {
+        if (res.succeded)
+          return res.data;
+        else
+          return []
+      })
+    );;
   }
 
   Coverflow = {

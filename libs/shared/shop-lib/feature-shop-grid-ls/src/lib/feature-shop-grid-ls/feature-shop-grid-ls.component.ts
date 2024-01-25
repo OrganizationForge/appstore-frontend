@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
-import { Product, ProductService, ShopGridLsdata } from '@angular-monorepo/shop-data-access';
-import { Options } from '@angular-slider/ngx-slider';
-import { NgbAccordionModule, NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { Category, Product, ProductService, ShopGridLsdata } from '@angular-monorepo/shop-data-access';
+import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, map } from 'rxjs';
+import { FilterCollapseComponent } from '@angular-monorepo/shared/ui/filter-ui';
+import { NgxSliderModule, Options } from 'ngx-slider-v2';
 
 @Component({
   selector: 'lib-feature-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule, ProductUiComponent, NgbAccordionModule, NgbPaginationModule],
+  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, NgxSliderModule],
   templateUrl: './feature-shop-grid-ls.component.html',
   styleUrl: './feature-shop-grid-ls.component.scss',
 })
@@ -18,14 +19,14 @@ export class FeatureShopGridLsComponent implements OnInit {
   content?: any;
   // Gridlists?: any;
   gridList$!: Observable<Product[]>;
-  total: any;
+  categoryList$!: Observable<Category[]>;
 
   // Custom Data
+  totalRecords: number = 0;
   page: any = 1;
   pageSize: any = 9;
-  startIndex: any = 0;
-  endIndex: any = 9;
-  totalRecords: any = 0;
+
+
   AllGridlists: any;
   AllGridSize: any;
   AllGridColor: any;
@@ -35,16 +36,19 @@ export class FeatureShopGridLsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gridList$ = this.productService.getProducts(`PageNumber=${this.page}&PageSize=${this.pageSize}`);
+    this.gridList$ = this.productService.getProducts(`PageNumber=${this.page}&PageSize=${this.pageSize}`)
+      .pipe(
+      map(res => {
+        if (res.succeded){
+          this.totalRecords = res.totalRecords;
+          return res.data;
+        }
+        else
+          return []
+      })
+    );
+    this.categoryList$ = this.productService.getCategories();
 
-    this.totalRecords = ShopGridLsdata.length;
-    this.startIndex = (this.page - 1) * this.pageSize + 1;
-    this.endIndex = (this.page - 1) * this.pageSize + this.pageSize;
-    if (this.endIndex > this.totalRecords) {
-      this.endIndex = this.totalRecords;
-    }
-    // this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
-    this.total = this.totalRecords;
     this.AllGridlists = Object.assign([], this.gridList$);
     this.AllGridSize = Object.assign([]);
     this.AllGridColor = Object.assign([]);
@@ -60,33 +64,35 @@ export class FeatureShopGridLsComponent implements OnInit {
 
   // Pagination data get
   loadPage(page: number) {
-    this.startIndex = (this.page - 1) * this.pageSize + 1;
-    this.endIndex = (this.page - 1) * this.pageSize + this.pageSize;
-    if (this.endIndex > this.totalRecords) {
-      this.endIndex = this.totalRecords;
-    }
-    // this.Gridlists = ShopGridLsdata.slice(this.startIndex - 1, this.endIndex);
-    this.gridList$ = this.productService.getProducts(`PageNumber=${page}&PageSize=${this.pageSize}`);
+    this.gridList$ = this.productService.getProducts(`PageNumber=${page}&PageSize=${this.pageSize}`)
+    .pipe(
+      map(res => {
+        if (res.succeded){
+          this.totalRecords = res.totalRecords;
+          return res.data;
+        }
+        else
+          return []
+      })
+    );;
   }
 
-  /**
-   * Open center modal and product data get
-   * @param centerDataModal center modal data
-   */
-  product_img: any;
-  singleData!: Product;
-  centerModal(centerDataModal: any, id: any) {
-    // this.singleData = this.gridList$[id];
-    this.product_img = this.singleData.urlImage;
-    // this.modalService.open(centerDataModal, { size: 'xl', centered: true });
+  filterCategory(categoryId: number) {
+    console.log("Filter Category Id : ", categoryId);
+    this.gridList$ = this.productService.getProducts(`CategoryId=${categoryId}`)
+    .pipe(
+      map(res => {
+        if (res.succeded){
+          this.totalRecords = res.totalRecords;
+          return res.data;
+        }
+        else
+          return []
+      })
+    );
   }
 
-  // Image Click Filtering
-  filterImg(id: any) {
-    this.product_img = this.singleData.urlImage
-  }
-
-  /**
+   /**
   * Range Slider Wise Data Filter
   */
   // Range Slider
@@ -112,21 +118,23 @@ export class FeatureShopGridLsComponent implements OnInit {
     }
   }
 
-  // Category Filtering
-  categoryFilter(e: any, name: any) {
-    if (name != 'All') {
-      // this.Gridlists = ShopGridLsdata.filter((product: any) => {
-      //   return product.cat === name;
-      // });
-
-      // this.total = this.Gridlists.length;
-      this.total != 0 ? document.querySelector('.data-blank')?.classList.add('d-none') : document.querySelector('.data-blank')?.classList.remove('d-none');
-
-    } else {
-      this.total = ShopGridLsdata.length;
-      // return this.Gridlists = this.AllGridlists;
-    }
+  /**
+   * Open center modal and product data get
+   * @param centerDataModal center modal data
+   */
+  product_img: any;
+  singleData!: Product;
+  centerModal(centerDataModal: any, id: any) {
+    // this.singleData = this.gridList$[id];
+    this.product_img = this.singleData.urlImage;
+    // this.modalService.open(centerDataModal, { size: 'xl', centered: true });
   }
+
+  // Image Click Filtering
+  filterImg(id: any) {
+    this.product_img = this.singleData.urlImage
+  }
+
 
   // Brand Filtering
   checkedVal: any[] = [];
@@ -147,7 +155,7 @@ export class FeatureShopGridLsComponent implements OnInit {
       // this.total = this.Gridlists.length;
     }
     else {
-      this.total = ShopGridLsdata.length;
+      // this.total = ShopGridLsdata.length;
       // return this.Gridlists = this.AllGridlists;
     }
   }
@@ -228,4 +236,6 @@ export class FeatureShopGridLsComponent implements OnInit {
   cart(id: any) {
     // CartData.push(this.Gridlists[id])
   }
+
+
 }
