@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { NewProduct, Product } from '../models/product.model';
 import { Category } from '../models/category.model';
+import { Brand } from '../models/brand.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,19 @@ export class ProductService {
   getCategories(): Observable<Category[]> {
 
     return this.apiService.get<ApiResponse<Category[]>>(`/v1/Categories`)
+    .pipe(
+      map(res => {
+        if (res.succeded)
+          return res.data;
+        else
+          return []
+      })
+    );;
+  }
+
+  getBrands(): Observable<Brand[]> {
+
+    return this.apiService.get<ApiResponse<Brand[]>>(`/v1/Brands`)
     .pipe(
       map(res => {
         if (res.succeded)

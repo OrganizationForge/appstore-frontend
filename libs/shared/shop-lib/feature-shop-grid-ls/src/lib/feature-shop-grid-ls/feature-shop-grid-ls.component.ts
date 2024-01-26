@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
-import { Category, Product, ProductService, ShopGridLsdata } from '@angular-monorepo/shop-data-access';
+import { Brand, Category, Product, ProductService } from '@angular-monorepo/shop-data-access';
 import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, map } from 'rxjs';
-import { FilterCollapseComponent } from '@angular-monorepo/shared/ui/filter-ui';
+import { FilterCheckedComponent, FilterCollapseComponent } from '@angular-monorepo/shared/ui/filter-ui';
 import { NgxSliderModule, Options } from 'ngx-slider-v2';
 
 @Component({
   selector: 'lib-feature-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, NgxSliderModule],
+  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, FilterCheckedComponent, NgxSliderModule],
   templateUrl: './feature-shop-grid-ls.component.html',
   styleUrl: './feature-shop-grid-ls.component.scss',
 })
@@ -20,6 +20,7 @@ export class FeatureShopGridLsComponent implements OnInit {
   // Gridlists?: any;
   gridList$!: Observable<Product[]>;
   categoryList$!: Observable<Category[]>;
+  brandsList$!: Observable<Brand[]>;
 
   // Custom Data
   totalRecords: number = 0;
@@ -48,6 +49,7 @@ export class FeatureShopGridLsComponent implements OnInit {
       })
     );
     this.categoryList$ = this.productService.getCategories();
+    this.brandsList$ = this.productService.getBrands();
 
     this.AllGridlists = Object.assign([], this.gridList$);
     this.AllGridSize = Object.assign([]);

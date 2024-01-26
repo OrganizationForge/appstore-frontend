@@ -1,9 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'card',
+  displayName: 'feature-add-product',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/shared/ui/cards',
+  coverageDirectory:
+    '../../../../coverage/libs/shared/shop-lib/feature-add-product',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

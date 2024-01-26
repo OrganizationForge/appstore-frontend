@@ -30,7 +30,6 @@
       "@angular-monorepo/autor-list": [
         "libs/library-app/autor/feature-autors-list/src/index.ts"
       ],
-      "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
       "@angular-monorepo/error-handler": [
         "libs/shared/core/error-handler-lib/src/index.ts"
       ],
@@ -60,9 +59,6 @@
       "@angular-monorepo/shared/dashboard-lib/data-access": [
         "libs/shared/dashboard-lib/data-access/src/index.ts"
       ],
-      "@angular-monorepo/shared/dashboard-lib/feature-add-prod": [
-        "libs/shared/dashboard-lib/feature-add-product/src/index.ts"
-      ],
       "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
         "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
       ],
@@ -74,6 +70,9 @@
       ],
       "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
         "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-add-prod": [
+        "libs/shared/shop-lib/feature-add-product/src/index.ts"
       ],
       "@angular-monorepo/shared/shop-lib/feature-product-detail": [
         "libs/shared/shop-lib/feature-product-detail/src/index.ts"

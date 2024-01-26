@@ -10,7 +10,7 @@
                               <h2 ngbAccordionHeader class="accordion-header">
                                 <button ngbAccordionButton class="border-0 bg-transparent" type="button" data-bs-toggle="collapse"
                                   data-bs-target="#gen-ques-collapseOne" aria-expanded="false" aria-controls="gen-ques-collapseOne">
-                                  {{item.categoryName}}
+                                  {{item.description}}
                                 </button>
                               </h2>
                               <div ngbAccordionCollapse>
@@ -34,7 +34,7 @@
                                           <li class="widget-list-item widget-filter-item"><a
                                             class="widget-list-link d-flex justify-content-between align-items-center"
                                                 href="javascript:void(0);" (click)="filter(subitem.id)"><span
-                                                  class="widget-filter-item-text">{{subitem.categoryName}}</span><span
+                                                  class="widget-filter-item-text">{{subitem.description}}</span><span
                                                   class="fs-xs text-muted ms-3">{{this.total}}</span></a>
                                           </li>
                                         }

@@ -7,6 +7,11 @@ export const featureDashboardRoutes: Route[] = [
     component: FeatureDashboardComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'settings',
+        pathMatch: 'full'
+      },
+      {
         path: 'profile',
         loadComponent: () =>
           import('@angular-monorepo/shared/dashboard-lib/feature-profile').then((m) => m.FeatureProfileComponent)
@@ -19,7 +24,7 @@ export const featureDashboardRoutes: Route[] = [
       {
         path: 'add-product',
         loadComponent: () =>
-          import('@angular-monorepo/shared/dashboard-lib/feature-add-prod').then((m) => m.FeatureAddProductComponent)
+          import('@angular-monorepo/shared/shop-lib/feature-add-prod').then((m) => m.FeatureAddProductComponent)
       },
       {
         path: 'settings',

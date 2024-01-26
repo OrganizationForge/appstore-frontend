@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NewProduct, ProductService } from '@angular-monorepo/shop-data-access';
 
@@ -15,10 +21,12 @@ export class FeatureAddProductComponent implements OnInit {
   productForm!: UntypedFormGroup;
   submitted = false;
 
-  constructor(private formBuilder: UntypedFormBuilder, private productService : ProductService) { }
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
-
     // When the user clicks on the button, scroll to the top of the document
     document.documentElement.scrollTop = 0;
 
@@ -34,11 +42,11 @@ export class FeatureAddProductComponent implements OnInit {
       urlImage: [''],
       brandId: [1],
       categoryId: [0, [Validators.required]],
-      stock: ['',[Validators.required]],
+      stock: ['', [Validators.required]],
       warranty: [''],
       barcode: [''],
       quantityTypeId: [1],
-      pricePercent: [0]
+      pricePercent: [0],
     });
   }
 
@@ -53,9 +61,9 @@ export class FeatureAddProductComponent implements OnInit {
   imageURL: string | undefined;
   fileChange(event: any) {
     const fileList: any = event.target as HTMLInputElement;
-    console.log(fileList)
+    console.log(fileList);
     const file: File = fileList.files[0];
-    console.log(file)
+    console.log(file);
     // document.getElementById('');
     // this.productForm.patchValue({
     //   salefile: file.name
@@ -64,8 +72,8 @@ export class FeatureAddProductComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.imageURL = reader.result as string;
-      console.log(this.imageURL)
-    }
+      console.log(this.imageURL);
+    };
     reader.readAsDataURL(file);
   }
 
@@ -77,7 +85,7 @@ export class FeatureAddProductComponent implements OnInit {
     // product.push(this.productForm.value);
     const file: File = this.files[0];
     this.productForm.patchValue({
-      urlImage: file != undefined ? file.name : ''
+      urlImage: file != undefined ? file.name : '',
     });
     console.log(this.productForm.value);
 
@@ -93,16 +101,12 @@ export class FeatureAddProductComponent implements OnInit {
       quantityTypeId: this.productForm.value.quantityTypeId,
       weight: 0,
       stock: this.productForm.value.stock,
-      barcode: this.productForm.value.barcode
-    }
-    this.productService.createProduct(newProduct)
-      .subscribe(res => {
-        if (res.succeded)
-          alert("Guardado Ok");
-        else
-          (res.errors);
-      });
-
+      barcode: this.productForm.value.barcode,
+    };
+    this.productService.createProduct(newProduct).subscribe((res) => {
+      if (res.succeded) alert('Guardado Ok');
+      else res.errors;
+    });
   }
 
   files: File[] = [];
@@ -115,12 +119,12 @@ export class FeatureAddProductComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  onSelectChange(){
-    const percent = this.productForm.get('pricePercent')?.value
-    const priceBase = this.productForm.get('priceBase')?.value
+  onSelectChange() {
+    const percent = this.productForm.get('pricePercent')?.value;
+    const priceBase = this.productForm.get('priceBase')?.value;
 
     this.productForm.patchValue({
-      price: Number(priceBase / (1- (percent/100))).toFixed(2)
+      price: Number(priceBase / (1 - percent / 100)).toFixed(2),
     });
   }
 }
