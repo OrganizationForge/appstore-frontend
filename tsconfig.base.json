@@ -92,6 +92,9 @@
       "@angular-monorepo/shared/ui/filter-ui": [
         "libs/shared/ui/filter-ui/src/index.ts"
       ],
+      "@angular-monorepo/shared/ui/number-slider-ui": [
+        "libs/shared/ui/number-slider-ui/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/product-gallery-ui": [
         "libs/shared/ui/product-gallery-ui/src/index.ts"
       ],

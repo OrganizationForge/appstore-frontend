@@ -5,12 +5,12 @@ import { Brand, Category, Product, ProductService } from '@angular-monorepo/shop
 import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, map } from 'rxjs';
 import { FilterCheckedComponent, FilterCollapseComponent } from '@angular-monorepo/shared/ui/filter-ui';
-import { NgxSliderModule, Options } from 'ngx-slider-v2';
+import { NumberSliderUiComponent } from '@angular-monorepo/shared/ui/number-slider-ui';
 
 @Component({
   selector: 'lib-feature-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, FilterCheckedComponent, NgxSliderModule],
+  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, FilterCheckedComponent, NumberSliderUiComponent],
   templateUrl: './feature-shop-grid-ls.component.html',
   styleUrl: './feature-shop-grid-ls.component.scss',
 })
@@ -32,22 +32,22 @@ export class FeatureShopGridLsComponent implements OnInit {
   AllGridSize: any;
   AllGridColor: any;
 
-  constructor(private modalService: NgbModal, private productService : ProductService) {
+  constructor(private modalService: NgbModal, private productService: ProductService) {
     // this.gridLsList = service.gridLsList$;
   }
 
   ngOnInit(): void {
     this.gridList$ = this.productService.getProducts(`PageNumber=${this.page}&PageSize=${this.pageSize}`)
       .pipe(
-      map(res => {
-        if (res.succeded){
-          this.totalRecords = res.totalRecords;
-          return res.data;
-        }
-        else
-          return []
-      })
-    );
+        map(res => {
+          if (res.succeded) {
+            this.totalRecords = res.totalRecords;
+            return res.data;
+          }
+          else
+            return []
+        })
+      );
     this.categoryList$ = this.productService.getCategories();
     this.brandsList$ = this.productService.getBrands();
 
@@ -67,58 +67,60 @@ export class FeatureShopGridLsComponent implements OnInit {
   // Pagination data get
   loadPage(page: number) {
     this.gridList$ = this.productService.getProducts(`PageNumber=${page}&PageSize=${this.pageSize}`)
-    .pipe(
-      map(res => {
-        if (res.succeded){
-          this.totalRecords = res.totalRecords;
-          return res.data;
-        }
-        else
-          return []
-      })
-    );;
+      .pipe(
+        map(res => {
+          if (res.succeded) {
+            this.totalRecords = res.totalRecords;
+            return res.data;
+          }
+          else
+            return []
+        })
+      );;
   }
 
   filterCategory(categoryId: number) {
-    console.log("Filter Category Id : ", categoryId);
     this.gridList$ = this.productService.getProducts(`CategoryId=${categoryId}`)
-    .pipe(
-      map(res => {
-        if (res.succeded){
-          this.totalRecords = res.totalRecords;
-          return res.data;
-        }
-        else
-          return []
-      })
-    );
+      .pipe(
+        map(res => {
+          if (res.succeded) {
+            this.totalRecords = res.totalRecords;
+            return res.data;
+          }
+          else
+            return []
+        })
+      );
   }
 
-   /**
-  * Range Slider Wise Data Filter
-  */
-  // Range Slider
-  minValue: number = 250;
-  maxValue: number = 721;
-  options: Options = {
-    floor: 0,
-    ceil: 1000,
-    translate: (value: number): string => {
-      return '$' + value;
-    }
-  };
-  valueChange(value: number, boundary: boolean): void {
-    if (boundary) {
-      this.minValue = value;
-    } else {
-      this.maxValue = value;
-      // this.Gridlists = ShopGridLsdata.filter((data: any) => {
-      //   data.price = data.price.replace(/,/g, '')
-      //   return data.price >= this.minValue && data.price <= this.maxValue;
-      // });
-      // this.total = this.Gridlists.length;
-    }
+  filterBrand(brandId: number) {
+    this.gridList$ = this.productService.getProducts(`BrandId=${brandId}`)
+      .pipe(
+        map(res => {
+          if (res.succeded) {
+            this.totalRecords = res.totalRecords;
+            return res.data;
+          }
+          else
+            return []
+        })
+      );
   }
+
+  filterPrice(prices: number[]) {
+    this.gridList$ = this.productService.getProducts(`MinPrice=${prices[0]}&MaxPrice=${prices[1]}`)
+      .pipe(
+        map(res => {
+          if (res.succeded) {
+            this.totalRecords = res.totalRecords;
+            return res.data;
+          }
+          else
+            return []
+        })
+      );
+  }
+
 
   /**
    * Open center modal and product data get
@@ -158,39 +160,6 @@ export class FeatureShopGridLsComponent implements OnInit {
     }
     else {
       // this.total = ShopGridLsdata.length;
-      // return this.Gridlists = this.AllGridlists;
-    }
-  }
-
-  // Product Size Filter
-  sizeFilter() {
-    const checkboxes: any = document.getElementsByName('category[]');
-    let result
-    // checkbox array data get
-    this.checkedVal = [];
-    for (let i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) {
-        result = checkboxes[i].value;
-        this.checkedVal.push(result);
-      }
-    }
-    // check box check wise data get
-    this.AllGridSize = [];
-    if (this.checkedVal.length > 0) {
-      // this.Gridlists = ShopGridLsdata.filter((product: any) => {
-      //   for (let i = 0; i < product.size.length; i++) {
-      //     for (let j = 0; j < this.checkedVal.length; j++) {
-      //       if (product.size[i] == this.checkedVal[j]) {
-      //         this.AllGridSize.push(product)
-      //       }
-      //     }
-      //   }
-      // });
-      // this.AllGridSize = [...new Map(this.AllGridSize.map((item: any) => [item['id'], item])).values()]
-      // this.Gridlists = this.AllGridSize
-      // this.total = this.Gridlists.length;
-    }
-    else {
       // return this.Gridlists = this.AllGridlists;
     }
   }

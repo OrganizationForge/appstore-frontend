@@ -16,6 +16,10 @@ export class FilterCheckedComponent {
 
   checkedVal: any[] = [];
 
+  filter(paramFilter: number){
+    this.send.emit(paramFilter)
+  }
+
   sizeFilter() {
     const checkboxes: any = document.getElementsByName('category[]');
     let result

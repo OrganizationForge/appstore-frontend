@@ -31,38 +31,27 @@
             (click)="close()"></button>
         </div>
         <div class="offcanvas-body py-grid-gutter px-lg-grid-gutter">
+          <!-- filtro por categoria -->
           @if(categoryList$ | async; as categorias){
             <lib-filter-collapse [title]="'Categorias'" [data]="categorias" (send)="filterCategory($event)"></lib-filter-collapse>
           }
 
-          <!-- Price range-->
-          <div class="widget mb-4 pb-4 border-bottom">
-            <h3 class="widget-title">Price</h3>
-            <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0" data-max="1000" data-step="1">
-              <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
-                (valueChange)="valueChange($event,true)" (highValueChange)="valueChange($event,false)"
-                class="range-slider-ui">
-              </ngx-slider>
-              <div class="d-flex pb-1">
-                <div class="w-50 pe-2 me-2">
-                  <div class="input-group input-group-sm"><span class="input-group-text">$</span>
-                    <input class="form-control range-slider-value-min" type="text" value="{{minValue}}">
-                  </div>
-                </div>
-                <div class="w-50 ps-2">
-                  <div class="input-group input-group-sm"><span class="input-group-text">$</span>
-                    <input class="form-control range-slider-value-max" type="text" value="{{maxValue}}">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- filtro por  precio -->
+          <lib-number-slider-ui
+            [title]="'Precio'"
+            [floor]="0"
+            [ceil]="3000"
+            [step]="100"
+            [minValue]="100"
+            [maxValue]="1200"
+            [returnString]="'$'"
+            (send)="filterPrice($event)"
+          ></lib-number-slider-ui>
 
-
-          <!-- Filter by Brand-->
+          <!-- filtro por marca -->
           @if(brandsList$ | async; as brands){
 
-            <lib-filter-checked [title]="'Marcas'" [data]="brands"></lib-filter-checked>
+            <lib-filter-checked [title]="'Marcas'" [data]="brands" (send)="filterBrand($event)"></lib-filter-checked>
           }
           <!-- Filter by Size-->
           <lib-filter-checked></lib-filter-checked>
