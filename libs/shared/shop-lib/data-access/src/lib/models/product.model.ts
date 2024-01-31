@@ -33,10 +33,10 @@ export interface NewProduct {
   weight: number,
   stock: number,
   barcode: string,
-  productFiles?: NewProductFile[]
+  imageFiles?: NewProductFile[]
 }
 
-export interface NewProductFile {
+export interface NewProductFile extends File{
   imageName: string;
   imageBytes: string;
 }

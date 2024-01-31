@@ -24,7 +24,7 @@ export class FeatureAddProductComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // When the user clicks on the button, scroll to the top of the document
@@ -82,21 +82,14 @@ export class FeatureAddProductComponent implements OnInit {
    */
   AddProduct() {
     this.submitted = true;
-    // product.push(this.productForm.value);
-    const file: File = this.files[0];
-    this.productForm.patchValue({
-      urlImage: file != undefined ? file.name : '',
-    });
 
-
-    const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
     // console.log(this.productForm.value);
     const newProduct: NewProduct = {
       productName: this.productForm.value.productName,
       description: this.productForm.value.description,
       priceBase: this.productForm.value.priceBase,
       price: this.productForm.value.price,
-      productFiles: productFiles,
+      imageFiles: this.files,
       brandId: this.productForm.value.brandId,
       availabilityId: 1,
       categoryId: this.productForm.value.categoryId,
@@ -111,30 +104,30 @@ export class FeatureAddProductComponent implements OnInit {
     });
   }
 
-  mapFilesToNewProductFiles(files: File[]): NewProductFile[] {
-    return files.map((file: File) => ({
-      imageName: file.name,
-      imageBytes: this.convertFileToBase64(file)
-    }));
-  }
-
-  convertFileToBase64(file: File): string {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      return reader.result;
-    };
-    return "";
-  }
-
-  files: File[] = [];
+  files: NewProductFile[] = [];
 
   onSelect(event: any) {
-    this.files.push(...event.addedFiles);
+    const files = event.addedFiles;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        file.imageName = file.name;
+        file.imageBytes = base64;
+        this.files.push(file);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    console.log(this.files);
+    // this.files2.push(...event.addedFiles);
   }
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
+    console.log(this.files);
+
   }
 
   onSelectChange() {
