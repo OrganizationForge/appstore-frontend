@@ -130,13 +130,13 @@ export class FeatureShopGridLsComponent implements OnInit {
   singleData!: Product;
   centerModal(centerDataModal: any, id: any) {
     // this.singleData = this.gridList$[id];
-    this.product_img = this.singleData.urlImage;
+    this.product_img = this.singleData.productFiles[0];
     // this.modalService.open(centerDataModal, { size: 'xl', centered: true });
   }
 
   // Image Click Filtering
   filterImg(id: any) {
-    this.product_img = this.singleData.urlImage
+    this.product_img = this.singleData.productFiles[0].urlImage
   }
 
 

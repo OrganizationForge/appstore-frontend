@@ -8,28 +8,36 @@ export interface Product {
   description: string;
   priceBase: number;
   price: number;
-  urlImage: string;
   warranty: string;
   category: Category;
   brand: Brand;
   availability: Availability;
+  productFiles: ProductFile[];
   rating: number;
   review: number;
   weight: number;
 }
-
+export interface ProductFile {
+  nameImage: string;
+  urlImage: string;
+}
 export interface NewProduct {
   productName: string,
   description: string,
   priceBase: number,
   price?: number,
-  urlImage: string ,
   brandId: number,
   availabilityId: number,
   categoryId: number,
   quantityTypeId: number,
   weight: number,
   stock: number,
-  barcode: string
+  barcode: string,
+  productFiles?: NewProductFile[]
+}
+
+export interface NewProductFile {
+  imageName: string;
+  imageBytes: string;
 }
 

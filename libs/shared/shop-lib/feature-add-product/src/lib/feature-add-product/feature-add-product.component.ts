@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { NewProduct, ProductService } from '@angular-monorepo/shop-data-access';
+import { NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
 
 @Component({
   selector: 'lib-feature-add-product',
@@ -87,14 +87,16 @@ export class FeatureAddProductComponent implements OnInit {
     this.productForm.patchValue({
       urlImage: file != undefined ? file.name : '',
     });
-    console.log(this.productForm.value);
 
+
+    const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
+    // console.log(this.productForm.value);
     const newProduct: NewProduct = {
       productName: this.productForm.value.productName,
       description: this.productForm.value.description,
       priceBase: this.productForm.value.priceBase,
       price: this.productForm.value.price,
-      urlImage: 'assets/img/shop/catalog/01.jpg',
+      productFiles: productFiles,
       brandId: this.productForm.value.brandId,
       availabilityId: 1,
       categoryId: this.productForm.value.categoryId,
@@ -107,6 +109,22 @@ export class FeatureAddProductComponent implements OnInit {
       if (res.succeded) alert('Guardado Ok');
       else res.errors;
     });
+  }
+
+  mapFilesToNewProductFiles(files: File[]): NewProductFile[] {
+    return files.map((file: File) => ({
+      imageName: file.name,
+      imageBytes: this.convertFileToBase64(file)
+    }));
+  }
+
+  convertFileToBase64(file: File): string {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      return reader.result;
+    };
+    return "";
   }
 
   files: File[] = [];
