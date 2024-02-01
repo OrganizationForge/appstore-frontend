@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs';
-import { formsActions } from './forms.actions';
+import { authActions } from './auth.actions';
 
 export const setData$ = createEffect(
   (actions$ = inject(Actions)) => {
     return actions$.pipe(
-      ofType(formsActions.setData, formsActions.updateData),
-      map(() => formsActions.initializeErrors()),
+      ofType(authActions.setData, authActions.updateData),
+      map(() => authActions.initializeErrors()),
     );
   },
   { functional: true },

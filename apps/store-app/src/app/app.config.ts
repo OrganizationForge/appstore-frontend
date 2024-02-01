@@ -2,10 +2,10 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { errorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@angular-monorepo/error-handler';
-import { ngrxFormsFeature, tokenInterceptor } from '@angular-monorepo/auth-data-access';
+import { ngrxAuthFeature, tokenInterceptor } from '@angular-monorepo/auth-data-access';
 import { environment } from '../environments/environment';
 import { API_URL } from '@angular-monorepo/http-client';
-import { ngrxFormsEffects } from '@angular-monorepo/auth-data-access';
+import { ngrxAuthEffects } from '@angular-monorepo/auth-data-access';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore } from '@ngrx/router-store';
@@ -17,9 +17,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideStore({
       errorHandler: errorHandlerFeature.reducer,
-      ngrxForms: ngrxFormsFeature.reducer,
+      ngrxAuth: ngrxAuthFeature.reducer,
     }),
-    provideEffects(errorHandlerEffects, ngrxFormsEffects),
+    provideEffects(errorHandlerEffects, ngrxAuthEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],

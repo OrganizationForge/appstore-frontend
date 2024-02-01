@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicFormUiComponent, Field } from '@angular-monorepo/shared/ui/dynamic-form-ui';
 import { Store } from '@ngrx/store';
-import { formsActions, ngrxFormsQuery } from '@angular-monorepo/auth-data-access';
+import { authActions, ngrxAuthQuery } from '@angular-monorepo/auth-data-access';
 
 
 const structure: Field[] = [
@@ -58,10 +58,10 @@ export class FeatureCategoryComponent implements OnInit {
   data$ = '';
   touchedForm$ = '';
 
-  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
+  structure$ = this.store.select(ngrxAuthQuery.selectStructure);
 
   ngOnInit() {
-    this.store.dispatch(formsActions.setStructure({ structure }));
+    this.store.dispatch(authActions.setStructure({ structure }));
   }
   // updateForm(changes: any) {
   //   // this.store.dispatch(formsActions.updateData({ data: changes }));

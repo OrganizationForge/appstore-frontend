@@ -4,9 +4,9 @@ export * from './lib/services/auth-guard';
 
 export { AuthStore } from './lib/auth.store';
 
-export * from './lib/+state/forms.actions';
-export * from './lib/+state/forms.reducer';
-export * from './lib/+state/forms.selectors';
-export * from './lib/+state/forms.interfaces';
+export * from './lib/+state/auth.actions';
+export * from './lib/+state/auth.reducer';
+export * from './lib/+state/auth.selectors';
+export * from './lib/+state/auth.interfaces';
 
-export * as ngrxFormsEffects from './lib/+state/forms.effects';
+export * as ngrxAuthEffects from './lib/+state/auth.effects';

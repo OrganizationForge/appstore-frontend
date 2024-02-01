@@ -151,16 +151,20 @@
       <!-- Products grid-->
       <div class="row mx-n2">
         <!-- Product-->
-      @if(gridList$ | async; as productList){
-        @for(data of productList;track $index){
-        <div class="col-md-4 col-sm-6 px-2 mb-4">
-            <lib-product-ui [data]="data"></lib-product-ui>
-        </div>
+        @if(gridList$ | async; as productList;){
+          @for(data of productList;track $index){
+          <div class="col-md-4 col-sm-6 px-2 mb-4">
+              <lib-product-ui [data]="data"></lib-product-ui>
+          </div>
+          }
+
+
         }
-      }
-        <div class="data-blank">
-          <p>Data Not Found</p>
-        </div>
+        @else{
+          <div class="spinner-border text-primary" role="status" >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        }
       </div>
 
       <hr class="my-3">

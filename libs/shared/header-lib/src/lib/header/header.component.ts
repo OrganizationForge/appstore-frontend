@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeatureMenuComponent } from '@angular-monorepo/feature-menu';
+import { RouterModule } from '@angular/router';
+import { AuthStore } from '@angular-monorepo/auth-data-access';
 
 @Component({
   selector: 'angular-monorepo-header',
   standalone: true,
-  imports: [CommonModule, FeatureMenuComponent],
+  imports: [CommonModule, FeatureMenuComponent, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
+
+  private readonly authStore = inject(AuthStore);
 
   showNavigationArrows = true;
   showNavigationIndicators: any;
@@ -19,6 +23,8 @@ export class HeaderComponent implements OnInit {
   cartDatas: any;
   subTotal = 0;
   Total: any;
+
+  $isAuthenticated = this.authStore.loggedIn;
 
   // Login Form
   // loginForm!: UntypedFormGroup;

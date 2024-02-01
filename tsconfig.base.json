@@ -53,6 +53,27 @@
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
       ],
+      "@angular-monorepo/shared/cart-lib/data-access": [
+        "libs/shared/cart-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-cart": [
+        "libs/shared/cart-lib/feature-cart/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout": [
+        "libs/shared/cart-lib/feature-checkout/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-detail": [
+        "libs/shared/cart-lib/feature-checkout-detail/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-payment": [
+        "libs/shared/cart-lib/feature-checkout-payment/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-review": [
+        "libs/shared/cart-lib/feature-checkout-review/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-shipping": [
+        "libs/shared/cart-lib/feature-checkout-shipping/src/index.ts"
+      ],
       "@angular-monorepo/shared/category-lib/feature-category": [
         "libs/shared/category-lib/feature-category/src/index.ts"
       ],

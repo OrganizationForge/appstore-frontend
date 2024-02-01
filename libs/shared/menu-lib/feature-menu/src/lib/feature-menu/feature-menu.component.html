@@ -1,6 +1,6 @@
 <ul class="navbar-nav" id="navbar-nav">
-  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
-    <ul class="dropdown-menu">
+  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" routerLink="/home" data-bs-toggle="dropdown">Home</a>
+    <!-- <ul class="dropdown-menu">
       <li class="dropdown position-static mb-0"><a class="dropdown-item border-bottom py-2" href="https://themes.themesbrand.com/cartzilla/angular/nft-marketplace"><span class="d-block text-heading">NFT
             Marketplace<span class="badge bg-danger ms-1">NEW</span></span><small class="d-block text-muted">NFTs,
             Multi-vendor, Auctions</small></a>
@@ -33,57 +33,13 @@
         <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" routerLink="/single-store" style="width: 250px;"><img src="assets/img/home/preview/th05.jpg" alt="Single Product / Brand Store"></a>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </li>
   <!-- Menu items-->
-  @for(item of menuItems;track $index){
-    <li class="nav-item dropdown">
-      @if(item.subItems){
-      <!-- <a class="nav-link menu-link sublink dropdown-toggle" data-bs-toggle="dropdown" (click)="onMenuClick($event)" role="button" (click)="toggleItem($event)">
-        {{item.label | translate}}
-      </a> -->
-      <a class="nav-link menu-link sublink dropdown-toggle" data-bs-toggle="dropdown" (click)="onMenuClick($event)" role="button" (click)="toggleItem($event)">
-        {{item.label}}
-      </a>
-    }
-      <ul class="dropdown-menu collapse menu-dropdown">
-        @for(subitem of item.subItems;track $index){
-        <li class="dropdown">
-          @if(subitem.subChild){
-          <a class="dropdown-item dropdown-toggle sublink" href="javascript:void(0);" data-bs-toggle="dropdown"
-           (click)="toggleSubItem($event)">{{subitem.label}}</a>
-           <!-- <a class="dropdown-item dropdown-toggle sublink" href="javascript:void(0);" data-bs-toggle="dropdown"
-           (click)="toggleSubItem($event)">{{subitem.label | translate}}</a> -->
-
-          <ul class="dropdown-menu collapse menu-dropdown">
-            @for(subChild of subitem.subChild;track $index){
-            <li>
-              @if(subChild.link){
-              <!-- <a class="dropdown-item sublink" routerLink="{{subChild.link}}">{{subChild.label | translate}}</a> -->
-              <a class="dropdown-item sublink" routerLink="{{subChild.link}}">{{subChild.label}}</a>
-              }
-              @if(subChild.fulllink){
-                <!-- <a class="dropdown-item sublink" href="{{subChild.fulllink}}">{{subChild.label | translate}}</a> -->
-                <a class="dropdown-item sublink" href="{{subChild.fulllink}}">{{subChild.label}}</a>
-              }
-            </li>
-            }
-          </ul>
-        }@else{
-          <!-- <a class="dropdown-item side-nav-link-ref sublink childSublink" routerLink="{{subitem.link}}"
-           data-bs-toggle="dropdown">{{subitem.label | translate}}</a> -->
-           <a class="dropdown-item side-nav-link-ref sublink childSublink" routerLink="{{subitem.link}}"
-           data-bs-toggle="dropdown">{{subitem.label}}</a>
-
-        }
-        </li>
-      }
-      </ul>
-    </li>
-}
 
 
-  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="javascript:void(0);" data-bs-toggle="dropdown">Docs / Components</a>
+
+  <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="javascript:void(0);" data-bs-toggle="dropdown">Docs / Components</a>
     <ul class="dropdown-menu">
       <li><a class="dropdown-item" href="https://themes.themesbrand.com/cartzilla/angular/docs/dev-setup.html">
           <div class="d-flex">
@@ -115,5 +71,5 @@
           </div>
         </a></li>
     </ul>
-  </li>
+  </li> -->
 </ul>
