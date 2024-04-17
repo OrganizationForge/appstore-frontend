@@ -1,7 +1,7 @@
 import { ApiPagedResponse, ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { NewProduct, Product } from '../models/product.model';
+import { Product } from '../models/product.model';
 import { Category } from '../models/category.model';
 import { Brand } from '../models/brand.model';
 
@@ -28,8 +28,8 @@ export class ProductService {
     // );
   }
 
-  createProduct(newProduct: NewProduct): Observable<ApiResponse<number>> {
-    return this.apiService.post<ApiResponse<number>,NewProduct>('/v1/Products',newProduct)
+  createProduct(newProduct: FormData): Observable<ApiResponse<number>> {
+    return this.apiService.post<ApiResponse<number>,FormData>('/v1/Products',newProduct)
     .pipe(
       map(res => {
         return res

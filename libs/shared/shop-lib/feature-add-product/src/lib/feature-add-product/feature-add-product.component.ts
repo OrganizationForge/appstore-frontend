@@ -79,49 +79,70 @@ export class FeatureAddProductComponent implements OnInit {
 
   /**
    * Save user
-   */
-  AddProduct() {
-    this.submitted = true;
+  */
+ files: NewProductFile[] = [];
+ AddProduct() {
+   this.submitted = true;
+   
+    const formData = new FormData();
+    formData.append('ProductName', this.productForm.value.productName);
+    formData.append('Description', this.productForm.value.productName);
+    formData.append('PriceBase', this.productForm.value.productName);
+    formData.append('Price', this.productForm.value.productName);
+    formData.append('BrandId', this.productForm.value.productName);
+    formData.append('AvailabilityId', this.productForm.value.productName);
+    formData.append('CategoryId', this.productForm.value.productName);
+    formData.append('QuantityTypeId', this.productForm.value.productName);
+    formData.append('Weight', this.productForm.value.productName);
+    formData.append('Stock', this.productForm.value.productName);
+    formData.append('Barcode', this.productForm.value.productName);
+    this.files.forEach( x => {
+      
+      formData.append('ImageFiles', x, x.name);
+    });
+    
 
-    // console.log(this.productForm.value);
-    const newProduct: NewProduct = {
-      productName: this.productForm.value.productName,
-      description: this.productForm.value.description,
-      priceBase: this.productForm.value.priceBase,
-      price: this.productForm.value.price,
-      imageFiles: this.files,
-      brandId: this.productForm.value.brandId,
-      availabilityId: 1,
-      categoryId: this.productForm.value.categoryId,
-      quantityTypeId: this.productForm.value.quantityTypeId,
-      weight: 0,
-      stock: this.productForm.value.stock,
-      barcode: this.productForm.value.barcode,
-    };
-    this.productService.createProduct(newProduct).subscribe((res) => {
+    // // console.log(this.productForm.value);
+    // const newProduct: NewProduct = {
+    //   productName: this.productForm.value.productName,
+    //   description: this.productForm.value.description,
+    //   priceBase: this.productForm.value.priceBase,
+    //   price: this.productForm.value.price,
+    //   imageFiles: formData,
+    //   brandId: this.productForm.value.brandId,
+    //   availabilityId: 1,
+    //   categoryId: this.productForm.value.categoryId,
+    //   quantityTypeId: this.productForm.value.quantityTypeId,
+    //   weight: 0,
+    //   stock: this.productForm.value.stock,
+    //   barcode: this.productForm.value.barcode,
+    // };
+
+    // console.log(newProduct);
+
+    this.productService.createProduct(formData).subscribe((res) => {
       if (res.succeded) alert('Guardado Ok');
       else res.errors;
     });
   }
 
-  files: NewProductFile[] = [];
 
   onSelect(event: any) {
-    const files = event.addedFiles;
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64 = reader.result as string;
-        file.imageName = file.name;
-        file.imageBytes = base64;
-        this.files.push(file);
-      };
-      reader.readAsDataURL(file);
-    }
+    // const files = event.addedFiles;
+    // for (let i = 0; i < files.length; i++) {
+    //   const file = files[i];
+    //   const reader = new FileReader();
+    //   reader.onload = () => {
+    //     const base64 = reader.result as string;
+    //     file.imageName = file.name;
+    //     file.imageBytes = base64;
+    //     this.files.push(file);
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
 
-    console.log(this.files);
-    // this.files2.push(...event.addedFiles);
+    // console.log(this.files);
+    this.files.push(...event.addedFiles);
   }
 
   onRemove(event: any) {

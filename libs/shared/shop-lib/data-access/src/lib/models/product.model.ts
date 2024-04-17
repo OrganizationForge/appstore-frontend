@@ -33,7 +33,7 @@ export interface NewProduct {
   weight: number,
   stock: number,
   barcode: string,
-  imageFiles?: NewProductFile[]
+  imageFiles?: FormData
 }
 
 export interface NewProductFile extends File{
