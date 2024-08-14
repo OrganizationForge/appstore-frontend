@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { cartActions } from '@angular-monorepo/shared/cart-lib/data-access';
+import { cartActions, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 
 @Component({
   selector: 'lib-product-ui',
@@ -22,5 +22,10 @@ export class ProductUiComponent {
     product.total = 0;
     product.qty = 0;
     this.store.dispatch(cartActions.postCart({products: product}))
+
+    // Seleccionar el estado del carrito actual
+    this.store.select(ngrxCartQuery.selectProducts).subscribe(cartItems => {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    });
   }
 }

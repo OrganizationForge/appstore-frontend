@@ -31,7 +31,7 @@ export class HomeStoreAppComponent implements OnInit {
         else
           return []
       })
-    );;
+    );
   }
 
   Coverflow = {

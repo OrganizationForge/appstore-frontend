@@ -7,6 +7,7 @@ export const cartActions = createActionGroup({
     getCart: props<{ data: any }>(),
     postCart: props<{ products: CartProduct }>(),
     removeItemFromCart: props<{ products: CartProduct }>(),
-    getCartFailure: props<{ error: string }>()
+    getCartFailure: props<{ error: string }>(),
+    loadCart:  props<{ cart: any }>()
   },
 });

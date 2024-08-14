@@ -8,7 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+import { NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+
 
 @Component({
   selector: 'lib-feature-add-product',
@@ -75,52 +76,75 @@ export class FeatureAddProductComponent implements OnInit {
       console.log(this.imageURL);
     };
     reader.readAsDataURL(file);
+
   }
 
   /**
    * Save user
   */
- files: NewProductFile[] = [];
- AddProduct() {
-   this.submitted = true;
-   
-    const formData = new FormData();
-    formData.append('ProductName', this.productForm.value.productName);
-    formData.append('Description', this.productForm.value.productName);
-    formData.append('PriceBase', this.productForm.value.productName);
-    formData.append('Price', this.productForm.value.productName);
-    formData.append('BrandId', this.productForm.value.productName);
-    formData.append('AvailabilityId', this.productForm.value.productName);
-    formData.append('CategoryId', this.productForm.value.productName);
-    formData.append('QuantityTypeId', this.productForm.value.productName);
-    formData.append('Weight', this.productForm.value.productName);
-    formData.append('Stock', this.productForm.value.productName);
-    formData.append('Barcode', this.productForm.value.productName);
+  files: NewProductFile[] = [];
+  AddProduct() {
+    this.submitted = true;
+
+    // const formData = new FormData();
+    // formData.append('ProductName', this.productForm.value.productName);
+    // formData.append('Description', this.productForm.value.productName);
+    // formData.append('PriceBase', this.productForm.value.productName);
+    // formData.append('Price', this.productForm.value.productName);
+    // formData.append('BrandId', this.productForm.value.productName);
+    // formData.append('AvailabilityId', this.productForm.value.productName);
+    // formData.append('CategoryId', this.productForm.value.productName);
+    // formData.append('QuantityTypeId', this.productForm.value.productName);
+    // formData.append('Weight', this.productForm.value.productName);
+    // formData.append('Stock', this.productForm.value.productName);
+    // formData.append('Barcode', this.productForm.value.productName);
+    // this.files.forEach( x => {
+
+    //   formData.append('ImageFiles', x, x.name);
+    // });
+
+
+    const fileProducts : NewFile[] = [];
+
     this.files.forEach( x => {
-      
-      formData.append('ImageFiles', x, x.name);
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        const file: NewFile = {
+          imageName : x.name,
+          imageBytes: base64
+        }
+        fileProducts.push(file);
+      };
+      reader.readAsDataURL(x);
     });
-    
 
+    // console.log(fileProducts);
     // // console.log(this.productForm.value);
-    // const newProduct: NewProduct = {
-    //   productName: this.productForm.value.productName,
-    //   description: this.productForm.value.description,
-    //   priceBase: this.productForm.value.priceBase,
-    //   price: this.productForm.value.price,
-    //   imageFiles: formData,
-    //   brandId: this.productForm.value.brandId,
-    //   availabilityId: 1,
-    //   categoryId: this.productForm.value.categoryId,
-    //   quantityTypeId: this.productForm.value.quantityTypeId,
-    //   weight: 0,
-    //   stock: this.productForm.value.stock,
-    //   barcode: this.productForm.value.barcode,
-    // };
+    const newProduct: NewProduct = {
+      productName: this.productForm.value.productName,
+      description: this.productForm.value.description,
+      priceBase: this.productForm.value.priceBase,
+      price: this.productForm.value.price,
+      productFiles: fileProducts,
+      brandId: this.productForm.value.brandId,
+      availabilityId: 1,
+      categoryId: this.productForm.value.categoryId,
+      quantityTypeId: this.productForm.value.quantityTypeId,
+      weight: 0,
+      stock: this.productForm.value.stock,
+      barcode: this.productForm.value.barcode,
+    };
 
-    // console.log(newProduct);
+    console.log(newProduct);
 
-    this.productService.createProduct(formData).subscribe((res) => {
+    // this.productService.createProduct(formData).subscribe((res) => {
+    //   if (res.succeded) alert('Guardado Ok');
+    //   else res.errors;
+    // });
+
+    this.productService.createProduct(newProduct).subscribe((res) => {
       if (res.succeded) alert('Guardado Ok');
       else res.errors;
     });
@@ -128,7 +152,9 @@ export class FeatureAddProductComponent implements OnInit {
 
 
   onSelect(event: any) {
+
     // const files = event.addedFiles;
+
     // for (let i = 0; i < files.length; i++) {
     //   const file = files[i];
     //   const reader = new FileReader();
@@ -141,7 +167,7 @@ export class FeatureAddProductComponent implements OnInit {
     //   reader.readAsDataURL(file);
     // }
 
-    // console.log(this.files);
+    console.log(this.files);
     this.files.push(...event.addedFiles);
   }
 

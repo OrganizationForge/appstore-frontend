@@ -1,13 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, AsyncPipe } from '@angular/common';
 import { FeatureMenuComponent } from '@angular-monorepo/feature-menu';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@angular-monorepo/auth-data-access';
+import { Store } from '@ngrx/store';
+import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'angular-monorepo-header',
   standalone: true,
-  imports: [CommonModule, FeatureMenuComponent, RouterModule],
+  imports: [CommonModule, FeatureMenuComponent, RouterModule, AsyncPipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -46,28 +49,20 @@ export class HeaderComponent implements OnInit {
 
   menuVisible = false;
 
+  private readonly store = inject(Store);
+
+  cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
+
   // constructor(private router: Router, private modalService: NgbModal, private formBuilder: UntypedFormBuilder, public languageService: LanguageService,
   //   public _cookiesService: CookieService, public translate: TranslateService) {
   // }
 
   ngOnInit(): void {
-    // const pathName = window.location.pathname;
-    /**
-     * Form Validatyion
-     */
-    // this.loginForm = this.formBuilder.group({
-    //   email: ['', [Validators.required]],
-    //   password: ['', Validators.required],
-    // });
 
-    /**
-     * Form Validatyion
-     */
-    // this.SignupForm = this.formBuilder.group({
-    //   email: ['', [Validators.required]],
-    //   name: ['', [Validators.required]],
-    //   password: ['', Validators.required],
-    // });
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      this.store.dispatch(cartActions.loadCart({ cart: JSON.parse(storedCart) }));
+    }
 
     // Language set
     // this.cookieValue = this._cookiesService.get('lang');
@@ -81,50 +76,25 @@ export class HeaderComponent implements OnInit {
 
     this.selectedLanguage = 'Eng / $'
 
-    // this.cartDatas = CartData;
-    this.cartDatas = [
-      {
-          id: 1,
-          image: 'assets/img/shop/cart/01.jpg',
-          name: 'Women Colorblock Sneakers',
-          size: 8.5,
-          color: 'White & Blue',
-          price: '154.00'
-      },
-      {
-          id: 2,
-          image: 'assets/img/shop/cart/02.jpg',
-          name: 'TH Jeans City Backpack',
-          color: 'Khaki',
-          brand: 'Tommy Hilfiger',
-          price: '79.50'
-      },
-      {
-          id: 3,
-          image: 'assets/img/shop/cart/03.jpg',
-          name: '3-Color Sun Stash Hat',
-          brand: 'The North Face',
-          color: 'Pink / Beige / Dark blue',
-          price: '22.50'
-      },
-      {
-          id: 4,
-          image: 'assets/img/shop/cart/04.jpg',
-          name: 'Cotton Polo Regular Fit',
-          size: 42,
-          color: 'Light blue',
-          price: '9.00'
-      },
-  ];
-
   }
 
   calculatetotal(total: any) {
     this.subTotal = 0;
-    this.cartDatas.forEach((element: any) => {
 
-      this.subTotal += parseFloat(element.price)
-    });
+    //  this.cartDatas = CartData;
+    this.cartItems$.pipe(
+      map(res => {
+        res.forEach((element: CartProduct) => {
+          console.log(element.price)
+          this.subTotal += element.price
+        });
+      })
+    )
+
+    // this.cartItems$.forEach((element: any) => {
+    //   console.log(element);
+    //   this.subTotal += parseFloat(element.price)
+    // });
     return this.subTotal.toFixed(2)
   }
 

@@ -1,7 +1,7 @@
 import { ApiPagedResponse, ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Product } from '../models/product.model';
+import { NewProduct, Product } from '../models/product.model';
 import { Category } from '../models/category.model';
 import { Brand } from '../models/brand.model';
 
@@ -10,10 +10,8 @@ import { Brand } from '../models/brand.model';
 })
 export class ProductService {
   private readonly apiService = inject(ApiService);
-  constructor() { }
-
   getProducts(params: string): Observable<ApiPagedResponse<Product[]>> {
-    let paramsUrl: string = "";
+    let paramsUrl = "";
     if (params)
       paramsUrl = '?' + params;
 
@@ -28,14 +26,22 @@ export class ProductService {
     // );
   }
 
-  createProduct(newProduct: FormData): Observable<ApiResponse<number>> {
-    return this.apiService.post<ApiResponse<number>,FormData>('/v1/Products',newProduct)
+  createProduct(newProduct: NewProduct): Observable<ApiResponse<number>> {
+    return this.apiService.post<ApiResponse<number>,NewProduct>('/v1/Products',newProduct)
     .pipe(
       map(res => {
         return res
       })
     )
   }
+  // createProduct(newProduct: FormData): Observable<ApiResponse<number>> {
+  //   return this.apiService.post<ApiResponse<number>,FormData>('/v1/Products',newProduct)
+  //   .pipe(
+  //     map(res => {
+  //       return res
+  //     })
+  //   )
+  // }
 
   getCategories(): Observable<Category[]> {
 
@@ -47,7 +53,7 @@ export class ProductService {
         else
           return []
       })
-    );;
+    );
   }
 
   getBrands(): Observable<Brand[]> {
@@ -60,6 +66,6 @@ export class ProductService {
         else
           return []
       })
-    );;
+    );
   }
 }

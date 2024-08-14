@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup,
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
+import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 import { map } from 'rxjs';
 
 @Component({
@@ -79,8 +79,14 @@ export class FeatureCheckoutComponent implements OnInit {
   }
 
   // Remove Cart
-  removeCart(event: any, id: any) {
+  removeCart(event: any, product: any) {
     //  this.subTotal -= parseFloat(this.cartDatas[id].total)
+    this.store.dispatch(cartActions.removeItemFromCart({products: product}))
+
+    // Seleccionar el estado del carrito actual
+    this.store.select(ngrxCartQuery.selectProducts).subscribe(cartItems => {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    });
     event.target.closest('.border-bottom').remove();
   }
 

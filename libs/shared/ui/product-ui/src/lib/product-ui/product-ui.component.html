@@ -1,14 +1,14 @@
     <div class="card product-card">
-      @if(data.id == '2'){
+      @if(data.id === '2'){
         <span class="badge bg-danger badge-shadow">Oferta</span>
         }
       <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image[0]}}" alt="Product"></a> -->
-      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="https://localhost:44331/{{data.productFiles[0].urlImage}}" alt="Product"></a>
+      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="assets\img\shop\catalog\01.jpg" alt="Product"></a>
       <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category.description}}</a>
         <h3 class="product-title fs-sm"><a routerLink="/shop/product-detail">{{data.productName}}</a></h3>
         <div class="d-flex justify-content-between">
 
-          @if(data.availability.id == 2){
+          @if(data.availability.id === 2){
             <div class="product-price"><span class="text-muted fs-sm">Out of stock</span></div>
           } @else {
             <div class="product-price"><span class="text-accent">${{data.price}}</span>
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      @if(data.availability.id == 1){
+      @if(data.availability.id === 1){
       <div class="card-body card-body-hidden">
         <div class="text-center pb-2">
           @for(size of data.size;track $index){
@@ -43,7 +43,7 @@
       </div>
       }
 
-      @if(data.type == 'color'){
+      @if(data.type === 'color'){
       <div class="card-body card-body-hidden">
         <div class="text-center pb-2">
           @for(color of data.colors;track $index){
@@ -68,7 +68,7 @@
       </div>
      }
 
-     @if(data.availability.id == 2){
+     @if(data.availability.id === 2){
       <div class="card-body card-body-hidden"><a class="btn btn-secondary btn-sm d-block w-100 mb-2" routerLink="/shop/product-detail">View details</a>
         <div class="text-center"><a class="nav-link-style fs-ms" href="javascript:void(0);" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
       </div>

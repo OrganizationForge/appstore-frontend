@@ -21,5 +21,9 @@ export const ngrxCartFeature = createFeature({
       return state;
      }),
     on(cartActions.getCartFailure, (state, action) => ({...state, error: action.error,})),
+    on(cartActions.loadCart, (state, { cart }) => ({
+      ...state,
+      products: cart
+  }))
   ),
 });
