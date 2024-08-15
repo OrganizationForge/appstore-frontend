@@ -207,9 +207,9 @@ export class HeaderComponent implements OnInit {
   }
 
   // Remove
-  remove(id: any) {
-    this.subTotal -= parseFloat(this.cartDatas[id].price)
-    this.cartDatas.splice(id, 1);
+  remove(product: any) {
+    // this.subTotal -= parseFloat(this.cartDatas[id].price)
+    this.store.dispatch(cartActions.removeItemFromCart({products: product}));
   }
 
 }

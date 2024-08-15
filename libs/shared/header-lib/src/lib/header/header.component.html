@@ -154,7 +154,14 @@
   <div class="navbar-sticky bg-light">
     <div class="navbar navbar-expand-lg navbar-light">
       <div class="container"><a class="navbar-brand d-none d-sm-block
-          flex-shrink-0" routerLink="/fashion-store-v1"><img src="assets/img/logo-dark.png" width="142" alt="Cartzilla"></a><a class="navbar-brand d-sm-none flex-shrink-0 me-2" routerLink="/fashion-store-v1"><img src="assets/img/logo-icon.png" width="74" alt="Cartzilla"></a>
+          flex-shrink-0" routerLink="/home">
+          APPSTORE
+          <!-- <img src="assets/img/logo-dark.png" width="142" alt="Cartzilla"> -->
+        </a>
+        <a class="navbar-brand d-sm-none flex-shrink-0 me-2" routerLink="/home">
+          APPSTORE
+          <!-- <img src="assets/img/logo-icon.png" width="74" alt="Cartzilla"> -->
+        </a>
         <div class="input-group d-none d-lg-flex mx-4">
           <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y
             text-muted fs-base me-3"></i>
@@ -252,7 +259,7 @@
 
                       @for(data of cartItems;track $index){
                         <div class="widget-cart-item pb-2 border-bottom">
-                          <button class="btn-close text-danger" type="button" aria-label="Remove" (click)="remove($index)"><span aria-hidden="true">&times;</span></button>
+                          <button class="btn-close text-danger" type="button" aria-label="Remove" (click)="remove(data)"><span aria-hidden="true">&times;</span></button>
                           <div class="d-flex align-items-center"><a class="flex-shrink-0" routerLink="/shop/single-v1"><img src="assets\img\shop\catalog\01.jpg" width="64" alt="Product"></a>
                             <div class="ps-2">
                               <h6 class="widget-product-title"><a routerLink="/shop/single-v1">{{data.productName}}</a>
@@ -288,7 +295,7 @@
           <!-- Departments menu-->
           <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle
-                ps-lg-0" href="javascript:void(0);" data-bs-toggle="dropdown"><i class="ci-view-grid me-2"></i>Departments</a>
+                ps-lg-0" href="javascript:void(0);" data-bs-toggle="dropdown"><i class="ci-view-grid me-2"></i>Categorias</a>
               <div class="dropdown-menu px-2 pb-4">
                 <div class="d-flex flex-wrap flex-sm-nowrap">
                   <div class="mega-dropdown-column pt-3 pt-sm-4 px-2 px-lg-3">
@@ -376,8 +383,7 @@
             </li>
           </ul>
           <!-- Primary menu-->
-          <!-- <app-menu></app-menu> -->
-          <lib-feature-menu></lib-feature-menu>
+          <!-- <lib-feature-menu></lib-feature-menu> -->
         </div>
       </div>
     </div>

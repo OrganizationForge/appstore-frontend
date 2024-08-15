@@ -21,11 +21,6 @@ export class ProductUiComponent {
   addToCart(product: any) {
     product.total = 0;
     product.qty = 0;
-    this.store.dispatch(cartActions.postCart({products: product}))
-
-    // Seleccionar el estado del carrito actual
-    this.store.select(ngrxCartQuery.selectProducts).subscribe(cartItems => {
-      localStorage.setItem('cart', JSON.stringify(cartItems));
-    });
+    this.store.dispatch(cartActions.postCart({products: product}));
   }
 }

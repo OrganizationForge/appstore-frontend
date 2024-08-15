@@ -10,14 +10,17 @@ export const ngrxCartFeature = createFeature({
   reducer: createReducer(
     ngrxCartInitialState,
     on(cartActions.getCart, (state) => ({...state,})),
-    on(cartActions.postCart, (state, action) => {  state = {...state, products: [...state.products, action.products]}
-    return state;
+    on(cartActions.postCart, (state, action) => {
+      state = {...state, products: [...state.products, action.products]}
+      localStorage.setItem('cart', JSON.stringify(state.products));
+      return state;
     }),
     on(cartActions.removeItemFromCart, (state, action) => {
       const products = [...state.products];
       const index = products.findIndex(x => x.id === action.products.id);
       products.splice(index, 1);
       state = {...state, products: products }
+      localStorage.setItem('cart', JSON.stringify(state.products));
       return state;
      }),
     on(cartActions.getCartFailure, (state, action) => ({...state, error: action.error,})),
