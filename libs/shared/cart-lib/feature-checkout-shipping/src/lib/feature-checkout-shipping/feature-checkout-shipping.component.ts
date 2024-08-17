@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { ShippingData } from './data';
+import { PaymentData, ShippingData } from './data';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import {ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 
 @Component({
   selector: 'lib-feature-checkout-shipping',
@@ -13,19 +15,32 @@ import { RouterModule } from '@angular/router';
 })
 export class FeatureCheckoutShippingComponent implements OnInit {
   shippingDatas: any;
+  paymentsDatas: any;
   promocodeForm!: UntypedFormGroup;
   submitted = false;
 
+  selectedPaymentMethod = 1;
+  selectedSendMethod = 1;
+
+
   constructor(private formBuilder: UntypedFormBuilder) { }
+
+  private readonly store = inject(Store);
+
+  cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
 
   ngOnInit(): void {
     this.shippingDatas = ShippingData;
+    this.paymentsDatas = PaymentData;
     /**
      * Form Validatyion
      */
     this.promocodeForm = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
+
+    localStorage.setItem('selectedSendMethod', JSON.stringify(this.shippingDatas[0]));
+    localStorage.setItem('selectedPaymentMethod', JSON.stringify(this.paymentsDatas[0]));
   }
 
   // convenience getter for easy access to form fields
@@ -41,4 +56,16 @@ export class FeatureCheckoutShippingComponent implements OnInit {
       return;
     }
   }
+
+
+  onSendChange(sendMethod: any) {
+    this.selectedSendMethod = sendMethod.Id;
+    localStorage.setItem('selectedSendMethod', JSON.stringify(sendMethod));
+  }
+
+  onPaymentChange(paymentMethod: any) {
+    this.selectedPaymentMethod = paymentMethod.Id;
+    localStorage.setItem('selectedPaymentMethod', JSON.stringify(paymentMethod));
+  }
+
 }
