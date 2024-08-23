@@ -2,8 +2,8 @@
       @if(data.id === '2'){
         <span class="badge bg-danger badge-shadow">Oferta</span>
         }
-      <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image[0]}}" alt="Product"></a> -->
-      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="assets\img\shop\catalog\01.jpg" alt="Product"></a>
+      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="https://localhost:44331/{{data.productFiles[0].urlImage}}" alt="Product"></a>
+      <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="" alt="Product"></a> -->
       <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category.description}}</a>
         <h3 class="product-title fs-sm"><a routerLink="/shop/product-detail">{{data.productName}}</a></h3>
         <div class="d-flex justify-content-between">

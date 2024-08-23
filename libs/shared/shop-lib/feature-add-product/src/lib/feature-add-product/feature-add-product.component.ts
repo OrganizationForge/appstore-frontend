@@ -76,85 +76,78 @@ export class FeatureAddProductComponent implements OnInit {
       console.log(this.imageURL);
     };
     reader.readAsDataURL(file);
-
   }
 
   /**
    * Save user
-  */
-  files: NewProductFile[] = [];
+   */
+  files: NewFile[] = [];
+
+
   AddProduct() {
     this.submitted = true;
+    const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
 
-    // const formData = new FormData();
-    // formData.append('ProductName', this.productForm.value.productName);
-    // formData.append('Description', this.productForm.value.productName);
-    // formData.append('PriceBase', this.productForm.value.productName);
-    // formData.append('Price', this.productForm.value.productName);
-    // formData.append('BrandId', this.productForm.value.productName);
-    // formData.append('AvailabilityId', this.productForm.value.productName);
-    // formData.append('CategoryId', this.productForm.value.productName);
-    // formData.append('QuantityTypeId', this.productForm.value.productName);
-    // formData.append('Weight', this.productForm.value.productName);
-    // formData.append('Stock', this.productForm.value.productName);
-    // formData.append('Barcode', this.productForm.value.productName);
-    // this.files.forEach( x => {
-
-    //   formData.append('ImageFiles', x, x.name);
-    // });
-
-
-    const fileProducts : NewFile[] = [];
-
-    this.files.forEach( x => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        const base64 = reader.result as string;
-        const file: NewFile = {
-          imageName : x.name,
-          imageBytes: base64
-        }
-        fileProducts.push(file);
-      };
-      reader.readAsDataURL(x);
-    });
-
-    // console.log(fileProducts);
-    // // console.log(this.productForm.value);
+    // console.log(this.productForm.value);
     const newProduct: NewProduct = {
       productName: this.productForm.value.productName,
       description: this.productForm.value.description,
       priceBase: this.productForm.value.priceBase,
       price: this.productForm.value.price,
-      productFiles: fileProducts,
+      // imageFiles: this.files,
+      productFiles: productFiles,
       brandId: this.productForm.value.brandId,
       availabilityId: 1,
       categoryId: this.productForm.value.categoryId,
       quantityTypeId: this.productForm.value.quantityTypeId,
       weight: 0,
       stock: this.productForm.value.stock,
-      barcode: this.productForm.value.barcode,
+      barcode: this.productForm.value.barcode
     };
 
     console.log(newProduct);
 
-    // this.productService.createProduct(formData).subscribe((res) => {
-    //   if (res.succeded) alert('Guardado Ok');
-    //   else res.errors;
-    // });
-
     this.productService.createProduct(newProduct).subscribe((res) => {
-      if (res.succeded) alert('Guardado Ok');
+      if (res.succeded) {
+        alert('Guardado Ok');
+        this.productForm.reset();
+        this.files = [];
+      }
       else res.errors;
     });
   }
 
+  mapFilesToNewProductFiles(files: NewFile[]): NewProductFile[] {
+    return files.map((file: NewFile) => ({
+      name: file.name,
+      extension: file.type,
+      data: file.imageBytes
+    }));
+  }
+
 
   onSelect(event: any) {
+    const files = event.addedFiles;
 
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => { // Use event object for type safety
+      const base64 = event.target.result as string;
+      file.imageName = file.name;
+      file.imageBytes = base64;
+      this.files.push(file); // Add the modified file
+    };
+
+    reader.onerror = (error) => {
+      console.error('Error reading file:', error);
+      // Handle errors appropriately (optional)
+    };
+
+    reader.readAsDataURL(file);
+  }
     // const files = event.addedFiles;
-
     // for (let i = 0; i < files.length; i++) {
     //   const file = files[i];
     //   const reader = new FileReader();
@@ -166,10 +159,8 @@ export class FeatureAddProductComponent implements OnInit {
     //   };
     //   reader.readAsDataURL(file);
     // }
-
-    console.log(this.files);
-    this.files.push(...event.addedFiles);
   }
+
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);

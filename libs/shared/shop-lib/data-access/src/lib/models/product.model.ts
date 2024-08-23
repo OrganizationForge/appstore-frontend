@@ -21,15 +21,6 @@ export interface ProductFile {
   nameImage: string;
   urlImage: string;
 }
-
-
-export interface NewFile{
-  imageName: string;
-  imageBytes: string;
-}
-
-
-
 export interface NewProduct {
   productName: string,
   description: string,
@@ -42,10 +33,16 @@ export interface NewProduct {
   weight: number,
   stock: number,
   barcode: string,
-  productFiles: NewFile[]
+  productFiles?: NewProductFile[]
 }
 
-export interface NewProductFile extends File{
+export interface NewProductFile{
+  name: string;
+  extension: string;
+  data: string;
+}
+
+export interface NewFile extends File {
   imageName: string;
   imageBytes: string;
 }
