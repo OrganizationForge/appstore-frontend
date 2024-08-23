@@ -1,214 +1,217 @@
 
+@if(detailProduct$ | async; as dataProduct){
 
-<!-- Custom page title-->
-<div class="page-title-overlap bg-dark pt-4">
-    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                    <li class="breadcrumb-item"><a class="text-nowrap" routerLink="/fashion-store-v1"><i
-                                class="ci-home"></i>Home</a>
-                    </li>
-                    <li class="breadcrumb-item text-nowrap"><a href="javascript:void(0);">Shop</a>
-                    </li>
-                    <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.2</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-            <h1 class="h3 text-light mb-2">Smartwatch Youth Edition</h1>
-            <div>
-                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                        class="star-rating-icon ci-star-filled active"></i><i
-                        class="star-rating-icon ci-star-filled active"></i><i
-                        class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
-                </div><span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">74 Reviews</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-  <div class="bg-light shadow-lg rounded-3">
-        <!-- Tabs-->
-      <ul class="nav nav-tabs" role="tablist" ngbNav #nav="ngbNav">
-        <li [ngbNavItem]="1">
-          <a ngbNavLink class="nav-link py-4 px-sm-4">General <span class='d-none d-sm-inline'>Info</span></a>
-          <ng-template ngbNavContent>
-            <!-- General info tab-->
-            <lib-general-info></lib-general-info>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="2">
-          <a ngbNavLink class="nav-link py-4 px-sm-4"><span class='d-none d-sm-inline'>Tech</span> Specs</a>
-          <ng-template ngbNavContent>
-            <!-- Tech specs tab-->
-            <lib-specs-info></lib-specs-info>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="3">
-          <a ngbNavLink class="nav-link py-4 px-sm-4">Reviews <span class="fs-sm opacity-60">(74)</span></a>
-          <ng-template ngbNavContent>
-            <!-- Reviews tab-->
-            <lib-reviews-info></lib-reviews-info>
-          </ng-template>
-        </li>
-      </ul>
-
-      <div class="px-4 pt-lg-3 pb-3 mb-5">
-        <div class="tab-content px-lg-3">
-            <div [ngbNavOutlet]="nav" class="mt-2"></div>
-        </div>
+  <!-- Custom page title-->
+  <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+          <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                      <li class="breadcrumb-item"><a class="text-nowrap" routerLink="/fashion-store-v1"><i
+                                  class="ci-home"></i>Home</a>
+                      </li>
+                      <li class="breadcrumb-item text-nowrap"><a href="javascript:void(0);">Shop</a>
+                      </li>
+                      <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.2</li>
+                  </ol>
+              </nav>
+          </div>
+          <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+              <h1 class="h3 text-light mb-2">{{dataProduct.productName}}</h1>
+              <div>
+                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                          class="star-rating-icon ci-star-filled active"></i><i
+                          class="star-rating-icon ci-star-filled active"></i><i
+                          class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  </div><span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">74 Reviews</span>
+              </div>
+          </div>
       </div>
   </div>
-</div>
 
-<!-- Product description-->
-<div class="container pt-lg-3 pb-4 pb-sm-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <h2 class="h3 pb-2">Choose your style</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p><img
-                src="assets/img/shop/single/prod-img2.jpg" alt="Product description">
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.
-            </p>
+  <div class="container">
+    <div class="bg-light shadow-lg rounded-3">
+          <!-- Tabs-->
+        <ul class="nav nav-tabs" role="tablist" ngbNav #nav="ngbNav">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink class="nav-link py-4 px-sm-4">General <span class='d-none d-sm-inline'>Info</span></a>
+            <ng-template ngbNavContent>
+              <!-- General info tab-->
+              <lib-general-info></lib-general-info>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="2">
+            <a ngbNavLink class="nav-link py-4 px-sm-4"><span class='d-none d-sm-inline'>Tech</span> Specs</a>
+            <ng-template ngbNavContent>
+              <!-- Tech specs tab-->
+              <lib-specs-info></lib-specs-info>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink class="nav-link py-4 px-sm-4">Reviews <span class="fs-sm opacity-60">(74)</span></a>
+            <ng-template ngbNavContent>
+              <!-- Reviews tab-->
+              <lib-reviews-info></lib-reviews-info>
+            </ng-template>
+          </li>
+        </ul>
+
+        <div class="px-4 pt-lg-3 pb-3 mb-5">
+          <div class="tab-content px-lg-3">
+              <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
         </div>
     </div>
-</div>
-<hr class="mb-5">
+  </div>
 
-<!-- Product carousel (You may also like)-->
-<div class="container pt-lg-2 pb-5 mb-md-3">
-    <h2 class="h3 text-center pb-4">You may also like</h2>
-    <ngx-slick-carousel [config]="Popular">
-        @for(data of PopularDatas;track $index){
-        <div class="swiper-slide" ngxSlickItem>
-            <div class="card product-card card-static">
-                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"
-                    ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a
-                    class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image}}"
-                        alt="Product"></a>
-                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                        href="javascript:void(0);">{{data.category}}</a>
-                    <h3 class="product-title fs-sm"><a routerlink="/shop/single-v1">{{data.name}}</a></h3>
-                    <div class="d-flex justify-content-between">
-                        <div class="product-price"><span class="text-accent">${{data.price}}</span></div>
-                        <div class="star-rating">
-                            <ng-template #t let-fill="fill">
-                                <span class="star" [class.full]="fill === 100">
-                                    <span class="half" [style.width.%]="fill">★</span>☆
-                                </span>
-                            </ng-template>
-                            <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="data.rating"
-                                [starTemplate]="t" [readonly]="true" [max]="5">
-                            </ngb-rating>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        }
-    </ngx-slick-carousel>
-</div>
+  <!-- Product description-->
+  <div class="container pt-lg-3 pb-4 pb-sm-5">
+      <div class="row justify-content-center">
+          <div class="col-lg-8">
+              <h2 class="h3 pb-2">Descripcion</h2>
+              <p>{{dataProduct.description}}</p>
+              <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                  ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p><img
+                  src="assets/img/shop/single/prod-img2.jpg" alt="Product description">
+              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                  rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                  explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                  consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
+                  dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.
+              </p> -->
+          </div>
+      </div>
+  </div>
+  <hr class="mb-5">
 
-<!-- Product bundles carousel (Cheaper together)-->
-<div class="container pt-lg-1 pb-5 mb-md-3">
-    <div class="card card-body pt-5">
-        <h2 class="h3 text-center pb-4">Cheaper together</h2>
-        <ngx-slick-carousel [config]="Cheaper">
-            <div class="swiper-slide" ngxSlickItem>
-                <div class="row align-items-center">
-                    <div class="col-md-3 col-sm-5">
-                        <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
-                                class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
-                                    src="assets/img/shop/catalog/70.jpg" alt="Product"></a>
-                            <div class="card-body py-2"><span
-                                    class="d-inline-block bg-secondary fs-ms rounded-1 py-1 px-2 mb-3">Your
-                                    product</span>
-                                <h3 class="product-title fs-sm"><a href="javascript:void(0);">Smartwatch Youth
-                                        Edition</a></h3>
-                                <div class="product-price text-accent">$124.<small>99</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-sm-2 text-center">
-                        <div class="display-4 fw-light text-muted px-4">+</div>
-                    </div>
-                    <div class="col-md-3 col-sm-5">
-                        <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
-                                class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
-                                    src="assets/img/shop/catalog/72.jpg" alt="Product"></a>
-                            <div class="card-body py-2"><span
-                                    class="d-inline-block bg-danger fs-ms text-white rounded-1 py-1 px-2 mb-3">-20%</span>
-                                <h3 class="product-title fs-sm"><a href="javascript:void(0);">Smartwatch Wireless
-                                        Charger</a></h3>
-                                <div class="product-price"><span class="text-accent">$16.<small>00</small></span>
-                                    <del class="fs-sm text-muted">$20.<small>00</small></del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-none d-md-block col-md-1 text-center">
-                        <div class="display-4 fw-light text-muted px-4">=</div>
-                    </div>
-                    <div class="col-md-4 pt-3 pt-md-0">
-                        <div class="bg-secondary p-4 rounded-3 text-center mx-auto" style="max-width: 20rem;">
-                            <div class="h3 fw-normal text-accent mb-3 me-1">$140.<small>99</small></div>
-                            <button class="btn btn-primary" type="button">Purchase together</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide" ngxSlickItem>
-                <div class="row align-items-center">
-                    <div class="col-md-3 col-sm-5">
-                        <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
-                                class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
-                                    src="assets/img/shop/catalog/70.jpg" alt="Product"></a>
-                            <div class="card-body py-2"><span
-                                    class="d-inline-block bg-secondary fs-ms rounded-1 py-1 px-2 mb-3">Your
-                                    product</span>
-                                <h3 class="product-title fs-sm"><a href="javascript:void(0);">Smartwatch Youth
-                                        Edition</a></h3>
-                                <div class="product-price text-accent">$124.<small>99</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-sm-2 text-center">
-                        <div class="display-4 fw-light text-muted px-4">+</div>
-                    </div>
-                    <div class="col-md-3 col-sm-5">
-                        <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
-                                class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
-                                    src="assets/img/shop/catalog/71.jpg" alt="Product"></a>
-                            <div class="card-body py-2"><span
-                                    class="d-inline-block bg-danger fs-ms text-white rounded-1 py-1 px-2 mb-3">-15%</span>
-                                <h3 class="product-title fs-sm"><a href="javascript:void(0);">Bluetooth Headset Air
-                                        (White)</a></h3>
-                                <div class="product-price"><span class="text-accent">$59.<small>00</small></span>
-                                    <del class="fs-sm text-muted">$69.<small>00</small></del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-none d-md-block col-md-1 text-center">
-                        <div class="display-4 fw-light text-muted px-4">=</div>
-                    </div>
-                    <div class="col-md-4 pt-3 pt-md-0">
-                        <div class="bg-secondary p-4 rounded-3 text-center mx-auto" style="max-width: 20rem;">
-                            <div class="h3 fw-normal text-accent mb-3 me-1">$183.<small>99</small></div>
-                            <button class="btn btn-primary" type="button">Purchase together</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ngx-slick-carousel>
-    </div>
-</div>
+  <!-- Product carousel (You may also like)-->
+  <div class="container pt-lg-2 pb-5 mb-md-3">
+      <h2 class="h3 text-center pb-4">You may also like</h2>
+      <ngx-slick-carousel [config]="Popular">
+          @for(data of PopularDatas;track $index){
+          <div class="swiper-slide" ngxSlickItem>
+              <div class="card product-card card-static">
+                  <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"
+                      ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button><a
+                      class="card-img-top d-block overflow-hidden" routerLink="/shop/single-v1"><img src="{{data.image}}"
+                          alt="Product"></a>
+                  <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
+                          href="javascript:void(0);">{{data.category}}</a>
+                      <h3 class="product-title fs-sm"><a routerlink="/shop/single-v1">{{data.name}}</a></h3>
+                      <div class="d-flex justify-content-between">
+                          <div class="product-price"><span class="text-accent">${{data.price}}</span></div>
+                          <div class="star-rating">
+                              <ng-template #t let-fill="fill">
+                                  <span class="star" [class.full]="fill === 100">
+                                      <span class="half" [style.width.%]="fill">★</span>☆
+                                  </span>
+                              </ng-template>
+                              <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="data.rating"
+                                  [starTemplate]="t" [readonly]="true" [max]="5">
+                              </ngb-rating>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          }
+      </ngx-slick-carousel>
+  </div>
+
+  <!-- Product bundles carousel (Cheaper together)-->
+  <div class="container pt-lg-1 pb-5 mb-md-3">
+      <div class="card card-body pt-5">
+          <h2 class="h3 text-center pb-4">Cheaper together</h2>
+          <ngx-slick-carousel [config]="Cheaper">
+              <div class="swiper-slide" ngxSlickItem>
+                  <div class="row align-items-center">
+                      <div class="col-md-3 col-sm-5">
+                          <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
+                                  class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
+                                      src="assets/img/shop/catalog/70.jpg" alt="Product"></a>
+                              <div class="card-body py-2"><span
+                                      class="d-inline-block bg-secondary fs-ms rounded-1 py-1 px-2 mb-3">Your
+                                      product</span>
+                                  <h3 class="product-title fs-sm"><a href="javascript:void(0);">Smartwatch Youth
+                                          Edition</a></h3>
+                                  <div class="product-price text-accent">$124.<small>99</small></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-1 col-sm-2 text-center">
+                          <div class="display-4 fw-light text-muted px-4">+</div>
+                      </div>
+                      <div class="col-md-3 col-sm-5">
+                          <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
+                                  class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
+                                      src="assets/img/shop/catalog/72.jpg" alt="Product"></a>
+                              <div class="card-body py-2"><span
+                                      class="d-inline-block bg-danger fs-ms text-white rounded-1 py-1 px-2 mb-3">-20%</span>
+                                  <h3 class="product-title fs-sm"><a href="javascript:void(0);">Smartwatch Wireless
+                                          Charger</a></h3>
+                                  <div class="product-price"><span class="text-accent">$16.<small>00</small></span>
+                                      <del class="fs-sm text-muted">$20.<small>00</small></del>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="d-none d-md-block col-md-1 text-center">
+                          <div class="display-4 fw-light text-muted px-4">=</div>
+                      </div>
+                      <div class="col-md-4 pt-3 pt-md-0">
+                          <div class="bg-secondary p-4 rounded-3 text-center mx-auto" style="max-width: 20rem;">
+                              <div class="h3 fw-normal text-accent mb-3 me-1">$140.<small>99</small></div>
+                              <button class="btn btn-primary" type="button">Purchase together</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="swiper-slide" ngxSlickItem>
+                  <div class="row align-items-center">
+                      <div class="col-md-3 col-sm-5">
+                          <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
+                                  class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
+                                      src="assets/img/shop/catalog/70.jpg" alt="Product"></a>
+                              <div class="card-body py-2"><span
+                                      class="d-inline-block bg-secondary fs-ms rounded-1 py-1 px-2 mb-3">Your
+                                      product</span>
+                                  <h3 class="product-title fs-sm"><a href="javascript:void(0);">Smartwatch Youth
+                                          Edition</a></h3>
+                                  <div class="product-price text-accent">$124.<small>99</small></div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-1 col-sm-2 text-center">
+                          <div class="display-4 fw-light text-muted px-4">+</div>
+                      </div>
+                      <div class="col-md-3 col-sm-5">
+                          <div class="card product-card card-static text-center mx-auto" style="max-width: 20rem;"><a
+                                  class="card-img-top d-block overflow-hidden" href="javascript:void(0);"><img
+                                      src="assets/img/shop/catalog/71.jpg" alt="Product"></a>
+                              <div class="card-body py-2"><span
+                                      class="d-inline-block bg-danger fs-ms text-white rounded-1 py-1 px-2 mb-3">-15%</span>
+                                  <h3 class="product-title fs-sm"><a href="javascript:void(0);">Bluetooth Headset Air
+                                          (White)</a></h3>
+                                  <div class="product-price"><span class="text-accent">$59.<small>00</small></span>
+                                      <del class="fs-sm text-muted">$69.<small>00</small></del>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="d-none d-md-block col-md-1 text-center">
+                          <div class="display-4 fw-light text-muted px-4">=</div>
+                      </div>
+                      <div class="col-md-4 pt-3 pt-md-0">
+                          <div class="bg-secondary p-4 rounded-3 text-center mx-auto" style="max-width: 20rem;">
+                              <div class="h3 fw-normal text-accent mb-3 me-1">$183.<small>99</small></div>
+                              <button class="btn btn-primary" type="button">Purchase together</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </ngx-slick-carousel>
+      </div>
+  </div>
+}

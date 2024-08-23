@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PopularData } from '@angular-monorepo/shop-data-access';
+import { PopularData, Product, ProductService } from '@angular-monorepo/shop-data-access';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import {NgbRatingModule, NgbAccordionModule, NgbTooltipModule, NgbModule, NgbNavItem } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
 import { SpecsInfoComponent } from '../specs-info/specs-info.component';
 import { ReviewsInfoComponent } from '../reviews-info/reviews-info.component';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-feature-product-detail',
@@ -24,6 +25,25 @@ import { ReviewsInfoComponent } from '../reviews-info/reviews-info.component';
 export class FeatureProductDetailComponent implements OnInit {
   // Data Get
   PopularDatas: any;
+
+  detailProduct$: Observable<Product | null>;
+
+  private productService = inject(ProductService);
+
+  constructor(){
+    this.detailProduct$ = this.productService.getProduct(1).pipe(
+      map( res => {
+        if (res.succeded){
+          console.log(res.data);
+          return res.data
+        }
+        else{
+          console.log(res.data);
+          return null
+        }
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.PopularDatas = PopularData;

@@ -26,6 +26,10 @@ export class ProductService {
     // );
   }
 
+  getProduct(id: number): Observable<ApiResponse<Product>> {
+    return this.apiService.get<ApiResponse<Product>>(`/v1/Products/${id}`);
+  }
+
   createProduct(newProduct: NewProduct): Observable<ApiResponse<number>> {
     return this.apiService.post<ApiResponse<number>,NewProduct>('/v1/Products',newProduct)
     .pipe(
@@ -34,14 +38,6 @@ export class ProductService {
       })
     )
   }
-  // createProduct(newProduct: FormData): Observable<ApiResponse<number>> {
-  //   return this.apiService.post<ApiResponse<number>,FormData>('/v1/Products',newProduct)
-  //   .pipe(
-  //     map(res => {
-  //       return res
-  //     })
-  //   )
-  // }
 
   getCategories(): Observable<Category[]> {
 

@@ -26,8 +26,9 @@ export class HomeStoreAppComponent implements OnInit {
     this.listProducts$ = this.service.getProducts("PageNumber=1&PageSize=10")
     .pipe(
       map(res => {
-        if (res.succeded)
+        if (res.succeded){
           return res.data;
+        }
         else
           return []
       })
