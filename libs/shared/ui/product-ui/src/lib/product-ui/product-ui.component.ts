@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { cartActions, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
@@ -8,7 +8,7 @@ import { cartActions, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/da
 @Component({
   selector: 'lib-product-ui',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgbRating],
+  imports: [CommonModule, RouterModule, NgbRating, RouterLink],
   templateUrl: './product-ui.component.html',
   styleUrl: './product-ui.component.scss',
 })

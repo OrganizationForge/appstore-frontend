@@ -26,7 +26,7 @@ export class ProductService {
     // );
   }
 
-  getProduct(id: number): Observable<ApiResponse<Product>> {
+  getProduct(id: string): Observable<ApiResponse<Product>> {
     return this.apiService.get<ApiResponse<Product>>(`/v1/Products/${id}`);
   }
 

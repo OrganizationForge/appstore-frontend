@@ -11,21 +11,38 @@
 <form method="post" (ngSubmit)="AddProduct()" [formGroup]="productForm">
   <div class="d-sm-flex flex-wrap justify-content-end align-items-center pb-2">
     <!-- <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Product</h2> -->
-    <div class="py-2">
-      <select
-        class="form-select me-2"
-        id="unp-category"
-        formControlName="categoryId"
-      >
-        <option value="0">Seleccionar categoría</option>
-        <option value="1">Photos</option>
-        <option value="2">Graphics</option>
-        <option value="3">UI Design</option>
-        <option value="4">Web Themes</option>
-        <option value="5">Fonts</option>
-        <option value="6">Add-Ons</option>
-      </select>
-    </div>
+     @if(categories$ | async; as categories){
+       <div class="py-2">
+         <select
+           class="form-select me-2"
+           id="unp-category"
+           formControlName="categoryId"
+         >
+         <option value="0">Seleccionar categoría</option>
+         @for(category of categories;track $index){
+           <option value="{{category.id}}">{{category.description}}</option>
+         }
+         </select>
+       </div>
+
+       <div class="py-2">
+        <select
+          class="form-select me-2"
+          id="unp-category"
+          formControlName="categoryId"
+        >
+        <option value="0">Seleccionar subcategoría</option>
+        @for(category of categories;track $index){
+          <option value="{{category.id}}">{{category.description}}</option>
+        }
+          <!-- <option value="2">Graphics</option>
+          <option value="3">UI Design</option>
+          <option value="4">Web Themes</option>
+          <option value="5">Fonts</option>
+          <option value="6">Add-Ons</option> -->
+        </select>
+      </div>
+     }
   </div>
 
   <div class="row">

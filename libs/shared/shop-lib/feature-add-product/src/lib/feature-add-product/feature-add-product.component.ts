@@ -8,7 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+import { Category, NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+import { map, Observable } from 'rxjs';
 
 
 @Component({
@@ -22,6 +23,9 @@ export class FeatureAddProductComponent implements OnInit {
   productForm!: UntypedFormGroup;
   submitted = false;
 
+  categories$!: Observable<Category[]>;
+  selectedCategoryId = 0;
+
   constructor(
     private formBuilder: UntypedFormBuilder,
     private productService: ProductService
@@ -30,6 +34,12 @@ export class FeatureAddProductComponent implements OnInit {
   ngOnInit(): void {
     // When the user clicks on the button, scroll to the top of the document
     document.documentElement.scrollTop = 0;
+
+    this.categories$ = this.productService.getCategories().pipe(
+      map((res) => {
+        return res;
+      })
+    )
 
     /**
      * Form Validation
@@ -62,14 +72,7 @@ export class FeatureAddProductComponent implements OnInit {
   imageURL: string | undefined;
   fileChange(event: any) {
     const fileList: any = event.target as HTMLInputElement;
-    console.log(fileList);
     const file: File = fileList.files[0];
-    console.log(file);
-    // document.getElementById('');
-    // this.productForm.patchValue({
-    //   salefile: file.name
-    // });
-    // console.log( this.productForm)
     const reader = new FileReader();
     reader.onload = () => {
       this.imageURL = reader.result as string;
@@ -147,18 +150,6 @@ export class FeatureAddProductComponent implements OnInit {
 
     reader.readAsDataURL(file);
   }
-    // const files = event.addedFiles;
-    // for (let i = 0; i < files.length; i++) {
-    //   const file = files[i];
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     const base64 = reader.result as string;
-    //     file.imageName = file.name;
-    //     file.imageBytes = base64;
-    //     this.files.push(file);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   }
 
 
@@ -176,4 +167,5 @@ export class FeatureAddProductComponent implements OnInit {
       price: Number(priceBase / (1 - percent / 100)).toFixed(2),
     });
   }
+
 }

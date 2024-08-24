@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { errorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@angular-monorepo/error-handler';
 import { ngrxAuthFeature, tokenInterceptor } from '@angular-monorepo/auth-data-access';
@@ -15,7 +15,7 @@ import { ngrxCartFeature } from '@angular-monorepo/shared/cart-lib/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(appRoutes),
+    provideRouter(appRoutes, withComponentInputBinding()),
     provideStore({
       errorHandler: errorHandlerFeature.reducer,
       ngrxAuth: ngrxAuthFeature.reducer,
