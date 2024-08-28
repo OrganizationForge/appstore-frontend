@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit {
   private readonly store = inject(Store);
 
   cartItems$! : Observable<CartProduct[]>;
+  cartTotal$! : Observable<number>;
 
   // constructor(private router: Router, private modalService: NgbModal, private formBuilder: UntypedFormBuilder, public languageService: LanguageService,
   //   public _cookiesService: CookieService, public translate: TranslateService) {
@@ -68,8 +69,10 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(cartActions.loadCart({ cart: JSON.parse(storedCart) }));
     }
 
-  this.cartItems$ = this.store.select(ngrxCartQuery.selectProducts).pipe();
+    this.cartItems$ = this.store.select(ngrxCartQuery.selectProducts).pipe();
+    this.cartTotal$ = this.store.select(ngrxCartQuery.selectTotal).pipe();
 
+    console.log( this.cartTotal$ )
 
     // Language set
     // this.cookieValue = this._cookiesService.get('lang');

@@ -1,0 +1,42 @@
+
+  <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
+    <div class="py-2 px-xl-2">
+      <div class="widget mb-3">
+        <h2 class="widget-title text-center">
+          Resumen del pedido</h2>
+        <!-- Carrito -->
+         @if(showCartItems){
+           @if(  cartItems$ | async; as cartItems){
+             @for(data of cartItems;track $index){
+               <div class="d-flex align-items-center pb-2 pt-2 border-bottom">
+                 <a class="d-block flex-shrink-0" [routerLink]="['/shop/product-detail/', data.id]">
+                   <img src="https://localhost:44331/{{data.productFiles[0].urlImage}}" width="64" alt="Product">
+                 </a>
+                 <div class="ps-2">
+                   <h6 class="widget-product-title"><a [routerLink]="['/shop/product-detail/', data.id]">{{data.productName}}</a></h6>
+                   <div class="widget-product-meta"><span class="text-accent me-2">{{data.price}}</span><span
+                       class="text-muted">x {{data.qty}}</span></div>
+                 </div>
+               </div>
+             }
+           }
+         }
+      </div>
+      @if(  cartTotal$ | async; as cartTotal){
+        <ul class="list-unstyled fs-sm pb-2 border-bottom">
+          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">${{cartTotal}}</span></li>
+          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Shipping:</span><span class="text-end">—</span></li>
+          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Discount:</span><span class="text-end">—</span></li>
+        </ul>
+      }
+      <h3 class="fw-normal text-center my-4">${{totalOrder}}</h3>
+      <form class="needs-validation" method="post" novalidate [formGroup]="promocodeForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <input class="form-control" type="text" placeholder="Promo code" required formControlName="name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
+          <div class="invalid-feedback">Please provide promo code.</div>
+        </div>
+        <button class="btn btn-outline-primary d-block w-100" type="submit">Aplicar código de promo</button>
+      </form>
+    </div>
+  </div>
+
