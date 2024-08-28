@@ -7,23 +7,27 @@ import { GeneralInfoComponent } from '../general-info/general-info.component';
 import { SpecsInfoComponent } from '../specs-info/specs-info.component';
 import { ReviewsInfoComponent } from '../reviews-info/reviews-info.component';
 import { map, Observable } from 'rxjs';
-import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { PopulerData, StyleData } from './data';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { PopulerData, Reviews, StyleData } from './data';
 import { ActivatedRoute } from "@angular/router";
 
 import { Store } from '@ngrx/store';
-import { cartActions } from '@angular-monorepo/shared/cart-lib/data-access';
+import { cartActions, CartProduct } from '@angular-monorepo/shared/cart-lib/data-access';
+
+import { EditorUiComponent } from "@angular-monorepo/shared/ui/editor-ui";
+import { OutputData } from '@editorjs/editorjs';
 
 @Component({
   selector: 'lib-feature-product-detail',
   standalone: true,
-  imports: [CommonModule, SlickCarouselModule, ReactiveFormsModule,
+  imports: [CommonModule, SlickCarouselModule, ReactiveFormsModule, FormsModule,
     NgbRatingModule,
     NgbAccordionModule,
     NgbTooltipModule,
     NgbModule,
     NgbNavItem,
     GeneralInfoComponent, SpecsInfoComponent, ReviewsInfoComponent
+    ,EditorUiComponent
   ],
   templateUrl: './feature-product-detail.component.html',
   styleUrl: './feature-product-detail.component.scss',
@@ -40,8 +44,10 @@ export class FeatureProductDetailComponent implements OnInit {
     styleDatas: any;
     populerDatas: any;
     zoomImag: any;
+    reviews: any;
 
    productId: string | '' = '';
+   selectedQuantity = '1';
 
 
   private productService = inject(ProductService);
@@ -50,6 +56,19 @@ export class FeatureProductDetailComponent implements OnInit {
 
   constructor( private modalService: NgbModal, private formBuilder: UntypedFormBuilder ){
 
+  }
+
+  dataContent : OutputData = {
+    time: 1722185500950,
+    blocks: [
+      {
+        id: "mhTl6ghSkV",
+        type: "paragraph",
+        data: {
+          text: "Hey. Meet the new Editor. On this picture you can see it in action. Then, try a demo 🤓",
+        },
+      }
+    ]
   }
 
   ngOnInit(): void {
@@ -74,6 +93,7 @@ export class FeatureProductDetailComponent implements OnInit {
 
     this.styleDatas = StyleData;
     this.populerDatas = PopulerData;
+    this.reviews = Reviews;
     /**
      * Form Validatyion
      */
@@ -181,9 +201,9 @@ export class FeatureProductDetailComponent implements OnInit {
     this.zoomImag = image
   }
 
-  addToCart(product: any) {
-    product.total = 0;
-    product.qty = 0;
+  addToCart(product: CartProduct) {
+    product.qty = Number(this.selectedQuantity);
+    product.total = product.price * Number(this.selectedQuantity);
     this.store.dispatch(cartActions.postCart({products: product}));
   }
 

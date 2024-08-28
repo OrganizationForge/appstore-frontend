@@ -110,6 +110,9 @@
       "@angular-monorepo/shared/ui/dynamic-form-ui": [
         "libs/shared/ui/dynamic-form-ui/src/index.ts"
       ],
+      "@angular-monorepo/shared/ui/editor-ui": [
+        "libs/shared/ui/editor-ui/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/filter-ui": [
         "libs/shared/ui/filter-ui/src/index.ts"
       ],

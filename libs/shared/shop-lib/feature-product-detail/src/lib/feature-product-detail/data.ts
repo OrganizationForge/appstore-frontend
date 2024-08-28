@@ -85,4 +85,51 @@ const PopulerData = [
   },
 ];
 
-export { StyleData, PopulerData };
+const Reviews = [
+  {
+    customerImage: 'assets/img/shop/reviews/01.jpg',
+    customerName: 'Rafael Marquez',
+    date: 'June 28, 2019',
+    content: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est...',
+    pros: 'Consequuntur magni, voluptatem sequi, tempora',
+    cons: 'Architecto beatae, quis autem',
+    rating: 5,
+    likes: 10,
+    dislikes: 0
+  },
+  {
+    customerImage: 'assets/img/shop/reviews/01.jpg',
+    customerName: 'Rafael Marquez',
+    date: 'June 28, 2019',
+    content: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est...',
+    pros: 'Consequuntur magni, voluptatem sequi, tempora',
+    cons: 'Architecto beatae, quis autem',
+    rating: 5,
+    likes: 10,
+    dislikes: 0
+  },
+  {
+    customerImage: 'assets/img/shop/reviews/01.jpg',
+    customerName: 'Rafael Marquez',
+    date: 'June 28, 2019',
+    content: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est...',
+    pros: 'Consequuntur magni, voluptatem sequi, tempora',
+    cons: 'Architecto beatae, quis autem',
+    rating: 5,
+    likes: 10,
+    dislikes: 0
+  },
+  {
+    customerImage: 'assets/img/shop/reviews/01.jpg',
+    customerName: 'Rafael Marquez',
+    date: 'June 28, 2019',
+    content: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est...',
+    pros: 'Consequuntur magni, voluptatem sequi, tempora',
+    cons: 'Architecto beatae, quis autem',
+    rating: 5,
+    likes: 10,
+    dislikes: 0
+  }
+];
+
+export { StyleData, PopulerData, Reviews };

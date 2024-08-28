@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -9,22 +9,25 @@ import {
 } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { Category, NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+import { EditorUiComponent } from "@angular-monorepo/shared/ui/editor-ui";
 import { map, Observable } from 'rxjs';
-
 
 @Component({
   selector: 'lib-feature-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxDropzoneModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxDropzoneModule, EditorUiComponent],
   templateUrl: './feature-add-product.component.html',
   styleUrl: './feature-add-product.component.scss',
 })
-export class FeatureAddProductComponent implements OnInit {
+export class FeatureAddProductComponent implements OnInit{
+  @ViewChild('editor', {read: ElementRef, static: true}) editorElement! : ElementRef;
   productForm!: UntypedFormGroup;
   submitted = false;
 
   categories$!: Observable<Category[]>;
   selectedCategoryId = 0;
+
+
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -86,15 +89,13 @@ export class FeatureAddProductComponent implements OnInit {
    */
   files: NewFile[] = [];
 
-
   AddProduct() {
     this.submitted = true;
     const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
 
-    // console.log(this.productForm.value);
     const newProduct: NewProduct = {
       productName: this.productForm.value.productName,
-      description: this.productForm.value.description,
+      description: 'prueba',
       priceBase: this.productForm.value.priceBase,
       price: this.productForm.value.price,
       // imageFiles: this.files,
@@ -167,5 +168,7 @@ export class FeatureAddProductComponent implements OnInit {
       price: Number(priceBase / (1 - percent / 100)).toFixed(2),
     });
   }
+
+
 
 }

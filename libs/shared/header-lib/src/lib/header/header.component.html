@@ -163,8 +163,8 @@
           <!-- <img src="assets/img/logo-icon.png" width="74" alt="Cartzilla"> -->
         </a>
         <div class="input-group d-none d-lg-flex mx-4">
-          <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y
-            text-muted fs-base me-3"></i>
+            <input class="form-control rounded-end pe-5" type="text" placeholder="Busca el producto que deseas" [formControl]="searchControl" (keyup.enter)="search()">
+            <i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3" (click)="search();"></i>
         </div>
         <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" ><span class="navbar-toggler-icon"></span></button>
@@ -259,11 +259,11 @@
                       @for(data of cartItems;track $index){
                         <div class="widget-cart-item pb-2 border-bottom">
                           <button class="btn-close text-danger" type="button" aria-label="Remove" (click)="remove(data)"><span aria-hidden="true">&times;</span></button>
-                          <div class="d-flex align-items-center"><a class="flex-shrink-0" routerLink="/shop/single-v1"><img src="assets\img\shop\catalog\01.jpg" width="64" alt="Product"></a>
+                          <div class="d-flex align-items-center"><a class="flex-shrink-0" [routerLink]="['/shop/product-detail/', data.id]"><img src="https://localhost:44331/{{data.productFiles[0].urlImage}}" width="64" alt="Product"></a>
                             <div class="ps-2">
-                              <h6 class="widget-product-title"><a routerLink="/shop/single-v1">{{data.productName}}</a>
+                              <h6 class="widget-product-title"><a [routerLink]="['/shop/product-detail/', data.id]">{{data.productName}}</a>
                               </h6>
-                              <div class="widget-product-meta"><span class="text-accent me-2">${{data.price}}</span><span class="text-muted">x 1</span>
+                              <div class="widget-product-meta"><span class="text-accent me-2">${{data.total}}</span><span class="text-muted">x {{data.qty}}</span>
                               </div>
                             </div>
                           </div>

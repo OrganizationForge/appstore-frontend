@@ -1,22 +1,24 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FeatureMenuComponent } from '@angular-monorepo/feature-menu';
-import { RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthStore } from '@angular-monorepo/auth-data-access';
 import { Store } from '@ngrx/store';
 import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'angular-monorepo-header',
   standalone: true,
-  imports: [CommonModule, FeatureMenuComponent, RouterModule, AsyncPipe],
+  imports: [CommonModule, FeatureMenuComponent, RouterModule, AsyncPipe, ReactiveFormsModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
 
   private readonly authStore = inject(AuthStore);
+  router = inject(Router)
 
   showNavigationArrows = true;
   showNavigationIndicators: any;
@@ -47,11 +49,12 @@ export class HeaderComponent implements OnInit {
   cookieValue: any;
   valueset: any;
 
+  searchControl = new FormControl('');
   menuVisible = false;
 
   private readonly store = inject(Store);
 
-  cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
+  cartItems$! : Observable<CartProduct[]>;
 
   // constructor(private router: Router, private modalService: NgbModal, private formBuilder: UntypedFormBuilder, public languageService: LanguageService,
   //   public _cookiesService: CookieService, public translate: TranslateService) {
@@ -59,10 +62,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       this.store.dispatch(cartActions.loadCart({ cart: JSON.parse(storedCart) }));
     }
+
+  this.cartItems$ = this.store.select(ngrxCartQuery.selectProducts).pipe();
+
 
     // Language set
     // this.cookieValue = this._cookiesService.get('lang');
@@ -78,15 +85,20 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  search(){
+    const searchTerm = this.searchControl.value;
+    this.router.navigate(['/shop/grid-ls', searchTerm]);
+  }
+
   calculatetotal(total: any) {
     this.subTotal = 0;
 
-    //  this.cartDatas = CartData;
     this.cartItems$.pipe(
       map(res => {
+        console.log(res)
         res.forEach((element: CartProduct) => {
-          console.log(element.price)
-          this.subTotal += element.price
+          console.log(element.total)
+          this.subTotal += element.total ? element.total : 0
         });
       })
     )

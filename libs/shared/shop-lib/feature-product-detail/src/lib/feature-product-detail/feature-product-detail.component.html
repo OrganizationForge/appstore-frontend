@@ -93,14 +93,14 @@
                   </select>
                 </div>
                 <div class="mb-3 d-flex align-items-center">
-                  <select class="form-select me-3" style="width: 5rem;">
+                  <select class="form-select me-3" name="quantity" id="quantity" style="width: 5rem;" [(ngModel)]="selectedQuantity">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                  <button class="btn btn-primary btn-shadow d-block w-100" type="button" (click)="addToCart(dataProduct);"><i class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                  <button class="btn btn-primary btn-shadow d-block w-100" type="button" (click)="addToCart(dataProduct);"><i class="ci-cart fs-lg me-2"></i>Agregar al carrito</button>
                 </div>
               </form>
               <!-- Product panels-->
@@ -215,7 +215,8 @@
       <div class="col-lg-4 col-md-6 offset-lg-1 py-4 order-md-1">
         <h2 class="h3 mb-4 pb-2">Decripción</h2>
         <!-- <h6 class="fs-base mb-3">Soft cotton blend</h6> -->
-        <p class="fs-sm text-muted pb-2">{{dataProduct.description}}</p>
+        <lib-editor-ui [data] = dataContent [readonly] = true class="fs-sm text-muted pb-2"></lib-editor-ui>
+        <!-- <p class="fs-sm text-muted pb-2">{{dataProduct.description}}</p> -->
 
         <!-- <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs mb-3" role="tablist">
           <li [ngbNavItem]="1">
@@ -355,33 +356,34 @@
             </div>
           </div>
           <!-- Review-->
-          <div class="product-review pb-4 mb-4 border-bottom">
-            <div class="d-flex mb-3">
-              <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="assets/img/shop/reviews/01.jpg" width="50" alt="Rafael Marquez">
-                <div class="ps-3">
-                  <h6 class="fs-sm mb-0">Rafael Marquez</h6><span class="fs-ms text-muted">June 28, 2019</span>
+           @for(review of reviews; track $index){
+            <div class="product-review pb-4 mb-4 border-bottom">
+              <div class="d-flex mb-3">
+                <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="{{review.customerImage}}" width="50" alt="Rafael Marquez">
+                  <div class="ps-3">
+                    <h6 class="fs-sm mb-0">{{review.customerName}}</h6><span class="fs-ms text-muted">{{review.date}}</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  </div>
+                  <!-- <div class="fs-ms text-muted">83% of users found this review helpful</div> -->
                 </div>
               </div>
-              <div>
-                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
-                </div>
-                <div class="fs-ms text-muted">83% of users found this review helpful</div>
+              <p class="fs-md mb-2">{{review.content}}</p>
+              <ul class="list-unstyled fs-ms pt-1">
+                <li class="mb-1"><span class="fw-medium">Pros:&nbsp;</span>{{review.pros}}</li>
+                <li class="mb-1"><span class="fw-medium">Cons:&nbsp;</span>{{review.cons}}</li>
+              </ul>
+              <div class="text-nowrap">
+                <button class="btn-like" type="button">{{review.likes}}</button>
+                <button class="btn-dislike" type="button">{{review.dislikes}}</button>
               </div>
             </div>
-            <p class="fs-md mb-2">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus
-              id quod maxime placeat facere possimus, omnis voluptas assumenda est...</p>
-            <ul class="list-unstyled fs-ms pt-1">
-              <li class="mb-1"><span class="fw-medium">Pros:&nbsp;</span>Consequuntur magni, voluptatem sequi, tempora
-              </li>
-              <li class="mb-1"><span class="fw-medium">Cons:&nbsp;</span>Architecto beatae, quis autem</li>
-            </ul>
-            <div class="text-nowrap">
-              <button class="btn-like" type="button">15</button>
-              <button class="btn-dislike" type="button">3</button>
-            </div>
-          </div>
+           }
+
           <!-- Review-->
-          <div class="product-review pb-4 mb-4 border-bottom">
+          <!-- <div class="product-review pb-4 mb-4 border-bottom">
             <div class="d-flex mb-3">
               <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="assets/img/shop/reviews/02.jpg" width="50" alt="Barbara Palson">
                 <div class="ps-3">
@@ -406,9 +408,9 @@
               <button class="btn-like" type="button">34</button>
               <button class="btn-dislike" type="button">1</button>
             </div>
-          </div>
+          </div> -->
           <!-- Review-->
-          <div class="product-review pb-4 mb-4 border-bottom">
+          <!-- <div class="product-review pb-4 mb-4 border-bottom">
             <div class="d-flex mb-3">
               <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle" src="assets/img/shop/reviews/03.jpg" width="50" alt="Daniel Adams">
                 <div class="ps-3">
@@ -433,7 +435,7 @@
               <button class="btn-like" type="button">26</button>
               <button class="btn-dislike" type="button">9</button>
             </div>
-          </div>
+          </div> -->
           <div class="text-center">
             <button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Load more reviews</button>
           </div>

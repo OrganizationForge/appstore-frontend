@@ -96,12 +96,20 @@
     <label class="form-label" for="unp-product-description">
       Descripción del producto
     </label>
-    <textarea
+    <!-- <textarea
       class="form-control"
       rows="6"
       id="unp-product-description"
       formControlName="description"
-    ></textarea>
+    ></textarea> -->
+
+    <lib-editor-ui
+      [readonly] = false
+      class="form-control"
+      rows="6">
+    </lib-editor-ui>
+
+
     <div class="bg-secondary p-3 fs-ms rounded-bottom">
       <span class="d-inline-block fw-medium me-2 my-1"
         >Markdown supported:</span

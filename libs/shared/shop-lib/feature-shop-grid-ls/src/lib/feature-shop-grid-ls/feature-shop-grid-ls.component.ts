@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductUiComponent } from '@angular-monorepo/shared/ui/product-ui';
 import { Brand, Category, Product, ProductService } from '@angular-monorepo/shop-data-access';
@@ -6,6 +6,7 @@ import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, map } from 'rxjs';
 import { FilterCheckedComponent, FilterCollapseComponent } from '@angular-monorepo/shared/ui/filter-ui';
 import { NumberSliderUiComponent } from '@angular-monorepo/shared/ui/number-slider-ui';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'lib-feature-shop-grid-ls',
@@ -23,7 +24,7 @@ export class FeatureShopGridLsComponent implements OnInit {
   brandsList$!: Observable<Brand[]>;
 
   // Custom Data
-  totalRecords: number = 0;
+  totalRecords = 0;
   page: any = 1;
   pageSize: any = 9;
 
@@ -32,12 +33,23 @@ export class FeatureShopGridLsComponent implements OnInit {
   AllGridSize: any;
   AllGridColor: any;
 
+  searchTerm!: string;
+
+  route = inject(ActivatedRoute);
+
+
   constructor(private modalService: NgbModal, private productService: ProductService) {
     // this.gridLsList = service.gridLsList$;
   }
 
   ngOnInit(): void {
-    this.gridList$ = this.productService.getProducts(`PageNumber=${this.page}&PageSize=${this.pageSize}`)
+
+    this.route.params.subscribe(params => {
+      this.searchTerm = params['searchTerm'];
+    });
+
+
+    this.gridList$ = this.productService.getProducts(`ProductName=${this.searchTerm}&PageNumber=${this.page}&PageSize=${this.pageSize}`)
       .pipe(
         map(res => {
           if (res.succeded) {
@@ -76,7 +88,7 @@ export class FeatureShopGridLsComponent implements OnInit {
           else
             return []
         })
-      );;
+      );
   }
 
   filterCategory(categoryId: number) {
