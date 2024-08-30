@@ -1,6 +1,7 @@
 import { Availability } from "./availability.model";
 import { Brand } from "./brand.model";
 import { Category } from "./category.model";
+import { ProductComment } from "./comment.model";
 
 export interface Product {
   id: number;
@@ -13,6 +14,7 @@ export interface Product {
   brand: Brand;
   availability: Availability;
   productFiles: ProductFile[];
+  comments: ProductComment[];
   rating: number;
   review: number;
   weight: number;

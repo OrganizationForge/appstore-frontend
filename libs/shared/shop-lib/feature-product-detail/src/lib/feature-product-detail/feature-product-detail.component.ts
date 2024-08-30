@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category, Product, ProductService } from '@angular-monorepo/shop-data-access';
+import { Category, NewProductComment, Product, ProductService } from '@angular-monorepo/shop-data-access';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgbRatingModule, NgbAccordionModule, NgbTooltipModule, NgbModule, NgbNavItem, NgbModal, NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
@@ -81,7 +81,7 @@ export class FeatureProductDetailComponent implements OnInit {
     this.detailProduct$ = this.productService.getProduct(this.productId).pipe(
       map( res => {
         if (res.succeded){
-          console.log(res.data);
+          console.log(res.data.comments);
           return res.data
         }
         else{
@@ -102,6 +102,8 @@ export class FeatureProductDetailComponent implements OnInit {
       email: ['', [Validators.required]],
       rating: ['', [Validators.required]],
       review: ['', [Validators.required]],
+      pros: [''],
+      cons: [''],
     });
 
     this.zoomImag = "assets/img/shop/single/gallery/th01.jpg"
@@ -128,6 +130,25 @@ export class FeatureProductDetailComponent implements OnInit {
     if (this.reviewForm.invalid) {
       return;
     }
+
+    const newComment: NewProductComment = {
+      customerName: this.reviewForm.value.name,
+      content: this.reviewForm.value.review,
+      pros: this.reviewForm.value.pros,
+      cons: this.reviewForm.value.cons,
+      rating: this.reviewForm.value.rating,
+      productId: this.productId
+    };
+
+    console.log(newComment);
+
+    this.productService.createComment(newComment).subscribe((res) => {
+      if (res.succeded) {
+        alert('Guardado Ok');
+        this.reviewForm.reset();
+      }
+      else res.errors;
+    });
   }
 
   /**
