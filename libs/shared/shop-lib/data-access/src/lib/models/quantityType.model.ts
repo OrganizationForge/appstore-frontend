@@ -1,4 +1,4 @@
 export interface QuantityType {
-  id: number,
+  id: string,
   description: string,
 }

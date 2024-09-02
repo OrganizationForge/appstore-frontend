@@ -40,6 +40,7 @@ export class FeatureAddProductComponent implements OnInit{
 
     this.categories$ = this.productService.getCategories().pipe(
       map((res) => {
+        console.log("categorias" + this.categories$)
         return res;
       })
     )
@@ -54,12 +55,12 @@ export class FeatureAddProductComponent implements OnInit{
       priceBase: ['', [Validators.required]],
       price: ['', [Validators.required]],
       urlImage: [''],
-      brandId: [1],
+      brandId: [''],
       categoryId: [0, [Validators.required]],
       stock: ['', [Validators.required]],
       warranty: [''],
       barcode: [''],
-      quantityTypeId: [1],
+      quantityTypeId: [''],
       pricePercent: [0],
     });
   }
@@ -100,10 +101,12 @@ export class FeatureAddProductComponent implements OnInit{
       price: this.productForm.value.price,
       // imageFiles: this.files,
       productFiles: productFiles,
-      brandId: this.productForm.value.brandId,
-      availabilityId: 1,
+      brandId: "c0765c00-ed4e-4f3a-b704-08dccaf575e2",
+      // brandId: this.productForm.value.brandId,
+      availabilityId: "2441cd81-061a-43b4-0695-08dccaf575c5",
       categoryId: this.productForm.value.categoryId,
-      quantityTypeId: this.productForm.value.quantityTypeId,
+      quantityTypeId: "1e1adb41-e0f5-418e-d890-08dccaf575f0",
+      // quantityTypeId: this.productForm.value.quantityTypeId,
       weight: 0,
       stock: this.productForm.value.stock,
       barcode: this.productForm.value.barcode

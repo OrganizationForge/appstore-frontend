@@ -1,5 +1,5 @@
 export interface ProductComment {
-  id: number,
+  id: string,
   customerName: string;
   content: string;
   customerImage: string;

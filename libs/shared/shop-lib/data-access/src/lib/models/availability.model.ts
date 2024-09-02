@@ -1,4 +1,4 @@
 export interface Availability {
-  id: number;
+  id: string;
   description: string;
 }

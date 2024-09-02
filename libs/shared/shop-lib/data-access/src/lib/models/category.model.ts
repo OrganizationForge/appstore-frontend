@@ -1,5 +1,5 @@
 export interface Category {
-  id: number,
+  id: string,
   description: string;
   urlImage: string;
   parentCategory: Category;
