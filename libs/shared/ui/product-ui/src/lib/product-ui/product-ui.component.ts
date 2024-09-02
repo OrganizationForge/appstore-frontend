@@ -4,6 +4,8 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { cartActions, CartProduct } from '@angular-monorepo/shared/cart-lib/data-access';
+import { settingsActions } from "@angular-monorepo/shared/dashboard-lib/data-access";
+import { Product } from '@angular-monorepo/shop-data-access';
 
 @Component({
   selector: 'lib-product-ui',
@@ -22,5 +24,10 @@ export class ProductUiComponent {
     product.total = product.price;
     product.qty = 1;
     this.store.dispatch(cartActions.postCart({products: product}));
+  }
+
+  addToWishlist(product: Product) {
+
+    this.store.dispatch(settingsActions.postSettings({wishlist: product}));
   }
 }

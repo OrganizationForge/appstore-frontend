@@ -12,6 +12,7 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { ngrxCartFeature } from '@angular-monorepo/shared/cart-lib/data-access';
+import { ngrxSettingsFeature } from '@angular-monorepo/shared/dashboard-lib/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,8 @@ export const appConfig: ApplicationConfig = {
       errorHandler: errorHandlerFeature.reducer,
       ngrxAuth: ngrxAuthFeature.reducer,
       ngrxCart: ngrxCartFeature.reducer,
+      ngrxSettings: ngrxSettingsFeature.reducer,
+
     }),
     provideEffects(errorHandlerEffects, ngrxAuthEffects),
     provideRouterStore(),
