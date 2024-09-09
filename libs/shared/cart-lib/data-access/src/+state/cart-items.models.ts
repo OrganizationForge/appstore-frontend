@@ -8,10 +8,12 @@ export interface  CartProduct extends Product {
 
 export interface  NgrxCartState {
   products: CartProduct[],
+  total: number,
   error: string | null
 }
 
 export const ngrxCartInitialState: NgrxCartState = {
   products: [],
+  total: 0,
   error: null
 };

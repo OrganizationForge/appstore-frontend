@@ -107,14 +107,23 @@
       "@angular-monorepo/shared/ui/brand-logos-ui": [
         "libs/shared/ui/brand-logos-ui/src/index.ts"
       ],
+      "@angular-monorepo/shared/ui/cart-detail-ui": [
+        "libs/shared/ui/cart-detail-ui/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/dynamic-form-ui": [
         "libs/shared/ui/dynamic-form-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/editor-ui": [
+        "libs/shared/ui/editor-ui/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/filter-ui": [
         "libs/shared/ui/filter-ui/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/number-slider-ui": [
         "libs/shared/ui/number-slider-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/order-summary-ui": [
+        "libs/shared/ui/order-summary-ui/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/product-gallery-ui": [
         "libs/shared/ui/product-gallery-ui/src/index.ts"

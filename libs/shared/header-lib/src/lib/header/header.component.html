@@ -163,8 +163,8 @@
           <!-- <img src="assets/img/logo-icon.png" width="74" alt="Cartzilla"> -->
         </a>
         <div class="input-group d-none d-lg-flex mx-4">
-          <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i class="ci-search position-absolute top-50 end-0 translate-middle-y
-            text-muted fs-base me-3"></i>
+            <input class="form-control rounded-end pe-5" type="text" placeholder="Busca el producto que deseas" [formControl]="searchControl" (keyup.enter)="search()">
+            <i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3" (click)="search();"></i>
         </div>
         <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" ><span class="navbar-toggler-icon"></span></button>
@@ -199,40 +199,47 @@
               </a>
               <div class="dropdown-menu dropdown-menu-end">
                   <div style="min-width: 14rem;">
-                      <h6 class="dropdown-header">Account</h6>
+                      <h6 class="dropdown-header">Configuracion de cuenta</h6>
                       <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/settings">
                           <i class="ci-settings opacity-60 me-2"></i>
-                          Settings
+                          Opciones
                       </a>
-                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/purchase">
+                      <!-- <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/wishlist">
                           <i class="ci-basket opacity-60 me-2"></i>
-                          Purchases
-                      </a>
-                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/favorites">
+                          Favoritos
+                      </a> -->
+                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/wishlist">
                           <i class="ci-heart opacity-60 me-2"></i>
-                          Favorites
+                          Favoritos
                           <span class="fs-xs text-muted ms-auto">4</span>
                       </a>
                       <div class="dropdown-divider"></div>
-                      <h6 class="dropdown-header">Seller Dashboard</h6>
-                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/sales">
+                      <h6 class="dropdown-header">Dashboard</h6>
+                      <!-- <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/sales">
                           <i class="ci-dollar opacity-60 me-2"></i>
                           Sales
                           <span class="fs-xs text-muted ms-auto">$1,375.00</span>
-                      </a>
+                      </a> -->
                       <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/product">
                           <i class="ci-package opacity-60 me-2"></i>
-                          Products
+                          Productos
                           <span class="fs-xs text-muted ms-auto">5</span>
                       </a>
-                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/addproduct">
+                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/add-product">
                           <i class="ci-cloud-upload opacity-60 me-2"></i>
-                          Add New
-                          Product
+                          Nuevo Producto
                       </a>
                       <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/payout">
                           <i class="ci-currency-exchange opacity-60 me-2"></i>
-                          Payouts
+                          Ordenes
+                      </a>
+                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/payout">
+                        <i class="ci-currency-exchange opacity-60 me-2"></i>
+                        Usuarios
+                      </a>
+                      <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/payout">
+                        <i class="ci-currency-exchange opacity-60 me-2"></i>
+                        Opciones entrega
                       </a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)">
@@ -246,10 +253,11 @@
 
           <!-- Carrito -->
           @if(  cartItems$ | async; as cartItems){
-            <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box
-                bg-secondary dropdown-toggle" routerLink="/cart"><span class="navbar-tool-label">{{cartItems.length}}</span><i class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text price" routerLink="/cart"><small>My
-              <!-- Cart</small></a> -->
-              Cart</small>${{calculatetotal(subTotal)}}</a>
+            <div class="navbar-tool dropdown ms-3">
+              @if(  cartTotal$ | async; as cartTotal){
+                <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" routerLink="/cart"><span class="navbar-tool-label">{{cartItems.length}}</span>
+                  <i class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text price" routerLink="/cart"><small>Mi carrito</small>${{cartTotal}}</a>
+                }
               <!-- Cart dropdown-->
               <div class="dropdown-menu dropdown-menu-end">
                 <div class="widget widget-cart px-3 pt-2 pb-3" style="width:
@@ -259,11 +267,11 @@
                       @for(data of cartItems;track $index){
                         <div class="widget-cart-item pb-2 border-bottom">
                           <button class="btn-close text-danger" type="button" aria-label="Remove" (click)="remove(data)"><span aria-hidden="true">&times;</span></button>
-                          <div class="d-flex align-items-center"><a class="flex-shrink-0" routerLink="/shop/single-v1"><img src="assets\img\shop\catalog\01.jpg" width="64" alt="Product"></a>
+                          <div class="d-flex align-items-center"><a class="flex-shrink-0" [routerLink]="['/shop/product-detail/', data.id]"><img src="{{data.productFiles[0].urlImage}}" width="64" alt="Product"></a>
                             <div class="ps-2">
-                              <h6 class="widget-product-title"><a routerLink="/shop/single-v1">{{data.productName}}</a>
+                              <h6 class="widget-product-title"><a [routerLink]="['/shop/product-detail/', data.id]">{{data.productName}}</a>
                               </h6>
-                              <div class="widget-product-meta"><span class="text-accent me-2">${{data.price}}</span><span class="text-muted">x 1</span>
+                              <div class="widget-product-meta"><span class="text-accent me-2">${{data.total}}</span><span class="text-muted">x {{data.qty}}</span>
                               </div>
                             </div>
                           </div>
@@ -273,7 +281,11 @@
                   </div>
                   <div class="d-flex flex-wrap justify-content-between
                     align-items-center py-3">
-                    <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1 price">${{calculatetotal(subTotal)}}</span></div>
+                    @if(  cartTotal$ | async; as cartTotal){
+                      <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1 price">${{cartTotal}}</span></div>
+                      <!-- <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1 price">${{calculatetotal(subTotal)}}</span></div> -->
+                    }
+
                     <!-- <a class="btn btn-outline-secondary btn-sm" routerLink="/cart">Expand cart<i class="ci-arrow-right ms-1 me-n1"></i></a> -->
                   </div>
                   <!-- <a class="btn btn-primary btn-sm d-block w-100" routerLink="/cart/checkout-details"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a> -->

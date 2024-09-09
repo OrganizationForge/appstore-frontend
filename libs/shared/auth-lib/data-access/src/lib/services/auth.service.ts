@@ -13,11 +13,11 @@ export class AuthService {
   }
 
   login(credentials: LoginUser): Observable<ApiResponse<User>> {
-    return this.apiService.post<ApiResponse<User>, LoginUserRequest>('/Account/Authenticate', { email: credentials.email, password: credentials.password });
+    return this.apiService.post<ApiResponse<User>, LoginUserRequest>('/v1/Account/authenticate', { email: credentials.email, password: credentials.password });
   }
 
   register(credentials: NewUser): Observable<ApiResponse<User>> {
-    return this.apiService.post<ApiResponse<User>, NewUser>('/Account/Register',
+    return this.apiService.post<ApiResponse<User>, NewUser>('/v1/Account/register',
       {
         nombre: credentials.nombre,
         apellido: credentials.apellido,

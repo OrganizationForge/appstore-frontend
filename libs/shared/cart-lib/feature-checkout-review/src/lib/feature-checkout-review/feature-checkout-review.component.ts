@@ -1,3 +1,5 @@
+import { CartDetailUiComponent } from '@angular-monorepo/shared/ui/cart-detail-ui';
+import { OrderSummaryUiComponent } from '@angular-monorepo/shared/ui/order-summary-ui';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -9,7 +11,7 @@ import { ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 @Component({
   selector: 'lib-feature-checkout-review',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,OrderSummaryUiComponent, CartDetailUiComponent],
   templateUrl: './feature-checkout-review.component.html',
   styleUrl: './feature-checkout-review.component.css',
 })

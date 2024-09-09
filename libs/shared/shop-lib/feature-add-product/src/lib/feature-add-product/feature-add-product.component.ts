@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -8,19 +8,26 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
-
+import { Category, NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+import { EditorUiComponent } from "@angular-monorepo/shared/ui/editor-ui";
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-feature-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxDropzoneModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxDropzoneModule, EditorUiComponent],
   templateUrl: './feature-add-product.component.html',
   styleUrl: './feature-add-product.component.scss',
 })
-export class FeatureAddProductComponent implements OnInit {
+export class FeatureAddProductComponent implements OnInit{
+  @ViewChild('editor', {read: ElementRef, static: true}) editorElement! : ElementRef;
   productForm!: UntypedFormGroup;
   submitted = false;
+
+  categories$!: Observable<Category[]>;
+  selectedCategoryId = 0;
+
+
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -30,6 +37,13 @@ export class FeatureAddProductComponent implements OnInit {
   ngOnInit(): void {
     // When the user clicks on the button, scroll to the top of the document
     document.documentElement.scrollTop = 0;
+
+    this.categories$ = this.productService.getCategories().pipe(
+      map((res) => {
+        console.log("categorias" + this.categories$)
+        return res;
+      })
+    )
 
     /**
      * Form Validation
@@ -41,12 +55,12 @@ export class FeatureAddProductComponent implements OnInit {
       priceBase: ['', [Validators.required]],
       price: ['', [Validators.required]],
       urlImage: [''],
-      brandId: [1],
+      brandId: [''],
       categoryId: [0, [Validators.required]],
       stock: ['', [Validators.required]],
       warranty: [''],
       barcode: [''],
-      quantityTypeId: [1],
+      quantityTypeId: [''],
       pricePercent: [0],
     });
   }
@@ -62,14 +76,7 @@ export class FeatureAddProductComponent implements OnInit {
   imageURL: string | undefined;
   fileChange(event: any) {
     const fileList: any = event.target as HTMLInputElement;
-    console.log(fileList);
     const file: File = fileList.files[0];
-    console.log(file);
-    // document.getElementById('');
-    // this.productForm.patchValue({
-    //   salefile: file.name
-    // });
-    // console.log( this.productForm)
     const reader = new FileReader();
     reader.onload = () => {
       this.imageURL = reader.result as string;
@@ -83,23 +90,23 @@ export class FeatureAddProductComponent implements OnInit {
    */
   files: NewFile[] = [];
 
-
   AddProduct() {
     this.submitted = true;
     const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
 
-    // console.log(this.productForm.value);
     const newProduct: NewProduct = {
       productName: this.productForm.value.productName,
-      description: this.productForm.value.description,
+      description: 'prueba',
       priceBase: this.productForm.value.priceBase,
       price: this.productForm.value.price,
       // imageFiles: this.files,
       productFiles: productFiles,
-      brandId: this.productForm.value.brandId,
-      availabilityId: 1,
+      brandId: "c0765c00-ed4e-4f3a-b704-08dccaf575e2",
+      // brandId: this.productForm.value.brandId,
+      availabilityId: "2441cd81-061a-43b4-0695-08dccaf575c5",
       categoryId: this.productForm.value.categoryId,
-      quantityTypeId: this.productForm.value.quantityTypeId,
+      quantityTypeId: "1e1adb41-e0f5-418e-d890-08dccaf575f0",
+      // quantityTypeId: this.productForm.value.quantityTypeId,
       weight: 0,
       stock: this.productForm.value.stock,
       barcode: this.productForm.value.barcode
@@ -147,18 +154,6 @@ export class FeatureAddProductComponent implements OnInit {
 
     reader.readAsDataURL(file);
   }
-    // const files = event.addedFiles;
-    // for (let i = 0; i < files.length; i++) {
-    //   const file = files[i];
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     const base64 = reader.result as string;
-    //     file.imageName = file.name;
-    //     file.imageBytes = base64;
-    //     this.files.push(file);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   }
 
 
@@ -176,4 +171,7 @@ export class FeatureAddProductComponent implements OnInit {
       price: Number(priceBase / (1 - percent / 100)).toFixed(2),
     });
   }
+
+
+
 }

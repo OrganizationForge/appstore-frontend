@@ -5,11 +5,12 @@ import { PaymentData, ShippingData } from './data';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
+import { OrderSummaryUiComponent } from '@angular-monorepo/shared/ui/order-summary-ui';
 
 @Component({
   selector: 'lib-feature-checkout-shipping',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, OrderSummaryUiComponent],
   templateUrl: './feature-checkout-shipping.component.html',
   styleUrl: './feature-checkout-shipping.component.scss',
 })
@@ -40,7 +41,6 @@ export class FeatureCheckoutShippingComponent implements OnInit {
     });
 
     localStorage.setItem('selectedSendMethod', JSON.stringify(this.shippingDatas[0]));
-    localStorage.setItem('selectedPaymentMethod', JSON.stringify(this.paymentsDatas[0]));
   }
 
   // convenience getter for easy access to form fields
@@ -62,10 +62,4 @@ export class FeatureCheckoutShippingComponent implements OnInit {
     this.selectedSendMethod = sendMethod.Id;
     localStorage.setItem('selectedSendMethod', JSON.stringify(sendMethod));
   }
-
-  onPaymentChange(paymentMethod: any) {
-    this.selectedPaymentMethod = paymentMethod.Id;
-    localStorage.setItem('selectedPaymentMethod', JSON.stringify(paymentMethod));
-  }
-
 }

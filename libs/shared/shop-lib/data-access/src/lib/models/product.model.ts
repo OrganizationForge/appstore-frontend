@@ -1,9 +1,10 @@
 import { Availability } from "./availability.model";
 import { Brand } from "./brand.model";
 import { Category } from "./category.model";
+import { ProductComment } from "./comment.model";
 
 export interface Product {
-  id: number;
+  id: string;
   productName: string;
   description: string;
   priceBase: number;
@@ -13,6 +14,7 @@ export interface Product {
   brand: Brand;
   availability: Availability;
   productFiles: ProductFile[];
+  comments: ProductComment[];
   rating: number;
   review: number;
   weight: number;
@@ -26,10 +28,10 @@ export interface NewProduct {
   description: string,
   priceBase: number,
   price?: number,
-  brandId: number,
-  availabilityId: number,
-  categoryId: number,
-  quantityTypeId: number,
+  brandId: string,
+  availabilityId: string,
+  categoryId: string,
+  quantityTypeId: string,
   weight: number,
   stock: number,
   barcode: string,

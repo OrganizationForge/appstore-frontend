@@ -1,7 +1,8 @@
 <div class="row">
   <section class="col-lg-8">
     <!-- Steps-->
-    <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" routerLink="/shop/cart">
+    <div class="steps steps-light pt-2 pb-3 mb-5">
+      <!-- <a class="step-item active" routerLink="/shop/cart">
         <div class="step-progress"><span class="step-count">1</span></div>
         <div class="step-label"><i class="ci-cart"></i>Cart</div>
       </a><a class="step-item active" routerLink="/shop/checkout-details">
@@ -16,16 +17,33 @@
       </a><a class="step-item" routerLink="/shop/checkout-review">
         <div class="step-progress"><span class="step-count">5</span></div>
         <div class="step-label"><i class="ci-check-circle"></i>Review</div>
-      </a></div>
+      </a> -->
+      <a class="step-item active" routerLink="/cart">
+        <div class="step-progress"><span class="step-count">1</span></div>
+        <div class="step-label"><i class="ci-cart"></i>Carrito</div>
+      </a>
+      <a class="step-item active" routerLink="/cart/checkout-shipping">
+        <div class="step-progress"><span class="step-count">2</span></div>
+        <div class="step-label"><i class="ci-user-circle"></i>Entregas</div>
+      </a>
+      <a class="step-item active current" routerLink="/cart/checkout-payment">
+        <div class="step-progress"><span class="step-count">3</span></div>
+        <div class="step-label"><i class="ci-package"></i>Pagos</div>
+      </a>
+      <a class="step-item active " routerLink="/cart/checkout-review">
+        <div class="step-progress"><span class="step-count">4</span></div>
+        <div class="step-label"><i class="ci-package"></i>Detalles</div>
+      </a>
+    </div>
     <!-- Payment methods accordion-->
-    <h2 class="h6 pb-3 mb-2">Choose payment method</h2>
+    <h2 class="h6 pb-3 mb-2">Elegí tu método de pago</h2>
 
-    <div ngbAccordion #acc="ngbAccordion" activeIds="static-1" [closeOthers]="true">
+    <div ngbAccordion #acc="ngbAccordion" activeIds="static-3" [closeOthers]="true">
       <!-- Shoes-->
       <div ngbAccordionItem id="static-1">
         <h2 ngbAccordionHeader class="accordion-header">
 
-          <button ngbAccordionButton ><i class="ci-card fs-lg me-2 mt-n1 align-middle"></i> Pay with Credit Card</button>
+          <button ngbAccordionButton (click)="setPayment('TJ');"><i class="ci-card fs-lg me-2 mt-n1 align-middle"></i> Pagos con tarjeta</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
@@ -56,30 +74,30 @@
       <div ngbAccordionItem id="static-2">
         <h2 ngbAccordionHeader class="accordion-header">
 
-          <button ngbAccordionButton><i class="ci-paypal me-2 align-middle"></i> Pay with PayPal</button>
+          <button ngbAccordionButton (click)="setPayment('MP');"><i class="ci-paypal me-2 align-middle"></i> Pagos con MercadoPago</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
-            <ng-template><span class='fw-medium'>PayPal</span> - the safer, easier way to pay</ng-template>
+            <!-- <ng-template><span class='fw-medium'>PayPal</span> - the safer, easier way to pay</ng-template> -->
             <form class="row needs-validation" method="post" novalidate>
-              <div class="col-sm-6">
+              <div class="col-sm-8">
                 <div class="mb-3">
-                  <input class="form-control" type="email" placeholder="E-mail" required>
-                  <div class="invalid-feedback">Please enter valid email address</div>
+                  <input class="form-control" type="email" placeholder="Ingresá tu email" required>
+                  <div class="invalid-feedback">Por favor ingresá tu email</div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="mb-3">
-                  <input class="form-control" type="password" placeholder="Password" required>
-                  <div class="invalid-feedback">Please enter your password</div>
+                  <input class="form-control" type="text" placeholder="Ingresá tu nombre" required>
+                  <div class="invalid-feedback">Ingresá tu nombre</div>
                 </div>
               </div>
-              <div class="col-12">
+              <!-- <div class="col-12">
                 <div class="d-flex flex-wrap justify-content-between align-items-center"><a class="nav-link-style"
                     href="javascript:void(0);">Forgot password?</a>
                   <button class="btn btn-primary" type="submit">Log In</button>
                 </div>
-              </div>
+              </div> -->
             </form>
           </div>
         </div>
@@ -87,16 +105,31 @@
       <div ngbAccordionItem id="static-3">
         <h2 ngbAccordionHeader class="accordion-header">
 
-          <button ngbAccordionButton><i class="ci-gift me-2"></i> Redeem Reward Pointsv</button>
+          <button ngbAccordionButton (click)="setPayment('TE');"><i class="ci-gift me-2"></i> Transferencia o efectivo</button>
         </h2>
         <div ngbAccordionCollapse>
           <div ngbAccordionBody>
-            <ng-template>You currently have<span class="fw-medium">&nbsp;384</span>&nbsp;Reward Points to
-              spend.</ng-template>
-            <div class="form-check d-block">
+
+            <ng-template>
+
+              @for(data of paymentsDatas;track $index){
+                    <div class="form-check mb-4">
+                      <input class="form-check-input" type="radio" id="{{data.id}}" name="payment-method"
+                      (change)="onPaymentChange(data)"
+                      [checked]="data.id === selectedPaymentMethod"
+                    >
+                      <label class="form-check-label" for="{{data.id}}">{{data.title}}</label>
+                    </div>
+              }
+            </ng-template>
+            <!-- <ng-template>You currently have<span class="fw-medium">&nbsp;384</span>&nbsp;Reward Points to
+              spend.
+            </ng-template> -->
+
+            <!-- <div class="form-check d-block">
               <input class="form-check-input" type="checkbox" id="use_points">
               <label class="form-check-label" for="use_points">Use my Reward Points to pay for this order.</label>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -105,86 +138,27 @@
 
     <!-- Navigation (desktop)-->
     <div class="d-none d-lg-flex pt-4">
-      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-shipping"><i
-            class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Shipping</span><span
-            class="d-inline d-sm-none">Back</span></a></div>
-      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-review"><span
-            class="d-none d-sm-inline">Review your order</span><span class="d-inline d-sm-none">Review order</span><i
+      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-shipping"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver a envíos</span><span
+            class="d-inline d-sm-none">Volver</span></a></div>
+      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-review"><span class="d-none d-sm-inline">Detalles de orden</span><span class="d-inline d-sm-none">Detalles de orden</span><i
             class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
     </div>
   </section>
   <!-- Sidebar-->
   <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-    <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
-      <div class="py-2 px-xl-2">
-        <div class="widget mb-3">
-          <h2 class="widget-title text-center">Order summary</h2>
-          <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-              routerLink="/shop/single-v1"><img src="assets/img/shop/cart/widget/01.jpg" width="64" alt="Product"></a>
-            <div class="ps-2">
-              <h6 class="widget-product-title"><a routerLink="/shop/single-v1">Women Colorblock Sneakers</a></h6>
-              <div class="widget-product-meta"><span class="text-accent me-2">$150.<small>00</small></span><span
-                  class="text-muted">x 1</span></div>
-            </div>
-          </div>
-          <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-              routerLink="/shop/single-v1"><img src="assets/img/shop/cart/widget/02.jpg" width="64" alt="Product"></a>
-            <div class="ps-2">
-              <h6 class="widget-product-title"><a routerLink="/shop/single-v1">TH Jeans City Backpack</a></h6>
-              <div class="widget-product-meta"><span class="text-accent me-2">$79.<small>50</small></span><span
-                  class="text-muted">x 1</span></div>
-            </div>
-          </div>
-          <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-              routerLink="/shop/single-v1"><img src="assets/img/shop/cart/widget/03.jpg" width="64" alt="Product"></a>
-            <div class="ps-2">
-              <h6 class="widget-product-title"><a routerLink="/shop/single-v1">3-Color Sun Stash Hat</a></h6>
-              <div class="widget-product-meta"><span class="text-accent me-2">$22.<small>50</small></span><span
-                  class="text-muted">x 1</span></div>
-            </div>
-          </div>
-          <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-              routerLink="/shop/single-v1"><img src="assets/img/shop/cart/widget/04.jpg" width="64" alt="Product"></a>
-            <div class="ps-2">
-              <h6 class="widget-product-title"><a routerLink="/shop/single-v1">Cotton Polo Regular Fit</a></h6>
-              <div class="widget-product-meta"><span class="text-accent me-2">$9.<small>00</small></span><span
-                  class="text-muted">x 1</span></div>
-            </div>
-          </div>
-        </div>
-        <ul class="list-unstyled fs-sm pb-2 border-bottom">
-          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span
-              class="text-end">$265.<small>00</small></span></li>
-          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Shipping:</span><span
-              class="text-end">—</span></li>
-          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Taxes:</span><span
-              class="text-end">$9.<small>50</small></span></li>
-          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Discount:</span><span
-              class="text-end">—</span></li>
-        </ul>
-        <h3 class="fw-normal text-center my-4">$274.<small>50</small></h3>
-        <form class="needs-validation" method="post" novalidate [formGroup]="promocodeForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <input class="form-control" type="text" placeholder="Promo code" required formControlName="name"
-              [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
-            <div class="invalid-feedback">Please provide promo code.</div>
-          </div>
-          <button class="btn btn-outline-primary d-block w-100" type="submit">Apply promo code</button>
-        </form>
-      </div>
-    </div>
+    <lib-order-summary-ui [showCartItems]="true"></lib-order-summary-ui>
   </aside>
 </div>
 <!-- Navigation (mobile)-->
 <div class="row d-lg-none">
   <div class="col-lg-8">
     <div class="d-flex pt-4 mt-3">
-      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-shipping"><i
-            class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Shipping</span><span
-            class="d-inline d-sm-none">Back</span></a></div>
-      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-review"><span
+      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-shipping"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver a envíos</span><span class="d-inline d-sm-none">Volver</span></a></div>
+      <!-- <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-review"><span
             class="d-none d-sm-inline">Review your order</span><span class="d-inline d-sm-none">Review order</span><i
-            class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
+            class="ci-arrow-right mt-sm-0 ms-1"></i></a></div> -->
+      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-review"><span class="d-none d-sm-inline">Continuar a detalles</span><span class="d-inline d-sm-none">Continuar</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
+
     </div>
   </div>
 </div>

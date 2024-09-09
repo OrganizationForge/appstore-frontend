@@ -127,7 +127,7 @@
                                 </div>
                             </ng-template>
                         </li>
-                        <li [ngbNavItem]="3" class="nav-item">
+                        <!-- <li [ngbNavItem]="3" class="nav-item">
                             <a ngbNavLink class="nav-link px-0" href="javascript:void(0)" data-bs-toggle="tab" role="tab">
                                 <div class="d-none d-lg-block">
                                     <i class="ci-card opacity-60 me-2"></i>
@@ -139,7 +139,6 @@
                                 </div>
                             </a>
                             <ng-template ngbNavContent>
-                                <!-- Payment methods -->
                                 <div class="bg-secondary rounded-3 p-4 mb-4">
                                     <p class="fs-sm text-muted mb-0">
                                         Primary payment method is used by default
@@ -172,8 +171,7 @@
                                                 <td class="py-3 align-middle">{{card.expire_date}}</td>
                                                 <td class="py-3 align-middle">
                                                     <a class="nav-link-style me-2" href="javascript:void(0)" data-bs-toggle="tooltip" ngbTooltip="Edit">
-                                                        <!-- <i class="ci-edit" (click)="editModal($index,content)"></i> -->
-                                                        <i class="ci-edit"></i>
+                                                        <i class="ci-edit" (click)="editModal($index,content)"></i>
                                                     </a>
                                                     <a class="nav-link-style text-danger" href="javascript:void(0);" placement="top" data-bs-toggle="tooltip" ngbTooltip="Remove" (click)="removeData($event)">
                                                         <div class="ci-trash"></div>
@@ -186,13 +184,12 @@
                                     </table>
                                 </div>
                                 <div class="text-sm-end">
-                                    <!-- <a class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#showModal" (click)="openModal(content)"> -->
-                                      <a class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#showModal">
+                                    <a class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#showModal" (click)="openModal(content)">
                                         Add payment method
                                     </a>
                                 </div>
                             </ng-template>
-                        </li>
+                        </li> -->
                     </ul>
                     <!-- Tab content -->
                     <div class="tab-content">

@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { NewProduct, Product } from '../models/product.model';
 import { Category } from '../models/category.model';
 import { Brand } from '../models/brand.model';
+import { NewProductComment } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,21 @@ export class ProductService {
     // );
   }
 
-  getProduct(id: number): Observable<ApiResponse<Product>> {
+  getProduct(id: string): Observable<ApiResponse<Product>> {
     return this.apiService.get<ApiResponse<Product>>(`/v1/Products/${id}`);
   }
 
   createProduct(newProduct: NewProduct): Observable<ApiResponse<number>> {
     return this.apiService.post<ApiResponse<number>,NewProduct>('/v1/Products',newProduct)
+    .pipe(
+      map(res => {
+        return res
+      })
+    )
+  }
+
+  createComment(newComment: NewProductComment): Observable<ApiResponse<number>> {
+    return this.apiService.post<ApiResponse<number>,NewProductComment>('/v1/Products/comments',newComment)
     .pipe(
       map(res => {
         return res

@@ -1,3 +1,4 @@
+import { CartDetailUiComponent } from '@angular-monorepo/shared/ui/cart-detail-ui';
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -10,7 +11,7 @@ import { map } from 'rxjs';
 @Component({
   selector: 'lib-feature-checkout',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAccordionModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAccordionModule, RouterModule, CartDetailUiComponent],
   templateUrl: './feature-checkout.component.html',
   styleUrl: './feature-checkout.component.scss',
 })
@@ -27,6 +28,7 @@ export class FeatureCheckoutComponent implements OnInit {
   submit = false;
 
   cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
+  cartTotal$ = this.store.select(ngrxCartQuery.selectTotal);
 
   qty: any = 1;
   subTotal = 0;
@@ -111,4 +113,5 @@ export class FeatureCheckoutComponent implements OnInit {
       return;
     }
   }
+
 }
