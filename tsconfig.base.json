@@ -92,6 +92,12 @@
       "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
         "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
       ],
+      "@angular-monorepo/shared/shipping-lib/data-access": [
+        "libs/shared/shipping-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shipping-lib/feature-shipping-list": [
+        "libs/shared/shipping-lib/feature-shipping-list/src/index.ts"
+      ],
       "@angular-monorepo/shared/shop-lib/feature-add-prod": [
         "libs/shared/shop-lib/feature-add-product/src/index.ts"
       ],
@@ -109,6 +115,9 @@
       ],
       "@angular-monorepo/shared/ui/cart-detail-ui": [
         "libs/shared/ui/cart-detail-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/dashboard-items-ui": [
+        "libs/shared/ui/dashboard-items-ui/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/dynamic-form-ui": [
         "libs/shared/ui/dynamic-form-ui/src/index.ts"

@@ -32,6 +32,11 @@ export const featureDashboardRoutes: Route[] = [
           import('@angular-monorepo/shared/dashboard-lib/feature-settings').then((m) => m.FeatureSettingsComponent)
       },
       {
+        path: 'shipping',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/shipping-lib/feature-shipping-list').then((m) => m.FeatureShippingListComponent)
+      },
+      {
         path: 'dynamic-forms',
         loadChildren: () =>
           import('@angular-monorepo/shared/category-lib/feature-category').then((m) => m.featureCategoryRoutes)
