@@ -7,11 +7,12 @@ import { Store } from '@ngrx/store';
 import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 import { map, Observable } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { DashboardItemsUiComponent } from "@angular-monorepo/shared/ui/dashboard-items-ui";
 
 @Component({
   selector: 'angular-monorepo-header',
   standalone: true,
-  imports: [CommonModule, FeatureMenuComponent, RouterModule, AsyncPipe, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, FeatureMenuComponent, RouterModule, AsyncPipe, ReactiveFormsModule, RouterLink, DashboardItemsUiComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

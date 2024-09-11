@@ -33,8 +33,8 @@ export class FeatureLoginComponent implements OnInit, OnDestroy {
      * Form Validatyion
      */
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', Validators.required],
+      email: ['userAdmin@gmail.com', [Validators.required]],
+      password: ['P4ssw0rd!', Validators.required],
     });
 
     /**

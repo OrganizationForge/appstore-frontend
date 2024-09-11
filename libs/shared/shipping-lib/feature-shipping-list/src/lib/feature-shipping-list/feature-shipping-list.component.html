@@ -1,0 +1,100 @@
+  <!-- Toolbar-->
+  <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+    <h6 class="fs-base text-light mb-0">Listado de métodos de entrega:</h6><a class="btn btn-primary btn-sm"
+      routerLink="/account/signin"><i class="ci-sign-out me-2"></i>Sign out</a>
+  </div>
+  <!-- Addresses list-->
+  <div class="table-responsive fs-md">
+    <table class="table table-hover mb-0">
+      <thead>
+        <tr>
+          <th>Método</th>
+          <th>Estimado entrega</th>
+          <th>Costo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(data of shippingList$ | async;track $index){
+          <tr>
+            <td class="py-3 align-middle">
+              <span class="text-dark fw-medium">{{data.title}}</span>
+              <br>
+              <span class="text-muted">{{data.description}}</span>
+            </td>
+
+            <!-- <td class="py-3 align-middle">
+              {{data.title}} {{data.description}}
+            </td> -->
+            <td class="py-3 align-middle">
+              {{data.deliveryTime}}
+            </td>
+            <td class="py-3 align-middle">
+              ${{data.price}}
+            </td>
+            <td class="py-3 align-middle">
+              <a class="nav-link-style me-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit"
+                (click)="editModal(content,data)"><i class="ci-edit"></i></a>
+              <a class="nav-link-style text-danger" href="javascript:void(0);" data-bs-toggle="tooltip" title="Remove"
+                (click)="removeData($event)">
+                <div class="ci-trash"></div>
+              </a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="text-sm-end pt-4"><a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
+      (click)="OpenModal(content)">Agregar</a></div>
+
+<!--Modal-->
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <form (ngSubmit)="saveUser()" [formGroup]="userForm">
+      <input type="hidden" name="id" value="" formControlName="id" />
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar nuevo método de envio</h5>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
+          (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row gx-4 gy-3">
+          <div class="col-sm-6">
+            <label class="form-label" for="title-fn">Nombre o título</label>
+            <input class="form-control" type="text" id="title-fn" required formControlName="f_title"
+              [ngClass]="{'is-invalid': submitted && form['f_title'].errors}">
+            <div class="invalid-feedback">Dale un nombre o titulo al envío!</div>
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label" for="description">Descripción</label>
+            <input class="form-control" type="text" id="description" formControlName="description">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label" for="deliveryTime-ln">Tiempo estimado entrega</label>
+            <input class="form-control" type="text" id="deliveryTime-ln" required formControlName="l_deliveryTime"
+              [ngClass]="{'is-invalid': submitted && form['l_deliveryTime'].errors}">
+            <div class="invalid-feedback">Por favor, dale un tiempo estimado de entrega!</div>
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label" for="price-ln">Precio o costo</label>
+            <input class="form-control" type="number" id="price-ln" required formControlName="price"
+              [ngClass]="{'is-invalid': submitted && form['price'].errors}">
+            <div class="invalid-feedback">Ponele precio al envío!</div>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="address-primary">
+              <label class="form-check-label" for="address-primary">Establecer como metodo de entrega por defecto!</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary btn-shadow" type="submit">Guardar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
