@@ -46,7 +46,7 @@
   </div>
 
   <div class="row">
-    <div class="mb-3 pb-2">
+    <div class="col-sm-8 mb-3 pb-2">
       <label class="form-label" for="unp-product-name">
         Nombre del Producto
       </label>
@@ -59,7 +59,26 @@
       />
       <div class="form-text">Maximo 100 carácteres</div>
     </div>
+    @if(brands$ | async; as brands){
+
+      <div class="col-sm-4 mb-3">
+        <label class="form-label" for="unp-unit-type"> Marca </label>
+        <select
+          class="form-select me-2"
+          id="unp-unit-type"
+          formControlName="brandId"
+        >
+          <option value="0">Seleccionar marca</option>
+          @for(brand of brands;track $index){
+            <option value="{{brand.id}}">{{brand.description}}</option>
+          }
+
+        </select>
+      </div>
+    }
   </div>
+
+
 
   <!-- Drag and drop file upload -->
   <ngx-dropzone
@@ -103,12 +122,12 @@
       formControlName="description"
     ></textarea> -->
 
-    <lib-editor-ui
+    <!-- <lib-editor-ui
       [readonly] = false
       class="form-control"
       rows="6">
-    </lib-editor-ui>
-
+    </lib-editor-ui> -->
+    <div #editor></div>
 
     <div class="bg-secondary p-3 fs-ms rounded-bottom">
       <span class="d-inline-block fw-medium me-2 my-1"
@@ -176,20 +195,29 @@
         <option value="45">45%</option>
       </select>
     </div>
-    <div class="col-sm-4 mb-3">
-      <label class="form-label" for="unp-unit-type"> Tipo </label>
-      <select
-        class="form-select me-2"
-        id="unp-unit-type"
-        formControlName="quantityTypeId"
-      >
-        <option value="1">Unidad</option>
-        <option value="2">Fracción</option>
-      </select>
-      <div class="form-text">
-        Producto por unidad o fracción(kg, metro, etc)
+
+
+    @if(quantityTypes$ | async; as quantityTypes){
+      <div class="col-sm-4 mb-3">
+        <label class="form-label" for="unp-unit-type"> Tipo </label>
+        <select
+          class="form-select me-2"
+          id="unp-unit-type"
+          formControlName="quantityTypeId"
+        >
+          <option value="0">Seleccionar marca</option>
+          @for(quantityType of quantityTypes;track $index){
+            <option value="{{quantityType.id}}">{{quantityType.description}}</option>
+          }
+        </select>
+        <div class="form-text">
+          Producto por unidad o fracción(kg, metro, etc)
+        </div>
       </div>
-    </div>
+
+    }
+
+
     <div class="col-sm-4 mb-3">
       <label class="form-label" for="unp-stock"> Stock </label>
       <div class="input-group">
@@ -205,14 +233,32 @@
       </div>
       <div class="form-text">Cantidad | Decimales para kg</div>
     </div>
-    <div class="col-sm-2 mb-3">
+
+    @if(availabilities$ | async; as availabilities){
+      <div class="col-sm-4 mb-3">
+        <label class="form-label" for="unp-unit-type"> Disponibilidad </label>
+        <select
+          class="form-select me-2"
+          id="unp-unit-type"
+          formControlName="availabilityId"
+        >
+          <option value="0">Seleccionar disponibilidad</option>
+          @for(availability of availabilities;track $index){
+            <option value="{{availability.id}}">{{availability.description}}</option>
+          }
+        </select>
+      </div>
+
+    }
+
+    <!-- <div class="col-sm-2 mb-3">
       <label class="form-label" for="unp-unit-type"> Fracción </label>
       <select class="form-select me-2" id="unp-unit-type">
         <option value="1">Gramos</option>
         <option value="2">Kilogramos</option>
         <option value="3">Metros</option>
       </select>
-    </div>
+    </div> -->
   </div>
   <div class="row">
     <div class="col-sm-10 mb-3">

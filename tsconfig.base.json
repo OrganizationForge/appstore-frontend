@@ -83,11 +83,26 @@
       "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
         "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
       ],
+      "@angular-monorepo/shared/dashboard-lib/feature-orders": [
+        "libs/shared/dashboard-lib/feature-orders/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-payouts": [
+        "libs/shared/dashboard-lib/feature-payouts/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-product-list": [
+        "libs/shared/dashboard-lib/feature-product-list/src/index.ts"
+      ],
       "@angular-monorepo/shared/dashboard-lib/feature-profile": [
         "libs/shared/dashboard-lib/feature-profile/src/index.ts"
       ],
+      "@angular-monorepo/shared/dashboard-lib/feature-sales": [
+        "libs/shared/dashboard-lib/feature-sales/src/index.ts"
+      ],
       "@angular-monorepo/shared/dashboard-lib/feature-settings": [
         "libs/shared/dashboard-lib/feature-settings/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-users": [
+        "libs/shared/dashboard-lib/feature-users/src/index.ts"
       ],
       "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
         "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"

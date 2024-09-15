@@ -12,14 +12,14 @@
       </nav>
     </div>
     <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-      <h1 class="h3 text-light mb-0">Profile info</h1>
+      <h1 class="h3 text-light mb-0">Perfil info</h1>
     </div>
   </div>
 </div>
 <div class="container pb-5 mb-2 mb-md-4">
   <div class="row">
     <!-- Sidebar-->
-     @if($isAuthenticated()){
+     @if(isAuthenticated$()){
 
        <aside class="col-lg-4 pt-4 pt-lg-0 pe-xl-5">
         <lib-dashboard-items-ui [isDropdown]="false"></lib-dashboard-items-ui>

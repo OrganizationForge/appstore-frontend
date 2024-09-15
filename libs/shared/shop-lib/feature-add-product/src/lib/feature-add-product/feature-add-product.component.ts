@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -8,9 +8,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { Category, NewFile, NewProduct, NewProductFile, ProductService } from '@angular-monorepo/shop-data-access';
+import { Availability, Brand, Category, NewFile, NewProduct, NewProductFile, ProductService, QuantityType } from '@angular-monorepo/shop-data-access';
 import { EditorUiComponent } from "@angular-monorepo/shared/ui/editor-ui";
 import { map, Observable } from 'rxjs';
+
+import EditorJS, { OutputData, ToolConstructable } from '@editorjs/editorjs';
+
+import Header from '@editorjs/header';
+// @ts-ignore
+import NestedList from '@editorjs/nested-list';
 
 @Component({
   selector: 'lib-feature-add-product',
@@ -19,20 +25,57 @@ import { map, Observable } from 'rxjs';
   templateUrl: './feature-add-product.component.html',
   styleUrl: './feature-add-product.component.scss',
 })
-export class FeatureAddProductComponent implements OnInit{
+export class FeatureAddProductComponent implements OnInit, AfterViewInit{
   @ViewChild('editor', {read: ElementRef, static: true}) editorElement! : ElementRef;
   productForm!: UntypedFormGroup;
   submitted = false;
 
   categories$!: Observable<Category[]>;
+  brands$!: Observable<Brand[]>;
+  quantityTypes$!: Observable<QuantityType[]>;
+  availabilities$!: Observable<Availability[]>;
   selectedCategoryId = 0;
 
-
+  private editor! : EditorJS;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private productService: ProductService
   ) { }
+
+  ngAfterViewInit(): void {
+    this.initializeEditor();
+
+
+  }
+
+  initializeEditor() : void{
+    this.editor = new EditorJS({
+      minHeight: 30,
+      holder: this.editorElement.nativeElement,
+      placeholder: 'Escribí acá lo que quieras!!',
+      inlineToolbar: ['bold', 'italic'],
+      tools: {
+        list: {
+          class: NestedList as unknown as ToolConstructable,
+          inlineToolbar: true,
+          config: {
+            defaultStyle: 'unordered'
+          },
+        },
+        header: {
+          class: Header as unknown as ToolConstructable,
+          shortcut: 'CMD+SHIFT+H',
+
+          config: {
+            levels: [2, 3, 4],
+            defaultLevel: 3,
+            placeholder: 'Titulo'
+          }
+        }
+      },
+    });
+  }
 
   ngOnInit(): void {
     // When the user clicks on the button, scroll to the top of the document
@@ -40,11 +83,27 @@ export class FeatureAddProductComponent implements OnInit{
 
     this.categories$ = this.productService.getCategories().pipe(
       map((res) => {
-        console.log("categorias" + this.categories$)
         return res;
       })
     )
 
+    this.brands$ = this.productService.getBrands().pipe(
+      map((res) => {
+        return res;
+      })
+    )
+
+    this.quantityTypes$ = this.productService.getQuantityTypes().pipe(
+      map((res) => {
+        return res;
+      })
+    )
+
+    this.availabilities$ = this.productService.getAvailabilities().pipe(
+      map((res) => {
+        return res;
+      })
+    )
     /**
      * Form Validation
      */
@@ -56,6 +115,7 @@ export class FeatureAddProductComponent implements OnInit{
       price: ['', [Validators.required]],
       urlImage: [''],
       brandId: [''],
+      availabilityId: [''],
       categoryId: [0, [Validators.required]],
       stock: ['', [Validators.required]],
       warranty: [''],
@@ -92,36 +152,42 @@ export class FeatureAddProductComponent implements OnInit{
 
   AddProduct() {
     this.submitted = true;
-    const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
 
-    const newProduct: NewProduct = {
-      productName: this.productForm.value.productName,
-      description: 'prueba',
-      priceBase: this.productForm.value.priceBase,
-      price: this.productForm.value.price,
-      // imageFiles: this.files,
-      productFiles: productFiles,
-      brandId: "c0765c00-ed4e-4f3a-b704-08dccaf575e2",
-      // brandId: this.productForm.value.brandId,
-      availabilityId: "2441cd81-061a-43b4-0695-08dccaf575c5",
-      categoryId: this.productForm.value.categoryId,
-      quantityTypeId: "1e1adb41-e0f5-418e-d890-08dccaf575f0",
-      // quantityTypeId: this.productForm.value.quantityTypeId,
-      weight: 0,
-      stock: this.productForm.value.stock,
-      barcode: this.productForm.value.barcode
-    };
+    this.editor.save().then((outputData) => {
 
-    console.log(newProduct);
+      const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
+      console.log(outputData);
+      const newProduct: NewProduct = {
+        productName: this.productForm.value.productName,
+        description: JSON.stringify(outputData),
+        priceBase: this.productForm.value.priceBase,
+        price: this.productForm.value.price,
+        productFiles: productFiles,
+        brandId: this.productForm.value.brandId,
+        availabilityId: this.productForm.value.availabilityId,
+        categoryId: this.productForm.value.categoryId,
+        quantityTypeId: this.productForm.value.quantityTypeId,
+        weight: 0,
+        stock: this.productForm.value.stock,
+        barcode: this.productForm.value.barcode
+      };
 
-    this.productService.createProduct(newProduct).subscribe((res) => {
-      if (res.succeded) {
-        alert('Guardado Ok');
-        this.productForm.reset();
-        this.files = [];
-      }
-      else res.errors;
+      console.log(newProduct);
+
+      this.productService.createProduct(newProduct).subscribe((res) => {
+        if (res.succeded) {
+          alert('Guardado Ok');
+          this.productForm.reset();
+          this.files = [];
+        }
+        else res.errors;
+      });
+
+    }).catch((error) => {
+      console.log('Saving failed: ', error)
     });
+
+
   }
 
   mapFilesToNewProductFiles(files: NewFile[]): NewProductFile[] {

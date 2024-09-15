@@ -1,23 +1,24 @@
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class LocalStorageJwtService {
-  getItem(): Observable<string | null> {
-    const data = localStorage.getItem('jwtToken');
+  getItem(): Observable<User | null> {
+    const data = localStorage.getItem('currentUser');
     if (data) {
-      return of(data);
+      return of(JSON.parse(data));
     }
     return of(null);
   }
 
-  setItem(data: string): Observable<string> {
-    localStorage.setItem('jwtToken', data);
+  setItem(data: User): Observable<User> {
+    localStorage.setItem('currentUser', JSON.stringify(data));
     return of(data);
   }
 
   removeItem(): Observable<boolean> {
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('currentUser');
     return of(true);
   }
 }

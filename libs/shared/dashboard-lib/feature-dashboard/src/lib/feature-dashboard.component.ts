@@ -17,5 +17,5 @@ export class FeatureDashboardComponent {
   public isCollapsed = true;
 
   private readonly authStore = inject(AuthStore);
-  $isAuthenticated = this.authStore.loggedIn;
+  isAuthenticated$ = this.authStore.loggedIn;
 }

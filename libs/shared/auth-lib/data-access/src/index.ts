@@ -10,3 +10,4 @@ export * from './lib/+state/auth.selectors';
 export * from './lib/+state/auth.interfaces';
 
 export * as ngrxAuthEffects from './lib/+state/auth.effects';
+export * as ngrxAuthActions from './lib/+state/auth.actions';

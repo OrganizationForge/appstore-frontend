@@ -1,7 +1,13 @@
 const DashboardItemsData = [
   {
     id: 1,
-    route: '/dashboard/add-product',
+    route: '/dashboard/sales',
+    name: 'Ventas',
+    icon: 'ci-dollar',
+  },
+  {
+    id: 1,
+    route: '/dashboard/product-list',
     name: 'Productos',
     icon: 'ci-package',
   },
@@ -13,13 +19,13 @@ const DashboardItemsData = [
   },
   {
     id: 3,
-    route: '/dashboard/add-product',
+    route: '/dashboard/orders',
     name: 'Ordenes',
     icon: 'ci-bag',
   },
   {
     id: 4,
-    route: '/dashboard/add-product',
+    route: '/dashboard/users',
     name: 'Usuarios',
     icon: 'ci-user',
   },
@@ -31,7 +37,7 @@ const DashboardItemsData = [
   },
   {
     id: 5,
-    route: '/dashboard/shipping',
+    route: '/dashboard/payouts',
     name: 'Pagos',
     icon: 'ci-currency-exchange',
   },
@@ -49,12 +55,6 @@ const ProfileItemsData = [
     route: '/dashboard/wishlist',
     name: 'Favoritos',
     icon: 'ci-heart',
-  },
-  {
-    id: 3,
-    route: '/login',
-    name: 'Log Out',
-    icon: 'ci-sign-out',
   },
 ];
 

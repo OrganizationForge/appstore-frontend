@@ -7,10 +7,13 @@ export type AuthState = {
 
 export const initialUserValue: User = {
   userName: '',
+  nombre: '',
+  apellido: '',
   email: '',
   jwToken: '',
-  // bio: '',
-  // image: '',
+  isVerified: false,
+  roles: [],
+  urlImage: '',
 };
 
 export const authInitialState: AuthState = {

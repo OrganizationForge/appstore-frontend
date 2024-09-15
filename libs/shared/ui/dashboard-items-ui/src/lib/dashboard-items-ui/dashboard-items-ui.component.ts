@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItemsData, ProfileItemsData } from './data';
+
+import { AuthStore } from '@angular-monorepo/auth-data-access';
+
 
 
 @Component({
@@ -15,7 +18,7 @@ import { DashboardItemsData, ProfileItemsData } from './data';
 })
 export class DashboardItemsUiComponent implements OnInit {
 
-
+  private readonly authStore = inject(AuthStore);
   @Input() isDropdown = true;
   public isCollapsed = true;
 
@@ -25,5 +28,9 @@ export class DashboardItemsUiComponent implements OnInit {
   ngOnInit(): void {
     this.dashboardItems = DashboardItemsData;
     this.profileItems = ProfileItemsData;
+  }
+
+  logout() {
+    this.authStore.logout();
   }
 }

@@ -5,6 +5,8 @@ import { NewProduct, Product } from '../models/product.model';
 import { Category } from '../models/category.model';
 import { Brand } from '../models/brand.model';
 import { NewProductComment } from '../models/comment.model';
+import { QuantityType } from '../models/quantityType.model';
+import { Availability } from '../models/availability.model';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +67,32 @@ export class ProductService {
   getBrands(): Observable<Brand[]> {
 
     return this.apiService.get<ApiResponse<Brand[]>>(`/v1/Brands`)
+    .pipe(
+      map(res => {
+        if (res.succeded)
+          return res.data;
+        else
+          return []
+      })
+    );
+  }
+
+  getQuantityTypes(): Observable<QuantityType[]> {
+
+    return this.apiService.get<ApiResponse<QuantityType[]>>(`/v1/Domain/quantity-types`)
+    .pipe(
+      map(res => {
+        if (res.succeded)
+          return res.data;
+        else
+          return []
+      })
+    );
+  }
+
+  getAvailabilities(): Observable<Availability[]> {
+
+    return this.apiService.get<ApiResponse<Availability[]>>(`/v1/Domain/availabilities`)
     .pipe(
       map(res => {
         if (res.succeded)

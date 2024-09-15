@@ -6,6 +6,9 @@ export * from './lib/models/product.model';
 export * from './lib/models/category.model';
 export * from './lib/models/brand.model';
 export * from './lib/models/comment.model';
+export * from './lib/models/quantityType.model';
+export * from './lib/models/availability.model';
+
 
 
 //services

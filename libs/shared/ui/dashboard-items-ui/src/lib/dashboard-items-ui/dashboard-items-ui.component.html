@@ -3,39 +3,15 @@
     <a class="navbar-tool-icon-box border dropdown-toggle" href="javascript:void(0)" routerLink="/sales">
       <img src="assets/img/marketplace/account/avatar-sm.png" width="32" alt="themesbrand">
     </a>
-    <a class="navbar-tool-text ms-n1" href="javascript:void(0)">
-        <small>Themesbrand</small>
-    </a>
     <div class="dropdown-menu dropdown-menu-end">
         <div style="min-width: 14rem;">
             <h6 class="dropdown-header">Dashboard</h6>
             @for(item of dashboardItems; track $index){
               <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="{{item.route}}">
                 <i class="{{item.icon}} opacity-60 me-2"></i> {{item.name}}
-                <!-- <span class="fs-xs text-muted ms-auto">5</span> -->
             </a>
             }
-            <!-- <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/product">
-                <i class="ci-package opacity-60 me-2"></i>
-                Productos
-                <span class="fs-xs text-muted ms-auto">5</span>
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/add-product">
-                <i class="ci-cloud-upload opacity-60 me-2"></i>
-                Nuevo Producto
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/payout">
-                <i class="ci-currency-exchange opacity-60 me-2"></i>
-                Ordenes
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/payout">
-              <i class="ci-currency-exchange opacity-60 me-2"></i>
-              Usuarios
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/shipping">
-              <i class="ci-currency-exchange opacity-60 me-2"></i>
-              Opciones entrega
-            </a> -->
+
 
             <div class="dropdown-divider"></div>
 
@@ -46,15 +22,11 @@
             </a>
             }
 
-            <!-- <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" routerLink="/dashboard/wishlist">
-                <i class="ci-heart opacity-60 me-2"></i> Favoritos
-                <span class="fs-xs text-muted ms-auto">4</span>
-            </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)">
+            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0)" (click)="logout()">
                 <i class="ci-sign-out opacity-60 me-2"></i>
-                Sign Out
-            </a> -->
+                Cerrar sesión
+            </a>
 
 
         </div>
@@ -94,9 +66,8 @@
           @for(item of profileItems; track $index){
             <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" routerLink="{{item.route}}"><i class="{{item.icon}} opacity-60 me-2"></i>{{item.name}}</a></li>
           }
-          <!-- <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" routerLink="/dashboard/settings"><i class="ci-settings opacity-60 me-2"></i>Opciones</a></li>
-          <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" routerLink="/dashboard/wishlist"><i class="ci-heart opacity-60 me-2"></i>Favoritos<span class="fs-sm text-muted ms-auto">3</span></a></li>
-          <li class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" routerLink="/account/signin"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a></li> -->
+
+          <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"  href="javascript:void(0)" (click)="logout()"><i class="ci-sign-out opacity-60 me-2"></i>Cerrar sesión</a></li>
         </ul>
 
 

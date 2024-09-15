@@ -2,12 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FeatureMenuComponent } from '@angular-monorepo/feature-menu';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { AuthStore } from '@angular-monorepo/auth-data-access';
+import { AuthStore, LocalStorageJwtService } from '@angular-monorepo/auth-data-access';
 import { Store } from '@ngrx/store';
 import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable, take } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DashboardItemsUiComponent } from "@angular-monorepo/shared/ui/dashboard-items-ui";
+
 
 @Component({
   selector: 'angular-monorepo-header',
@@ -19,6 +20,7 @@ import { DashboardItemsUiComponent } from "@angular-monorepo/shared/ui/dashboard
 export class HeaderComponent implements OnInit {
 
   private readonly authStore = inject(AuthStore);
+  private readonly localStorageJwtService = inject(LocalStorageJwtService);
   router = inject(Router)
 
   showNavigationArrows = true;
@@ -30,7 +32,6 @@ export class HeaderComponent implements OnInit {
   subTotal = 0;
   Total: any;
 
-  $isAuthenticated = this.authStore.loggedIn;
 
   // Login Form
   // loginForm!: UntypedFormGroup;
@@ -57,6 +58,8 @@ export class HeaderComponent implements OnInit {
 
   cartItems$! : Observable<CartProduct[]>;
   cartTotal$! : Observable<number>;
+  isAuthenticated$ =  this.authStore.loggedIn;
+
 
   // constructor(private router: Router, private modalService: NgbModal, private formBuilder: UntypedFormBuilder, public languageService: LanguageService,
   //   public _cookiesService: CookieService, public translate: TranslateService) {
@@ -64,6 +67,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.localStorageJwtService
+      .getItem()
+      .pipe(
+        take(1),
+        filter((token) => !!token?.jwToken),
+      )
+      .subscribe(() => this.authStore.getUser());
 
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
@@ -227,5 +237,7 @@ export class HeaderComponent implements OnInit {
     // this.subTotal -= parseFloat(this.cartDatas[id].price)
     this.store.dispatch(cartActions.removeItemFromCart({products: product}));
   }
+
+
 
 }

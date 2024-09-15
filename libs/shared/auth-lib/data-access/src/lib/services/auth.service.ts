@@ -9,7 +9,7 @@ export class AuthService {
   private readonly apiService = inject(ApiService);
 
   user(): Observable<ApiResponse<User>> {
-    return this.apiService.get<ApiResponse<User>>('/user');
+    return this.apiService.get<ApiResponse<User>>('/v1/Account/current');
   }
 
   login(credentials: LoginUser): Observable<ApiResponse<User>> {

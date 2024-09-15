@@ -20,7 +20,6 @@ export const appRoutes: Route[] = [
       import('@angular-monorepo/home-store-app').then(
         (m) => m.HomeStoreAppComponent
       ),
-    canActivate: [authGuard],
   },
   {
     path: 'shop',
@@ -31,6 +30,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'dashboard',
+
     loadChildren: () =>
       import('@angular-monorepo/shared/dashboard-lib/feature-dashboard').then(
         (m) => m.featureDashboardRoutes

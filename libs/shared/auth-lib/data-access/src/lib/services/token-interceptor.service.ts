@@ -7,12 +7,12 @@ export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn)
   let token: string | null = null;
   inject(LocalStorageJwtService)
     .getItem()
-    .subscribe((t) => (token = t));
+    .subscribe((t) => (token = t?.jwToken || null));
 
   if (token) {
     request = request.clone({
       setHeaders: {
-        Authorization: `Token ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   }

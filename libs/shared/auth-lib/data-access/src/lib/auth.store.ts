@@ -36,7 +36,7 @@ export const AuthStore = signalStore(
               tapResponse({
                 next: ({ data }) => {
                   patchState(store, { data, loggedIn: true });
-                  localStorageService.setItem(data.jwToken);
+                  localStorageService.setItem(data);
                   router.navigateByUrl('home');
                 },
                 error: ({ error }) => reduxStore.dispatch(authActions.setErrors({ errors: error.errors })),
@@ -53,7 +53,7 @@ export const AuthStore = signalStore(
               tapResponse({
                 next: ({ data }) => {
                   patchState(store, { data, loggedIn: true });
-                  localStorageService.setItem(data.jwToken);
+                  localStorageService.setItem(data);
                   router.navigateByUrl('home');
                 },
                 error: ({ error }) => reduxStore.dispatch(authActions.setErrors({ errors: error.errors })),
