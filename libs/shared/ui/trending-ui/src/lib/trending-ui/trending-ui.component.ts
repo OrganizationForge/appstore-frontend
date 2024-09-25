@@ -17,13 +17,6 @@ export class TrendingUiComponent {
 
   constructor(private modalService: NgbModal) { }
 
-
-  /**
-   * Product Data
-   */
-
-
-
   /**
    * Open center modal and product data get
    * @param centerDataModal center modal data

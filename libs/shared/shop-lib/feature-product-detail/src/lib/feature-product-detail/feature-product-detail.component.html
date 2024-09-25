@@ -9,7 +9,7 @@
             <li class="breadcrumb-item"><a class="text-nowrap" routerLink="/fashion-store-v1"><i class="ci-home"></i>Home</a></li>
             <li class="breadcrumb-item text-nowrap"><a href="javascript:void(0);">Shop</a>
             </li>
-            <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.1</li>
+            <li class="breadcrumb-item text-nowrap active" aria-current="page">Detail</li>
           </ol>
         </nav>
       </div>
@@ -52,16 +52,32 @@
             <div class="product-details ms-auto pb-3">
               <div class="d-flex justify-content-between align-items-center mb-2"><a href="javascript:void(0);">
                 <!-- <div class="d-flex justify-content-between align-items-center mb-2"><a href="javascript:void(0);" data-scroll [ngxScrollTo]="'#reviews'"> -->
-                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
-                  </div><span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">74 Reviews</span>
+                   <div class="star-rating">
+                    <ng-template #t let-fill="fill">
+                      <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">★</span>☆
+                      </span>
+                    </ng-template>
+                    <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="dataProduct.rating" [starTemplate]="t" [readonly]="true" [max]="5">
+                    </ngb-rating>
+                  </div>
+                  <span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">{{dataProduct.review}} reseñas</span>
                 </a>
                 <button class="btn-wishlist me-0 me-lg-n3" type="button" data-bs-toggle="tooltip" placement="top" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button>
               </div>
-              <div class="mb-3"><span class="h3 fw-normal text-accent me-1">${{dataProduct.price}}</span>
-                <!-- <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$18.<small>99</small></span> -->
-                <del class="text-muted fs-lg me-3">$25.<small>00</small></del><span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
-              </div>
-              <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span class="text-muted" id="colorOption">Red/Dark blue/White</span></div>
+
+              @if(dataProduct.price < dataProduct.priceBase){
+                <div class="mb-3"><span class="h3 fw-normal text-accent me-1">${{dataProduct.price}}</span>
+                  <!-- <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$18.<small>99</small></span> -->
+                  <del class="text-muted fs-lg me-3">${{dataProduct.priceBase}}</del><span class="badge bg-danger badge-shadow align-middle mt-n2">Oferta</span>
+                </div>
+              }
+              @else{
+                <div class="mb-3"><span class="h3 fw-normal text-accent me-1">${{dataProduct.price}}</span>
+                </div>
+              }
+
+              <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span class="text-muted" id="colorOption">Rojo/Oscuro Azul/Claro</span></div>
               <div class="position-relative me-n4 mb-3">
                 <div class="form-check form-option form-check-inline mb-2">
                   <input class="form-check-input" type="radio" name="color" id="color1" data-bs-label="colorOption" value="Red/Dark blue/White" checked>
@@ -75,16 +91,22 @@
                   <input class="form-check-input" type="radio" name="color" id="color3" data-bs-label="colorOption" value="Dark grey/White/Orange">
                   <label class="form-option-label rounded-circle" for="color3"><span class="form-option-color rounded-circle" style="background-image: url(assets/img/shop/single/color-opt-3.png)"></span></label>
                 </div>
-                <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Product available
-                </div>
+                @if(dataProduct.availability.description === 'Available'){
+                  <div class="product-badge product-available mt-n1"><i class="ci-security-check"></i>Producto disponible
+                  </div>
+                }
+                @else{
+                  <div class="product-badge product-not-available mt-n1"><i class="ci-security-check"></i>Sin stock
+                  </div>
+                }
               </div>
               <form class="mb-grid-gutter" method="post">
                 <div class="mb-3">
                   <div class="d-flex justify-content-between align-items-center pb-1">
-                    <label class="form-label" for="product-size">Size:</label><a class="nav-link-style fs-sm" href="javascript:void(0);" data-bs-toggle="modal" (click)="sizetModal(sizeChartModal)"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Size guide</a>
+                    <label class="form-label" for="product-size">Talle:</label><a class="nav-link-style fs-sm" href="javascript:void(0);" data-bs-toggle="modal" (click)="sizetModal(sizeChartModal)"><i class="ci-ruler lead align-middle me-1 mt-n1"></i>Guia de talles</a>
                   </div>
                   <select class="form-select" required id="product-size">
-                    <option value="">Select size</option>
+                    <option value="">Seleccionar talle</option>
                     <option value="xs">XS</option>
                     <option value="s">S</option>
                     <option value="m">M</option>
@@ -109,13 +131,13 @@
                 <div ngbAccordionItem id="static-1">
                   <h2 ngbAccordionHeader class="accordion-header">
                     <button ngbAccordionButton class="border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne" aria-expanded="false" aria-controls="gen-ques-collapseOne">
-                      <i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Product info
+                      <i class="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Info del producto
                     </button>
                   </h2>
                   <div ngbAccordionCollapse>
                     <div ngbAccordionBody>
                       <ng-template>
-                    <h6 class="fs-sm mb-2">Composition</h6>
+                    <h6 class="fs-sm mb-2">Composicion</h6>
                     <ul class="fs-sm ps-4">
                       <li>Elastic rib: Cotton 95%, Elastane 5%</li>
                       <li>Lining: Cotton 100%</li>
@@ -177,7 +199,7 @@
                     </div>
                   </div>
               </div> -->
-                <div ngbAccordionItem id="static-3">
+                <!-- <div ngbAccordionItem id="static-3">
                   <h2 ngbAccordionHeader class="accordion-header">
                     <button ngbAccordionButton class="border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne" aria-expanded="false" aria-controls="gen-ques-collapseOne">
                       <i class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Find in local store
@@ -199,11 +221,11 @@
                       </ng-template>
                     </div>
                   </div>
-              </div>
+              </div> -->
               </div>
 
               <!-- Sharing-->
-              <label class="form-label d-inline-block align-middle my-2 me-3">Share:</label><a class="btn-share btn-twitter me-2 my-2" href="javascript:void(0);"><i class="ci-twitter"></i>Twitter</a><a class="btn-share btn-instagram me-2 my-2" href="javascript:void(0);"><i class="ci-instagram"></i>Instagram</a><a class="btn-share btn-facebook my-2" href="javascript:void(0);"><i class="ci-facebook"></i>Facebook</a>
+              <label class="form-label d-inline-block align-middle my-2 me-3">Compartir:</label><a class="btn-share btn-twitter me-2 my-2" href="javascript:void(0);"><i class="ci-twitter"></i>Twitter</a><a class="btn-share btn-instagram me-2 my-2" href="javascript:void(0);"><i class="ci-instagram"></i>Instagram</a><a class="btn-share btn-facebook my-2" href="javascript:void(0);"><i class="ci-facebook"></i>Facebook</a>
             </div>
           </div>
         </div>
@@ -211,20 +233,21 @@
     </div>
     <!-- Product description section 1-->
     <div class="row align-items-center py-md-3">
+      <h2 class="h3 mb-4 pb-2">Decripción del producto</h2>
       <div class="col-lg-5 col-md-6 offset-lg-1 order-md-2"><img class="d-block rounded-3" src="assets/img/shop/single/prod-img.jpg" alt="Image"></div>
       <div class="col-lg-4 col-md-6 offset-lg-1 py-4 order-md-1">
-        <h2 class="h3 mb-4 pb-2">Decripción</h2>
         <!-- <h6 class="fs-base mb-3">Soft cotton blend</h6> -->
         <lib-editor-ui [data] = dataContent [readonly] = true class="fs-sm text-muted pb-2"></lib-editor-ui>
         <!-- <p class="fs-sm text-muted pb-2">{{dataProduct.description}}</p> -->
 
-        <!-- <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs mb-3" role="tablist">
+        <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs mb-3" role="tablist">
           <li [ngbNavItem]="1">
             <a ngbNavLink>
               <i class="ci-wash fs-xl"></i>
             </a>
             <ng-template ngbNavContent>
-              <div class="tab-pane fade show active" id="wash" role="tabpanel">30° mild machine washing</div>
+              <div class="tab-pane fade show active" id="wash" role="tabpanel">
+                Lavado a máquina suave a 30°</div>
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
@@ -232,7 +255,8 @@
               <i class="ci-bleach fs-xl"></i>
             </a>
             <ng-template ngbNavContent>
-              <div class="tab-pane fade show active" id="bleach" role="tabpanel">Do not use any bleach</div>
+              <div class="tab-pane fade show active" id="bleach" role="tabpanel">No use lavandina
+              </div>
             </ng-template>
           </li>
           <li [ngbNavItem]="3">
@@ -240,7 +264,7 @@
               <i class="ci-hand-wash fs-xl"></i>
             </a>
             <ng-template ngbNavContent>
-              <div class="tab-pane fade show active" id="hand-wash" role="tabpanel">Hand wash normal (30°)</div>
+              <div class="tab-pane fade show active" id="hand-wash" role="tabpanel">Lavar a mano normal (30°)</div>
             </ng-template>
           </li>
           <li [ngbNavItem]="4">
@@ -248,7 +272,7 @@
               <i class="ci-ironing fs-xl"></i>
             </a>
             <ng-template ngbNavContent>
-              <div class="tab-pane fade show active" id="ironing" role="tabpanel">Low temperature ironing</div>
+              <div class="tab-pane fade show active" id="ironing" role="tabpanel">Planchado a baja temperatura</div>
             </ng-template>
           </li>
           <li [ngbNavItem]="5">
@@ -256,14 +280,14 @@
               <i class="ci-dry-clean fs-xl"></i>
             </a>
             <ng-template ngbNavContent>
-              <div class="tab-pane fade show active" id="dry-clean" role="tabpanel">Do not dry clean</div>
+              <div class="tab-pane fade show active" id="dry-clean" role="tabpanel">No lavar en seco</div>
             </ng-template>
           </li>
         </ul>
 
         <div class="tab-content text-muted fs-sm">
           <div [ngbNavOutlet]="nav"></div>
-        </div> -->
+        </div>
       </div>
     </div>
     <!-- Product description section 2-->
@@ -298,44 +322,65 @@
     <div class="container pt-md-2" id="reviews">
       <div class="row pb-3">
         <div class="col-lg-4 col-md-5">
-          <h2 class="h3 mb-4">74 Reviews</h2>
-          <div class="star-rating me-2"><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star fs-sm text-muted me-1"></i></div><span class="d-inline-block align-middle">4.1 Overall rating</span>
-          <p class="pt-3 fs-sm text-muted">58 out of 74 (77%)<br>Customers recommended this product</p>
+          <h2 class="h3 mb-4">{{dataProduct.review}} reseñas</h2>
+
+          <div class="star-rating" >
+            <ng-template #t let-fill="fill">
+              <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">★</span>☆
+              </span>
+            </ng-template>
+            <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="dataProduct.rating" [starTemplate]="t" [readonly]="true" [max]="5">
+            </ngb-rating>
+          </div>
+
+          <!-- <div class="star-rating me-2">
+            <i class="ci-star-filled fs-sm text-accent me-1"></i>
+            <i class="ci-star-filled fs-sm text-accent me-1"></i>
+            <i class="ci-star-filled fs-sm text-accent me-1"></i>
+            <i class="ci-star-filled fs-sm text-accent me-1"></i>
+            <i class="ci-star fs-sm text-muted me-1"></i>
+          </div> -->
+
+          <span class="d-inline-block align-middle"> {{dataProduct.rating | number:'1.0-1'}} Rating general</span>
+          <p class="pt-3 fs-sm text-muted">
+            {{getCountReviewsByComments(dataProduct.comments, 5) + getCountReviewsByComments(dataProduct.comments, 4)}}
+            de {{dataProduct.review}}
+            ({{getPorcentage(dataProduct.comments.length,getCountReviewsByComments(dataProduct.comments, 5) + getCountReviewsByComments(dataProduct.comments, 4))}}%)
+            <br>
+            compradores recomiendan este producto
+          </p>
         </div>
         <div class="col-lg-8 col-md-7">
           <div class="d-flex align-items-center mb-2">
             <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">5</span><i class="ci-star-filled fs-xs ms-1"></i></div>
             <div class="w-100">
-              <ngb-progressbar [value]="60" type="success" style="height: 4px;"></ngb-progressbar>
-            </div><span class="text-muted ms-3">43</span>
+              <ngb-progressbar [value]="getPorcentage(dataProduct.comments.length,getCountReviewsByComments(dataProduct.comments, 5))" type="success" style="height: 4px;"></ngb-progressbar>
+            </div><span class="text-muted ms-3">{{getCountReviewsByComments(dataProduct.comments, 5)}}</span>
           </div>
           <div class="d-flex align-items-center mb-2">
             <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">4</span><i class="ci-star-filled fs-xs ms-1"></i></div>
             <div class="w-100">
-              <div class="progress" style="height: 4px;">
-                <div class="progress-bar" role="progressbar" style="width: 27%; background-color: #a7e453;" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><span class="text-muted ms-3">16</span>
+              <ngb-progressbar [value]="getPorcentage(dataProduct.comments.length,getCountReviewsByComments(dataProduct.comments, 4))" type="info" style="height: 4px;"></ngb-progressbar>
+            </div><span class="text-muted ms-3">{{getCountReviewsByComments(dataProduct.comments, 4)}}</span>
           </div>
           <div class="d-flex align-items-center mb-2">
             <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">3</span><i class="ci-star-filled fs-xs ms-1"></i></div>
             <div class="w-100">
-              <ngb-progressbar [value]="17" type="warning" style="height: 4px;"></ngb-progressbar>
-            </div><span class="text-muted ms-3">9</span>
-          </div>
-          <div class="d-flex align-items-center mb-2">
-            <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">2</span><i class="ci-star-filled fs-xs ms-1"></i></div>
-            <div class="w-100">
-              <div class="progress" style="height: 4px;">
-                <div class="progress-bar" role="progressbar" style="width: 9%; background-color: #fea569;" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div><span class="text-muted ms-3">4</span>
+              <ngb-progressbar [value]="getPorcentage(dataProduct.comments.length,getCountReviewsByComments(dataProduct.comments, 3))" type="accent" style="height: 4px;"></ngb-progressbar>
+            </div><span class="text-muted ms-3">{{getCountReviewsByComments(dataProduct.comments, 3)}}</span>
           </div>
           <div class="d-flex align-items-center">
-            <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">1</span><i class="ci-star-filled fs-xs ms-1"></i></div>
+            <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">2</span><i class="ci-star-filled fs-xs ms-1"></i></div>
             <div class="w-100">
-              <ngb-progressbar [value]="4" type="danger" style="height: 4px;"></ngb-progressbar>
-            </div><span class="text-muted ms-3">2</span>
+              <ngb-progressbar [value]="getPorcentage(dataProduct.comments.length,getCountReviewsByComments(dataProduct.comments, 2))" type="warning" style="height: 4px;"></ngb-progressbar>
+            </div><span class="text-muted ms-3">{{getCountReviewsByComments(dataProduct.comments, 2)}}</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">1</span><i class="ci-star-filled fs-xs ms-2"></i></div>
+            <div class="w-100">
+              <ngb-progressbar [value]="getPorcentage(dataProduct.comments.length,getCountReviewsByComments(dataProduct.comments, 1))" type="danger" style="height: 4px;"></ngb-progressbar>
+            </div><span class="text-muted ms-3">{{getCountReviewsByComments(dataProduct.comments, 1)}}</span>
           </div>
         </div>
       </div>
@@ -345,13 +390,13 @@
         <div class="col-md-7">
           <div class="d-flex justify-content-end pb-4">
             <div class="d-flex align-items-center flex-nowrap">
-              <label class="fs-sm text-muted text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Sort by:</label>
+              <label class="fs-sm text-muted text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Ordenar por:</label>
               <select class="form-select form-select-sm" id="sort-reviews">
-                <option>Newest</option>
-                <option>Oldest</option>
+                <option>Nuevos</option>
+                <option>Viejos</option>
                 <option>Popular</option>
-                <option>High rating</option>
-                <option>Low rating</option>
+                <option>Alto rating</option>
+                <option>Bajo rating</option>
               </select>
             </div>
           </div>
@@ -365,8 +410,22 @@
                   </div>
                 </div>
                 <div>
-                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  <div class="star-rating" >
+                    <ng-template #t let-fill="fill">
+                      <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">★</span>☆
+                      </span>
+                    </ng-template>
+                    <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="comment.rating" [starTemplate]="t" [readonly]="true" [max]="5">
+                    </ngb-rating>
                   </div>
+                  <!-- <div class="star-rating">
+                    <i class="star-rating-icon ci-star-filled active"></i>
+                    <i class="star-rating-icon ci-star-filled active"></i>
+                    <i class="star-rating-icon ci-star-filled active"></i>
+                    <i class="star-rating-icon ci-star-filled active"></i>
+                    <i class="star-rating-icon ci-star"></i>
+                  </div> -->
                 </div>
               </div>
               <p class="fs-md mb-2">{{comment.content}}</p>
@@ -436,52 +495,51 @@
             </div>
           </div> -->
           <div class="text-center">
-            <button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Load more reviews</button>
+            <button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Cargar mas reseñas</button>
           </div>
         </div>
         <!-- Leave review form-->
         <div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
           <div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
-            <h3 class="h4 pb-2">Write a review</h3>
+            <h3 class="h4 pb-2">Escribí tu reseña</h3>
             <form class="needs-validation" method="post" novalidate [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
               <div class="mb-3">
-                <label class="form-label" for="review-name">Your name<span class="text-danger">*</span></label>
+                <label class="form-label" for="review-name">Tu nombre<span class="text-danger">*</span></label>
                 <input class="form-control" type="text" required id="review-name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
-                <div class="invalid-feedback">Please enter your name!</div><small class="form-text text-muted">Will be
-                  displayed on the comment.</small>
+                <div class="invalid-feedback">Por favor ingresa tu nombre!</div><small class="form-text text-muted">Será mostrado en el comentario.</small>
               </div>
               <div class="mb-3">
-                <label class="form-label" for="review-email">Your email<span class="text-danger">*</span></label>
+                <label class="form-label" for="review-email">Tu email<span class="text-danger">*</span></label>
                 <input class="form-control" type="email" required id="review-email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form['email'].errors }">
-                <div class="invalid-feedback">Please provide valid email address!</div><small class="form-text text-muted">Authentication only - we won't spam you.</small>
+                <div class="invalid-feedback">Por favor ingresa un maiil válido!</div>
+                <!-- <small class="form-text text-muted">Authentication only - we won't spam you.</small> -->
               </div>
               <div class="mb-3">
                 <label class="form-label" for="review-rating">Rating<span class="text-danger">*</span></label>
                 <select class="form-select" required id="review-rating" formControlName="rating" [ngClass]="{ 'is-invalid': submitted && form['rating'].errors }">
-                  <option value="">Choose rating</option>
-                  <option value="5">5 stars</option>
-                  <option value="4">4 stars</option>
-                  <option value="3">3 stars</option>
-                  <option value="2">2 stars</option>
-                  <option value="1">1 star</option>
+                  <option value="">Elegí un rating</option>
+                  <option value="5">5 estrellas</option>
+                  <option value="4">4 estrellas</option>
+                  <option value="3">3 estrellas</option>
+                  <option value="2">2 estrellas</option>
+                  <option value="1">1 estrella</option>
                 </select>
-                <div class="invalid-feedback">Please choose rating!</div>
+                <div class="invalid-feedback">Por favor selecciona un rating!</div>
               </div>
               <div class="mb-3">
-                <label class="form-label" for="review-text">Review<span class="text-danger">*</span></label>
+                <label class="form-label" for="review-text">Tu reseña<span class="text-danger">*</span></label>
                 <textarea class="form-control" rows="6" required id="review-text" formControlName="review" [ngClass]="{ 'is-invalid': submitted && form['review'].errors }"></textarea>
-                <div class="invalid-feedback">Please write a review!</div><small class="form-text text-muted">Your review
-                  must be at least 50 characters.</small>
+                <div class="invalid-feedback">Por favor deja una reseña!</div><small class="form-text text-muted">Tu reseña no debe superar mas de 100 caracteres.</small>
               </div>
               <div class="mb-3">
                 <label class="form-label" for="review-pros">Pros</label>
-                <textarea class="form-control" rows="2" placeholder="Separated by commas" id="review-pros" formControlName="pros"></textarea>
+                <textarea class="form-control" rows="2" placeholder="Separado por comas" id="review-pros" formControlName="pros"></textarea>
               </div>
               <div class="mb-3 mb-4">
-                <label class="form-label" for="review-cons">Cons</label>
-                <textarea class="form-control" rows="2" placeholder="Separated by commas" id="review-cons" formControlName="cons"></textarea>
+                <label class="form-label" for="review-cons">Contras</label>
+                <textarea class="form-control" rows="2" placeholder="Separado por comas" id="review-cons" formControlName="cons"></textarea>
               </div>
-              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit a Review</button>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Enviar la reseña</button>
             </form>
           </div>
         </div>

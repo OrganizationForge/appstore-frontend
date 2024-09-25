@@ -2,7 +2,7 @@
       @if(data.id === '2'){
         <span class="badge bg-danger badge-shadow">Oferta</span>
         }
-      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist" (click)="addToWishlist(data);"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" [routerLink]="['/shop/product-detail/', data.id]"><img src="{{data.productFiles[0].urlImage}}" alt="Product"></a>
+      <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist" (click)="addToWishlist(data);"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" [routerLink]="['/shop/product-detail/', data.id]"><img src="{{data.productFiles[0].urlImage || ''}}" alt="Product"></a>
       <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left"><i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" routerLink="/shop/product-detail"><img src="" alt="Product"></a> -->
       <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category.description}}</a>
         <h3 class="product-title fs-sm"><a [routerLink]="['/shop/product-detail/', data.id]">{{data.productName}}</a></h3>
@@ -17,13 +17,14 @@
               }
             </div>
           }
+
           <div class="star-rating">
             <ng-template #t let-fill="fill">
               <span class="star" [class.full]="fill === 100">
                 <span class="half" [style.width.%]="fill">★</span>☆
               </span>
             </ng-template>
-            <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="data.rating"[readonly]="true" [max]="5" [starTemplate]="t"></ngb-rating>
+            <ngb-rating class="d-inline-flex stars align-middle star-rating" [(rate)]="data.rating" [readonly]="true" [max]="5" [starTemplate]="t"></ngb-rating>
           </div>
         </div>
       </div>

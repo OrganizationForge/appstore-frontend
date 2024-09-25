@@ -54,8 +54,6 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     this.initializeEditor();
-
-
   }
 
   initializeEditor() : void{
@@ -90,11 +88,9 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
     // When the user clicks on the button, scroll to the top of the document
     document.documentElement.scrollTop = 0;
 
-    this.categories$.subscribe(categories => {
-      console.log('Categorías obtenidas:', categories);
-      this.selectOptions = this.createSelectOptions(categories);
-      console.log('Opciones del select:', this.selectOptions);
-    });
+    // this.categories$.subscribe(categories => {
+    //   this.selectOptions = this.createSelectOptions(categories);
+    // });
 
     this.brands$ = this.productService.getBrands().pipe(
       map((res) => {
@@ -189,6 +185,7 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
           alert('Guardado Ok');
           this.productForm.reset();
           this.files = [];
+          this.editor.clear();
         }
         else res.errors;
       });
@@ -215,15 +212,15 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
   //   ]);
   // }
 
-  createSelectOptions(categories: Category[]): { value: string, label: string }[] {
-    return categories.flatMap(category => {
-      console.log('Procesando categoría:', category); // Agrega un log para ver qué categorías se están procesando
-      return [
-        { value: category.id, label: category.description },
-        ...category.childrenCategories ? this.createSelectOptions(category.childrenCategories) : []
-      ];
-    });
-  }
+  // createSelectOptions(categories: Category[]): { value: string, label: string }[] {
+  //   return categories.flatMap(category => {
+  //     console.log('Procesando categoría:', category); // Agrega un log para ver qué categorías se están procesando
+  //     return [
+  //       { value: category.id, label: category.description },
+  //       ...category.childrenCategories ? this.createSelectOptions(category.childrenCategories) : []
+  //     ];
+  //   });
+  // }
 
   onSelect(event: any) {
     const files = event.addedFiles;

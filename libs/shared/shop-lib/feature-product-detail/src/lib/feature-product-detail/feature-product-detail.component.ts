@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category, NewProductComment, Product, ProductService } from '@angular-monorepo/shop-data-access';
+import { Category, NewProductComment, Product, ProductComment, ProductService,  } from '@angular-monorepo/shop-data-access';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgbRatingModule, NgbAccordionModule, NgbTooltipModule, NgbModule, NgbNavItem, NgbModal, NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralInfoComponent } from '../general-info/general-info.component';
@@ -49,6 +49,8 @@ export class FeatureProductDetailComponent implements OnInit {
    productId: string | '' = '';
    selectedQuantity = '1';
 
+   dataContent! : OutputData ;
+
 
   private productService = inject(ProductService);
   private route = inject(ActivatedRoute)
@@ -58,18 +60,18 @@ export class FeatureProductDetailComponent implements OnInit {
 
   }
 
-  dataContent : OutputData = {
-    time: 1722185500950,
-    blocks: [
-      {
-        id: "mhTl6ghSkV",
-        type: "paragraph",
-        data: {
-          text: "Hey. Meet the new Editor. On this picture you can see it in action. Then, try a demo 🤓",
-        },
-      }
-    ]
-  }
+  // dataContent : OutputData = {
+  //   time: 1722185500950,
+  //   blocks: [
+  //     {
+  //       id: "mhTl6ghSkV",
+  //       type: "paragraph",
+  //       data: {
+  //         text: "Hey. Meet the new Editor. On this picture you can see it in action. Then, try a demo 🤓",
+  //       },
+  //     }
+  //   ]
+  // }
 
   ngOnInit(): void {
 
@@ -81,7 +83,8 @@ export class FeatureProductDetailComponent implements OnInit {
     this.detailProduct$ = this.productService.getProduct(this.productId).pipe(
       map( res => {
         if (res.succeded){
-          console.log(res.data.comments);
+          console.log(res);
+          this.dataContent = JSON.parse(res.data.description);
           return res.data
         }
         else{
@@ -228,5 +231,14 @@ export class FeatureProductDetailComponent implements OnInit {
     this.store.dispatch(cartActions.postCart({products: product}));
   }
 
+  getCountReviewsByComments(comments: ProductComment[], typeRating : number) : number{
 
+    const countList = comments.filter(c => c.rating === typeRating && typeof c.rating === 'number').length;
+    return countList;
+  }
+
+  getPorcentage(total: number, actual: number) : number{
+    const percentage = (actual * 100) / total;
+    return Number(percentage.toFixed(1));
+  }
 }

@@ -13,27 +13,27 @@
     <!-- <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Product</h2> -->
      @if(categories$ | async; as categories){
 
-      <div class="py-2">
+      <!-- <div class="py-2">
         <select class="form-select me-2" id="unp-category" formControlName="categoryId">
-          <option value="0">Seleccionar categoría</option>
+          <option value="0" selected>Seleccionar categoría</option>
           <option *ngFor="let option of selectOptions" [value]="option.value">
             {{ option.label }}
           </option>
         </select>
-      </div>
+      </div> -->
 
-       <!-- <div class="py-2">
+       <div class="py-2">
          <select
            class="form-select me-2"
            id="unp-category"
            formControlName="categoryId"
          >
          <option value="0">Seleccionar categoría</option>
-         @for(category of categories;track $index){
-           <option value="{{category.id}}">{{category.description}}</option>
-         }
+          @for(category of categories;track $index){
+            <option value="{{category.id}}">{{category.description}}</option>
+          }
          </select>
-       </div> -->
+       </div>
 
 
      }
@@ -62,7 +62,7 @@
           id="unp-unit-type"
           formControlName="brandId"
         >
-          <option value="0">Seleccionar marca</option>
+          <option value="0" selected>Seleccionar marca</option>
           @for(brand of brands;track $index){
             <option value="{{brand.id}}">{{brand.description}}</option>
           }
@@ -121,7 +121,7 @@
       class="form-control"
       rows="6">
     </lib-editor-ui> -->
-    <div #editor></div>
+    <div #editor class="form-control" rows="6"></div>
 
     <div class="bg-secondary p-3 fs-ms rounded-bottom">
       <span class="d-inline-block fw-medium me-2 my-1"
@@ -199,7 +199,7 @@
           id="unp-unit-type"
           formControlName="quantityTypeId"
         >
-          <option value="0">Seleccionar marca</option>
+          <option value="0" selected>Seleccionar marca</option>
           @for(quantityType of quantityTypes;track $index){
             <option value="{{quantityType.id}}">{{quantityType.description}}</option>
           }
@@ -236,7 +236,7 @@
           id="unp-unit-type"
           formControlName="availabilityId"
         >
-          <option value="0">Seleccionar disponibilidad</option>
+          <option value="0" selected>Seleccionar disponibilidad</option>
           @for(availability of availabilities;track $index){
             <option value="{{availability.id}}">{{availability.description}}</option>
           }
