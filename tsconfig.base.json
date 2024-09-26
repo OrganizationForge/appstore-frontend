@@ -30,11 +30,140 @@
       "@angular-monorepo/autor-list": [
         "libs/library-app/autor/feature-autors-list/src/index.ts"
       ],
-      "@angular-monorepo/card": ["libs/shared/ui/cards/src/index.ts"],
+      "@angular-monorepo/error-handler": [
+        "libs/shared/core/error-handler-lib/src/index.ts"
+      ],
       "@angular-monorepo/feature-login": [
         "libs/shared/auth-lib/feature-login/src/index.ts"
       ],
-      "@angular-monorepo/header": ["libs/shared/ui/header/src/index.ts"]
+      "@angular-monorepo/feature-menu": [
+        "libs/shared/menu-lib/feature-menu/src/index.ts"
+      ],
+      "@angular-monorepo/footer": ["libs/shared/footer-lib/src/index.ts"],
+      "@angular-monorepo/header": ["libs/shared/header-lib/src/index.ts"],
+      "@angular-monorepo/home-store-app": [
+        "libs/store-app/home-lib/src/index.ts"
+      ],
+      "@angular-monorepo/http-client": [
+        "libs/shared/core/http-client-lib/src/index.ts"
+      ],
+      "@angular-monorepo/menu-data-access": [
+        "libs/shared/menu-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/product-slider": [
+        "libs/shared/ui/product-slider-lib/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/data-access": [
+        "libs/shared/cart-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-cart": [
+        "libs/shared/cart-lib/feature-cart/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout": [
+        "libs/shared/cart-lib/feature-checkout/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-detail": [
+        "libs/shared/cart-lib/feature-checkout-detail/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-payment": [
+        "libs/shared/cart-lib/feature-checkout-payment/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-review": [
+        "libs/shared/cart-lib/feature-checkout-review/src/index.ts"
+      ],
+      "@angular-monorepo/shared/cart-lib/feature-checkout-shipping": [
+        "libs/shared/cart-lib/feature-checkout-shipping/src/index.ts"
+      ],
+      "@angular-monorepo/shared/category-lib/feature-category": [
+        "libs/shared/category-lib/feature-category/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/data-access": [
+        "libs/shared/dashboard-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
+        "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-orders": [
+        "libs/shared/dashboard-lib/feature-orders/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-payouts": [
+        "libs/shared/dashboard-lib/feature-payouts/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-product-list": [
+        "libs/shared/dashboard-lib/feature-product-list/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-profile": [
+        "libs/shared/dashboard-lib/feature-profile/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-sales": [
+        "libs/shared/dashboard-lib/feature-sales/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-settings": [
+        "libs/shared/dashboard-lib/feature-settings/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-users": [
+        "libs/shared/dashboard-lib/feature-users/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
+        "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shipping-lib/data-access": [
+        "libs/shared/shipping-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shipping-lib/feature-shipping-list": [
+        "libs/shared/shipping-lib/feature-shipping-list/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-add-prod": [
+        "libs/shared/shop-lib/feature-add-product/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-product-detail": [
+        "libs/shared/shop-lib/feature-product-detail/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-shop": [
+        "libs/shared/shop-lib/feature-shop/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-shop-grid-ls": [
+        "libs/shared/shop-lib/feature-shop-grid-ls/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/brand-logos-ui": [
+        "libs/shared/ui/brand-logos-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/cart-detail-ui": [
+        "libs/shared/ui/cart-detail-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/dashboard-items-ui": [
+        "libs/shared/ui/dashboard-items-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/dynamic-form-ui": [
+        "libs/shared/ui/dynamic-form-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/editor-ui": [
+        "libs/shared/ui/editor-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/filter-ui": [
+        "libs/shared/ui/filter-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/number-slider-ui": [
+        "libs/shared/ui/number-slider-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/order-summary-ui": [
+        "libs/shared/ui/order-summary-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/product-gallery-ui": [
+        "libs/shared/ui/product-gallery-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/product-ui": [
+        "libs/shared/ui/product-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/spec-card-ui": [
+        "libs/shared/ui/spec-card-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shared/ui/trending-ui": [
+        "libs/shared/ui/trending-ui/src/index.ts"
+      ],
+      "@angular-monorepo/shop-data-access": [
+        "libs/shared/shop-lib/data-access/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

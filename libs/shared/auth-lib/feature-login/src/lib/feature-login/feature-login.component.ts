@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AuthStore, authActions, ngrxAuthQuery } from "@angular-monorepo/auth-data-access";
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'angular-monorepo-feature-login',
@@ -9,7 +11,11 @@ import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators }
   templateUrl: './feature-login.component.html',
   styleUrl: './feature-login.component.css',
 })
-export class FeatureLoginComponent implements OnInit {
+export class FeatureLoginComponent implements OnInit, OnDestroy {
+  private readonly authStore = inject(AuthStore);
+  private readonly store = inject(Store);
+
+
   // Login Form
   loginForm!: UntypedFormGroup;
   submitted = false;
@@ -17,61 +23,72 @@ export class FeatureLoginComponent implements OnInit {
   // Signup form
   SignupForm!: UntypedFormGroup;
   submit = false;
+  data$ = this.store.select(ngrxAuthQuery.selectData);
 
   constructor(private formBuilder: UntypedFormBuilder) { }
+
 
   ngOnInit(): void {
     /**
      * Form Validatyion
      */
-     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', Validators.required],
+    this.loginForm = this.formBuilder.group({
+      email: ['userAdmin@gmail.com', [Validators.required]],
+      password: ['P4ssw0rd!', Validators.required],
     });
 
-     /**
-     * Form Validatyion
-     */
-      this.SignupForm = this.formBuilder.group({
-        f_name: ['', [Validators.required]],
-        l_name: ['', [Validators.required]],
-        email: ['', Validators.required],
-        phone: ['', Validators.required],
-        password: ['', Validators.required],
-        cpassword: ['', Validators.required],
-      });
+    /**
+    * Form Validatyion
+    */
+    this.SignupForm = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      email: ['', Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    });
   }
 
   //------------------ Sign In Form ---------------------//
-   // convenience getter for easy access to form fields
-   get f() { return this.loginForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
 
-   /**
-    * Form submit
-    */
-    onSubmit() {
-     this.submitted = true;
+  /**
+   * Form submit
+   */
+  onSubmit() {
+    this.submitted = true;
 
-     // stop here if form is invalid
-     if (this.loginForm.invalid) {
-       return;
-     }
-   }
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.store.dispatch(authActions.updateData({ data: this.loginForm.value }));
+    this.authStore.login();
+  }
 
-    //------------------ Sign Up Form ---------------------//
 
-   // convenience getter for easy access to form fields
-   get fa() { return this.SignupForm.controls; }
+  ngOnDestroy() {
+    this.store.dispatch(authActions.initializeForm());
+  }
 
-   /**
-    * Form submit
-    */
-    SignupSubmit() {
-     this.submit = true;
+  //------------------ Sign Up Form ---------------------//
 
-     // stop here if form is invalid
-     if (this.SignupForm.invalid) {
-       return;
-     }
-   }
+  // convenience getter for easy access to form fields
+  get fa() { return this.SignupForm.controls; }
+
+  /**
+   * Form submit
+   */
+  SignupSubmit() {
+    this.submit = true;
+
+    // stop here if form is invalid
+    if (this.SignupForm.invalid) {
+      return;
+    }
+    this.store.dispatch(authActions.updateData({ data: this.SignupForm.value }));
+    this.authStore.register();
+  }
 }

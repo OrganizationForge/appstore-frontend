@@ -13,24 +13,36 @@
         "outputPath": "dist/apps/store-app",
         "index": "apps/store-app/src/index.html",
         "browser": "apps/store-app/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["zone.js","@angular/localize/init"],
         "tsConfig": "apps/store-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/store-app/src/favicon.ico",
+          {
+            "glob": "**/*",
+            "input": "./libs/shared/assets",
+            "output": "./assets"
+          },
           "apps/store-app/src/assets"
         ],
         "styles": [
-          "apps/store-app/src/styles.scss"],
-        "scripts": []
+          "node_modules/slick-carousel/slick/slick.scss",
+          "node_modules/slick-carousel/slick/slick-theme.scss",
+          "libs/shared/assets/scss/theme.scss",
+          "apps/store-app/src/styles.scss"
+        ],
+        "scripts": [
+          "node_modules/jquery/dist/jquery.min.js",
+          "node_modules/slick-carousel/slick/slick.min.js"
+        ]
       },
       "configurations": {
         "production": {
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "2mb",
+              "maximumError": "4mb"
             },
             {
               "type": "anyComponentStyle",
@@ -67,8 +79,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",

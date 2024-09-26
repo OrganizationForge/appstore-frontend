@@ -1,0 +1,196 @@
+ <!-- Toolbar-->
+ <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+  <h6 class="fs-base text-light mb-0">Update you profile details below:</h6><a class="btn btn-primary btn-sm"
+    routerLink="/account/signin"><i class="ci-sign-out me-2"></i>Sign out</a>
+</div>
+                    <!-- Tabs -->
+<ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs nav-justified">
+    <li [ngbNavItem]="1" class="nav-item">
+        <a ngbNavLink class="nav-link px-0" href="javascript:void(0)">
+            <div class="d-none d-lg-block">
+                <i class="ci-user opacity-60 me-2"></i>
+                Profile
+            </div>
+            <div class="d-lg-none text-center">
+                <i class="ci-user opacity-60 d-block fs-xl mb-2"></i>
+                <span class="fs-ms">Profile</span>
+            </div>
+        </a>
+        <ng-template ngbNavContent>
+          <!-- Profile form-->
+          <form>
+            <div class="bg-secondary rounded-3 p-4 mb-4">
+              <div class="d-flex align-items-center"><img class="rounded" src="assets/img/shop/account/avatar.jpg"
+                  width="90" alt="Susan Gardner" id="user_profile">
+                <div class="ps-3">
+                  <label for="customer-image-input" class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i
+                      class="ci-loading me-2"></i>Change avatar</label>
+                  <input class="form-control d-none" id="customer-image-input" type="file"
+                    accept="image/png, image/gif, image/jpeg" (change)="fileChange($event)">
+                  <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="row gx-4 gy-3">
+              <div class="col-sm-6">
+                <label class="form-label" for="account-fn">First Name</label>
+                <input class="form-control" type="text" id="account-fn" value="Susan">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-ln">Last Name</label>
+                <input class="form-control" type="text" id="account-ln" value="Gardner">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-email">Email Address</label>
+                <input class="form-control" type="email" id="account-email" value="s.gardner@example.com" disabled>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-phone">Phone Number</label>
+                <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-pass">New Password</label>
+                <div class="password-toggle">
+                  <input [type]="NPasswordType ? 'text' : 'password'" class="form-control pe-5 password-input"
+                    placeholder="Enter password" id="password-input">
+                  <label class="password-toggle-btn" aria-label="Show/hide password" (click)="toggleNewPassword()">
+                    <i _ngcontent-tdd-c114="" class="" [ngClass]="NPasswordType ? 'ci-eye' : 'ci-eye-off'"></i>
+                  </label>
+                  <div class="invalid-feedback">
+                    Please enter password
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" for="account-confirm-pass">Confirm Password</label>
+                <div class="password-toggle">
+                  <input class="form-control" [type]="CPasswordType ? 'text' : 'password'" id="account-confirm-pass">
+                  <label class="password-toggle-btn" aria-label="Show/hide password" (click)="toggleConfirmPassword()">
+                    <i _ngcontent-tdd-c114="" class="" [ngClass]="CPasswordType ? 'ci-eye' : 'ci-eye-off'"></i>
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <hr class="mt-2 mb-3">
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="subscribe_me" checked>
+                    <label class="form-check-label" for="subscribe_me">Subscribe me to Newsletter</label>
+                  </div>
+                  <button class="btn btn-primary mt-3 mt-sm-0" type="button">Update profile</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </li>
+                        <!-- <li [ngbNavItem]="2" class="nav-item">
+                            <a ngbNavLink class="nav-link px-0" href="javascript:void(0)">
+                                <div class="d-none d-lg-block">
+                                    <i class="ci-bell opacity-60 me-2"></i>
+                                    Notifications
+                                </div>
+                                <div class="d-lg-none text-center">
+                                    <i class="ci-bell opacity-60 d-block fs-xl mb-2"></i>
+                                    <span class="fs-ms">Notifications</span>
+                                </div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="bg-secondary rounded-3 p-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="nf-disable-all" value="option" [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)">
+                                        <label class="form-check-label fw-medium" for="nf-disable-all">
+                                            Enable/disable
+                                            all
+                                            notifications
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="notifocation-settings">
+                                    @for(notify of allnotification;track $index){
+                                    <div class="border-bottom p-4">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="nf-product-sold" [(ngModel)]="notify.state">
+                                            <label class="form-check-label" for="nf-product-sold">
+                                                {{notify.title}}
+                                            </label>
+                                        </div>
+                                        <div class="form-text">{{notify.subtitle}}</div>
+                                    </div>
+                                    }
+                                </div>
+                                <div class="text-sm-end mt-4">
+                                    <button class="btn btn-primary" type="button">
+                                        Save changes
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </li> -->
+                        <!-- <li [ngbNavItem]="3" class="nav-item">
+                            <a ngbNavLink class="nav-link px-0" href="javascript:void(0)" data-bs-toggle="tab" role="tab">
+                                <div class="d-none d-lg-block">
+                                    <i class="ci-card opacity-60 me-2"></i>
+                                    Payment methods
+                                </div>
+                                <div class="d-lg-none text-center">
+                                    <i class="ci-card opacity-60 d-block fs-xl mb-2"></i>
+                                    <span class="fs-ms">Payment</span>
+                                </div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="bg-secondary rounded-3 p-4 mb-4">
+                                    <p class="fs-sm text-muted mb-0">
+                                        Primary payment method is used by default
+                                    </p>
+                                </div>
+                                <div class="table-responsive fs-md mb-4">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Your credit / debit cards</th>
+                                                <th>Name on card</th>
+                                                <th>Expires on</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for(card of allpayment;track $index){
+                                            <tr>
+                                                <td class="py-3 align-middle">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{card.image}}" width="39" alt="Visa">
+                                                        <div class="ps-2">
+                                                            <span class="fw-medium text-heading me-1">{{card.title}}</span>
+                                                            ending in {{card.card_no}}
+                                                            <span class="align-middle badge badge-info ms-2">Primary</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="py-3 align-middle">{{card.card_name}}</td>
+                                                <td class="py-3 align-middle">{{card.expire_date}}</td>
+                                                <td class="py-3 align-middle">
+                                                    <a class="nav-link-style me-2" href="javascript:void(0)" data-bs-toggle="tooltip" ngbTooltip="Edit">
+                                                        <i class="ci-edit" (click)="editModal($index,content)"></i>
+                                                    </a>
+                                                    <a class="nav-link-style text-danger" href="javascript:void(0);" placement="top" data-bs-toggle="tooltip" ngbTooltip="Remove" (click)="removeData($event)">
+                                                        <div class="ci-trash"></div>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-sm-end">
+                                    <a class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#showModal" (click)="openModal(content)">
+                                        Add payment method
+                                    </a>
+                                </div>
+                            </ng-template>
+                        </li> -->
+                    </ul>
+                    <!-- Tab content -->
+                    <div class="tab-content">
+                        <div [ngbNavOutlet]="nav"></div>
+                    </div>

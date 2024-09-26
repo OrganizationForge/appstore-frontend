@@ -1,0 +1,106 @@
+<div class="tab-pane fade show" id="specs" role="tabpanel">
+  <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
+      <div class="d-flex align-items-center me-md-3"><img src="assets/img/shop/single/gallery/th05.jpg"
+              width="90" alt="Product thumb">
+          <div class="ps-3">
+              <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
+              <div class="h4 fw-normal text-accent">$124.<small>99</small></div>
+          </div>
+      </div>
+      <div class="d-flex align-items-center pt-3">
+          <select class="form-select me-2" style="width: 5rem;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+          </select>
+          <button class="btn btn-primary btn-shadow me-2" type="button"><i
+                  class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Add to
+                  Cart</span></button>
+          <div class="me-2">
+              <button class="btn btn-secondary btn-icon" placement="button" data-bs-toggle="tooltip"
+                  ngbTooltip="Add to Wishlist"><i class="ci-heart fs-lg"></i></button>
+          </div>
+          <div>
+              <button class="btn btn-secondary btn-icon" placement="button" data-bs-toggle="tooltip"
+                  ngbTooltip="Compare"><i class="ci-compare fs-lg"></i></button>
+          </div>
+      </div>
+  </div>
+  <!-- Specs table-->
+  <div class="row pt-2">
+
+    @for(dataSpec of producSpecs; track $index){
+      <div class="col-lg-5 col-sm-6">
+        <lib-spec-card-ui [dataSpec]="dataSpec"></lib-spec-card-ui>
+      </div>
+    }
+
+
+      <!-- <div class="col-lg-5 col-sm-6">
+          <h3 class="h6">General specs</h3>
+          <ul class="list-unstyled fs-sm pb-2">
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Model:</span><span>Amazfit Smartwatch</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Gender:</span><span>Unisex</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Smartphone app:</span><span>Amazfit Watch</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">OS
+                      campitibility:</span><span>Android / iOS</span></li>
+          </ul>
+          <h3 class="h6">Physical specs</h3>
+          <ul class="list-unstyled fs-sm pb-2">
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Shape:</span><span>Rectangular</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Body
+                      material:</span><span>Plastics / Ceramics</span>
+              </li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Band
+                      material:</span><span>Silicone</span></li>
+          </ul>
+          <h3 class="h6">Display</h3>
+          <ul class="list-unstyled fs-sm pb-2">
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Display
+                      type:</span><span>Color</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Display
+                      size:</span><span>1.28"</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Screen
+                      resolution:</span><span>176 x 176</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Touch
+                      screen:</span><span>No</span></li>
+          </ul>
+      </div>
+      <div class="col-lg-5 col-sm-6 offset-lg-1">
+          <h3 class="h6">Functions</h3>
+          <ul class="list-unstyled fs-sm pb-2">
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted"-0'¿tghone
+                      calls:</span><span>Incoming call
+                      notification</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Monitoring:</span><span>Heart rate / Physical
+                      activity</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">GPS
+                      support:</span><span>Yes</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Sensors:</span><span>Heart rate, Gyroscope, Geomagnetic,
+                      Light sensor</span></li>
+          </ul>
+          <h3 class="h6">Battery</h3>
+          <ul class="list-unstyled fs-sm pb-2">
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Battery:</span><span>Li-Pol</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Battery
+                      capacity:</span><span>190 mAh</span></li>
+          </ul>
+          <h3 class="h6">Dimensions</h3>
+          <ul class="list-unstyled fs-sm pb-2">
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Dimensions:</span><span>195 x 20 mm</span></li>
+              <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                      class="text-muted">Weight:</span><span>32 g</span></li>
+          </ul>
+      </div> -->
+  </div>
+</div>

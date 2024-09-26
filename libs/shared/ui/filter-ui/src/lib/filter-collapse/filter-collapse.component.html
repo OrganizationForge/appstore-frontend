@@ -1,0 +1,146 @@
+                    <!-- Categories-->
+                    <div class="widget widget-categories mb-4 pb-4 border-bottom">
+                      <h3 class="widget-title">{{title}}</h3>
+                      <div class="accordion mt-n1" id="shop-categories">
+
+                        <div ngbAccordion #acc="ngbAccordion" activeIds="static-2" [closeOthers]="true">
+                          @for(item of data; track $index){
+                            <!-- Generic-->
+                            <div ngbAccordionItem id="static-1">
+                              <h2 ngbAccordionHeader class="accordion-header">
+                                <button ngbAccordionButton class="border-0 bg-transparent" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#gen-ques-collapseOne" aria-expanded="false" aria-controls="gen-ques-collapseOne">
+                                  {{item.description}}
+                                </button>
+                              </h2>
+                              <div ngbAccordionCollapse>
+                                <div ngbAccordionBody>
+                                  <ng-template>
+                                    <div class="widget widget-links widget-filter">
+                                      <div class="input-group input-group-sm mb-2">
+                                        <input class="widget-filter-search form-control rounded-end" type="text"
+                                          placeholder="Search"><i
+                                          class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+                                      </div>
+                                      <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;" data-simplebar
+                                        data-simplebar-auto-hide="false">
+                                        <li class="widget-list-item widget-filter-item"><a
+                                        class="widget-list-link d-flex justify-content-between align-items-center"
+                                            href="javascript:void(0);" (click)="filter(item.id)"><span
+                                              class="widget-filter-item-text">View all</span><span
+                                              class="fs-xs text-muted ms-3">{{this.total}}</span></a>
+                                        </li>
+                                        @for(subitem of item.childrens; track $index){
+                                          <li class="widget-list-item widget-filter-item"><a
+                                            class="widget-list-link d-flex justify-content-between align-items-center"
+                                                href="javascript:void(0);" (click)="filter(subitem.id)"><span
+                                                  class="widget-filter-item-text">{{subitem.description}}</span><span
+                                                  class="fs-xs text-muted ms-3">{{this.total}}</span></a>
+                                          </li>
+                                        }
+                                      </ul>
+                                    </div>
+                                  </ng-template>
+                                </div>
+                              </div>
+                            </div>
+                          }
+
+                          <!-- Shoes-->
+                          <!-- <div ngbAccordionItem id="static-1">
+                            <h2 ngbAccordionHeader class="accordion-header">
+                              <button ngbAccordionButton class="border-0 bg-transparent" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#gen-ques-collapseOne" aria-expanded="false" aria-controls="gen-ques-collapseOne">
+                                Shoes
+                              </button>
+                            </h2>
+                            <div ngbAccordionCollapse>
+                              <div ngbAccordionBody>
+                                <ng-template>
+                                  <div class="widget widget-links widget-filter">
+                                    <div class="input-group input-group-sm mb-2">
+                                      <input class="widget-filter-search form-control rounded-end" type="text"
+                                        placeholder="Search"><i
+                                        class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+                                    </div>
+                                    <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;" data-simplebar
+                                      data-simplebar-auto-hide="false">
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'All')"><span
+                                            class="widget-filter-item-text">View all</span><span
+                                            class="fs-xs text-muted ms-3">{{this.total}}</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Heels')"><span
+                                            class="widget-filter-item-text">Pumps &amp; High Heels</span><span
+                                            class="fs-xs text-muted ms-3">247</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Flats')"><span
+                                            class="widget-filter-item-text">Ballerinas &amp; Flats</span><span
+                                            class="fs-xs text-muted ms-3">156</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Sandals')"><span
+                                            class="widget-filter-item-text">Sandals</span><span
+                                            class="fs-xs text-muted ms-3">310</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Sneakers')"><span
+                                            class="widget-filter-item-text">Sneakers</span><span
+                                            class="fs-xs text-muted ms-3">402</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Boots')"><span
+                                            class="widget-filter-item-text">Boots</span><span
+                                            class="fs-xs text-muted ms-3">393</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Ankle')"><span
+                                            class="widget-filter-item-text">Ankle Boots</span><span
+                                            class="fs-xs text-muted ms-3">50</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Loafers')"><span
+                                            class="widget-filter-item-text">Loafers</span><span
+                                            class="fs-xs text-muted ms-3">93</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Slip')"><span
+                                            class="widget-filter-item-text">Slip-on</span><span
+                                            class="fs-xs text-muted ms-3">122</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Flip')"><span
+                                            class="widget-filter-item-text">Flip Flops</span><span
+                                            class="fs-xs text-muted ms-3">116</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Clogs')"><span
+                                            class="widget-filter-item-text">Clogs &amp; Mules</span><span
+                                            class="fs-xs text-muted ms-3">24</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Athletic')"><span
+                                            class="widget-filter-item-text">Athletic Shoes</span><span
+                                            class="fs-xs text-muted ms-3">31</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Oxfords')"><span
+                                            class="widget-filter-item-text">Oxfords</span><span
+                                            class="fs-xs text-muted ms-3">9</span></a></li>
+                                      <li class="widget-list-item widget-filter-item"><a
+                                          class="widget-list-link d-flex justify-content-between align-items-center"
+                                          href="javascript:void(0);" (click)="categoryFilter($event,'Smart')"><span
+                                            class="widget-filter-item-text">Smart Shoes</span><span
+                                            class="fs-xs text-muted ms-3">18</span></a></li>
+                                    </ul>
+                                  </div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
