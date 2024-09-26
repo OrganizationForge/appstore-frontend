@@ -66,16 +66,14 @@ export class FeatureCheckoutReviewComponent implements OnInit {
 
   openWhatsApp() {
     const storedProductsString = localStorage.getItem('cart');
-
-    let storedProducts: any[] = []; // Inicializamos un array vacío por defecto
-
+    let storedProducts : any;
     if (storedProductsString)
       storedProducts = JSON.parse(storedProductsString);
 
       let message = `¡Hola! Estoy interesado en encargar:\n`;
 
       // Recorremos el array de productos y agregamos los detalles a cada uno
-      storedProducts.forEach((product: any) => {
+      storedProducts.products.forEach((product: any) => {
         message += `\n* ${product.productName} *\n`;
         message += `Descripción: ${product.description}\n`;
         message += `Precio: ${product.price}\n`;
@@ -88,6 +86,6 @@ export class FeatureCheckoutReviewComponent implements OnInit {
       const encodedMessage = encodeURIComponent(message);
 
       // Abre WhatsApp en una nueva pestaña
-      window.open(`https://wa.me/+541139214662?text=${encodedMessage}`, '_blank');
+      window.open(`https://wa.me/+5491138880723?text=${encodedMessage}`, '_blank');
     }
   }

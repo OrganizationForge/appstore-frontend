@@ -10,7 +10,7 @@
              @for(data of cartItems;track $index){
                <div class="d-flex align-items-center pb-2 pt-2 border-bottom">
                  <a class="d-block flex-shrink-0" [routerLink]="['/shop/product-detail/', data.id]">
-                   <img src="https://localhost:44331/{{data.productFiles[0].urlImage}}" width="64" alt="Product">
+                   <img src="{{data.productFiles[0].urlImage}}" width="64" alt="Product">
                  </a>
                  <div class="ps-2">
                    <h6 class="widget-product-title"><a [routerLink]="['/shop/product-detail/', data.id]">{{data.productName}}</a></h6>
