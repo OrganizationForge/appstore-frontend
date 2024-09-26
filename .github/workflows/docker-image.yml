@@ -16,7 +16,7 @@ jobs:
     # Step 2: Definir el nombre dinámico de la imagen (timestamp)
     - name: Set Image Tag
       id: vars
-      run: echo "IMAGE_TAG=store-client:$(date +%s)" >> $GITHUB_ENV
+      run: echo "IMAGE_TAG=store:$(date +%s)" >> $GITHUB_ENV
     
     # Step 2: Construir la imagen Docker localmente
     - name: Build Docker image
@@ -24,7 +24,7 @@ jobs:
 
     # Step 3: Guardar la imagen Docker como un archivo tar
     - name: Save Docker image to file
-      run: docker save -o store-client.tar ${{ env.IMAGE_TAG }}
+      run: docker save -o store.tar ${{ env.IMAGE_TAG }}
 
     # Step 4: Copiar la imagen tar al servidor Ubuntu
     - name: Copy image to server
@@ -34,8 +34,8 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASSWORD }}
-        source: ./store-client.tar
-        target: /home/mgiraudo/store-client.tar
+        source: ./store.tar
+        target: /home/mgiraudo/
 
     # Step 5: SSH al servidor para importar y desplegar la imagen
     - name: Deploy to Server
@@ -46,7 +46,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASSWORD }}
         script: |
-          docker load -i /home/mgiraudo/store-client.tar
-          docker stop append-client || true
-          docker rm append-client || true
-          docker run -d -p 80:80 --name append-client ${{ env.IMAGE_TAG }}
+          sudo docker load -i /home/mgiraudo/store.tar
+          sudo docker stop append-client || true
+          sudo docker rm append-client || true
+          sudo docker run -d -p 80:80 --name append-client ${{ env.IMAGE_TAG }}
