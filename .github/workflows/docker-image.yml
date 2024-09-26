@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Clonar el repositorio
-    - name: Checkout repository
     - uses: actions/checkout@v4
 
     # Step 2: Definir el nombre dinámico de la imagen (timestamp)
