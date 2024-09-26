@@ -1,0 +1,52 @@
+name: Docker Build and Deploy
+
+on:
+  push:
+    branches: [ "develop" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Clonar el repositorio
+    - name: Checkout repository
+    - uses: actions/checkout@v4
+
+    # Step 2: Definir el nombre dinámico de la imagen (timestamp)
+    - name: Set Image Tag
+      id: vars
+      run: echo "IMAGE_TAG=store-client:$(date +%s)" >> $GITHUB_ENV
+    
+    # Step 2: Construir la imagen Docker localmente
+    - name: Build Docker image
+      run: docker build . --file Dockerfile --tag ${{ env.IMAGE_TAG }}
+
+    # Step 3: Guardar la imagen Docker como un archivo tar
+    - name: Save Docker image to file
+      run: docker save -o store-client.tar ${{ env.IMAGE_TAG }}
+
+    # Step 4: Copiar la imagen tar al servidor Ubuntu
+    - name: Copy image to server
+      uses: appleboy/scp-action@v0.1.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        source: ./store-client.tar
+        target: /home/mgiraudo/store-client.tar
+
+    # Step 5: SSH al servidor para importar y desplegar la imagen
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@v0.1.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          docker load -i /home/mgiraudo/store-client.tar
+          docker stop append-client || true
+          docker rm append-client || true
+          docker run -d -p 80:80 --name append-client ${{ env.IMAGE_TAG }}
