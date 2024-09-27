@@ -158,6 +158,9 @@
       "@angular-monorepo/shared/ui/spec-card-ui": [
         "libs/shared/ui/spec-card-ui/src/index.ts"
       ],
+      "@angular-monorepo/shared/ui/toast-ui": [
+        "libs/shared/ui/toast-ui/src/index.ts"
+      ],
       "@angular-monorepo/shared/ui/trending-ui": [
         "libs/shared/ui/trending-ui/src/index.ts"
       ],

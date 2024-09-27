@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup,
 import { CartData } from './data';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
+import { cartActions, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 
 @Component({
   selector: 'lib-feature-checkout-review',
@@ -84,6 +84,8 @@ export class FeatureCheckoutReviewComponent implements OnInit {
 
       // Codifica el mensaje para la URL de WhatsApp
       const encodedMessage = encodeURIComponent(message);
+
+      this.store.dispatch(cartActions.clearCart());
 
       // Abre WhatsApp en una nueva pestaña
       window.open(`https://wa.me/+5491138880723?text=${encodedMessage}`, '_blank');

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -11,6 +11,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { Availability, Brand, Category, NewFile, NewProduct, NewProductFile, ProductService, QuantityType } from '@angular-monorepo/shop-data-access';
 import { EditorUiComponent } from "@angular-monorepo/shared/ui/editor-ui";
 import { map, Observable } from 'rxjs';
+import { AppToastService } from "@angular-monorepo/shared/ui/toast-ui";
 
 import EditorJS, { OutputData, ToolConstructable } from '@editorjs/editorjs';
 
@@ -35,6 +36,10 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
   quantityTypes$!: Observable<QuantityType[]>;
   availabilities$!: Observable<Availability[]>;
   selectedCategoryId = 0;
+
+  @ViewChild('successToast', { static: true }) template!: TemplateRef<any>;
+  messageToast! : string;
+  toastService = inject(AppToastService);
 
   private editor! : EditorJS;
 
@@ -182,7 +187,8 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
 
       this.productService.createProduct(newProduct).subscribe((res) => {
         if (res.succeded) {
-          alert('Guardado Ok');
+          this.messageToast = 'Producto guardado correctamente.';
+          this.toastService.show({ template: this.template,  classname: 'bg-success text-light', delay: 2000 });
           this.productForm.reset();
           this.files = [];
           this.editor.clear();

@@ -28,6 +28,11 @@ export const ngrxCartFeature = createFeature({
       ...state,
       products: cart.products,
       total: cart.total
-  }))
+    })),
+    on(cartActions.clearCart, () => ({
+      products: [],
+      total: 0,
+      error: null,
+    }))
   ),
 });
