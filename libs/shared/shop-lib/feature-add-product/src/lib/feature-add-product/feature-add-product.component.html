@@ -9,32 +9,35 @@
 <!-- Title -->
 
 <form method="post" (ngSubmit)="AddProduct()" [formGroup]="productForm">
-  <div class="d-sm-flex flex-wrap justify-content-end align-items-center pb-2">
+  <div class="row d-sm-flex flex-wrap justify-content-end align-items-center pb-2">
     <!-- <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Product</h2> -->
      @if(categories$ | async; as categories){
 
-      <!-- <div class="py-2">
-        <select class="form-select me-2" id="unp-category" formControlName="categoryId">
-          <option value="0" selected>Seleccionar categoría</option>
-          <option *ngFor="let option of selectOptions" [value]="option.value">
-            {{ option.label }}
-          </option>
-        </select>
-      </div> -->
-
-       <div class="py-2">
-         <select
-           class="form-select me-2"
-           id="unp-category"
-           formControlName="categoryId"
-         >
-         <option value="0">Seleccionar categoría</option>
+       <div class="py-2 col-6">
+        <select
+          class="form-select me-2"
+          id="unp-category"
+          formControlName="categoryId"
+        >
+          <option value="0">Seleccionar categoría</option>
           @for(category of categories;track $index){
-            <option value="{{category.id}}">{{category.description}}</option>
+            <option [value]="category.id">{{category.description}}</option>
           }
-         </select>
-       </div>
+        </select>
+      </div>
 
+      <div class="py-2 col-6">
+        <select
+          class="form-select me-2"
+          id="unp-child-category"
+          formControlName="childCategoryId"
+        >
+          <option value="0">Seleccionar subcategoría</option>
+          @for(childCategory of childCategories;track $index){
+            <option [value]="childCategory.id">{{childCategory.description}}</option>
+          }
+        </select>
+      </div>
 
      }
   </div>
@@ -125,13 +128,11 @@
 
     <div class="bg-secondary p-3 fs-ms rounded-bottom">
       <span class="d-inline-block fw-medium me-2 my-1"
-        >Markdown supported:</span
+        >Editor por bloques:</span
       >
-      <em class="d-inline-block border-end pe-2 me-2 my-1">*Italic*</em>
-      <strong class="d-inline-block border-end pe-2 me-2 my-1">**Bold**</strong>
-      <span class="d-inline-block border-end pe-2 me-2 my-1">- List item</span>
-      <span class="d-inline-block border-end pe-2 me-2 my-1">##Heading##</span>
-      <span class="d-inline-block">--- Horizontal rule</span>
+      <span class="d-inline-block border-end pe-2 me-2 my-1">/Text - Parrafo</span>
+      <span class="d-inline-block border-end pe-2 me-2 my-1">/List - Listas</span>
+      <span class="d-inline-block border-end pe-2 me-2 my-1">/Heading- Titulo</span>
     </div>
   </div>
 

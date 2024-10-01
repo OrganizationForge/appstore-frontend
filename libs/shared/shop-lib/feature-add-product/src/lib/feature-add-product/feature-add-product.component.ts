@@ -32,6 +32,9 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
   submitted = false;
 
   categories$!: Observable<Category[]>;
+  selectedParentId = '';
+  childCategories: Category[] = [];
+
   brands$!: Observable<Brand[]>;
   quantityTypes$!: Observable<QuantityType[]>;
   availabilities$!: Observable<Availability[]>;
@@ -43,19 +46,49 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
 
   private editor! : EditorJS;
 
+
   selectOptions: { value: string, label: string }[] = [];
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private productService: ProductService
   ) {
-    this.categories$ = this.productService.getCategories().pipe(
-      map((res) => {
-        console.log(res)
-        return res;
-      })
-    )
+
+    this.productForm = this.formBuilder.group({
+      ids: [''],
+      productName: ['', [Validators.required]],
+      description: [''],
+      priceBase: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      urlImage: [''],
+      brandId: [''],
+      availabilityId: [''],
+      categoryId: [0, [Validators.required]],
+      childCategoryId: [0, [Validators.required]],
+      stock: ['', [Validators.required]],
+      warranty: [''],
+      barcode: [''],
+      quantityTypeId: [''],
+      pricePercent: [0],
+    });
+
+    // Obtener todas las categorías y separar las categorías padre
+    this.categories$ = this.productService.getCategories();
+
+    this.productForm.get('categoryId')?.valueChanges.subscribe(parentId => {
+      this.selectedParentId = parentId;
+      this.filterChildCategories();
+    });
    }
+
+   filterChildCategories() {
+    this.categories$.subscribe(categories => {
+
+      const selectedCategory : any = categories.find(category => category.id === this.selectedParentId);
+      // Devolver las categorías hijas de la categoría seleccionada, si existen
+      this.childCategories =  selectedCategory ? selectedCategory.childrens || [] : [];
+    });
+  }
 
   ngAfterViewInit(): void {
     this.initializeEditor();
@@ -117,22 +150,6 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
     /**
      * Form Validation
      */
-    this.productForm = this.formBuilder.group({
-      ids: [''],
-      productName: ['', [Validators.required]],
-      description: [''],
-      priceBase: ['', [Validators.required]],
-      price: ['', [Validators.required]],
-      urlImage: [''],
-      brandId: [''],
-      availabilityId: [''],
-      categoryId: [0, [Validators.required]],
-      stock: ['', [Validators.required]],
-      warranty: [''],
-      barcode: [''],
-      quantityTypeId: [''],
-      pricePercent: [0],
-    });
 
   }
 
@@ -176,7 +193,7 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
         productFiles: productFiles,
         brandId: this.productForm.value.brandId,
         availabilityId: this.productForm.value.availabilityId,
-        categoryId: this.productForm.value.categoryId,
+        categoryId: this.productForm.value.childCategoryId,
         quantityTypeId: this.productForm.value.quantityTypeId,
         weight: 0,
         stock: this.productForm.value.stock,
