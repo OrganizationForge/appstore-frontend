@@ -5,9 +5,14 @@ import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
   let token: string | null = null;
+
+
+
   inject(LocalStorageJwtService)
     .getItem()
     .subscribe((t) => (token = t?.jwToken || null));
+
+
 
   if (token) {
     request = request.clone({

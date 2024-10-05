@@ -27,4 +27,21 @@ export class AuthService {
         confirmPassword: credentials.confirmPassword
       });
   }
+
+  refreshToken() : Observable<ApiResponse<User>> {
+    return this.apiService.post<ApiResponse<User>, User>('/v1/Account/refreshtoken');
+  }
+
+  logout() {
+    return this.apiService.post<ApiResponse<User>, User>('/v1/Account/revoke-token');
+  }
+
+  tokenValido(user: User) {
+    if (user && user.jwToken) {
+      // parse json object from base64 encoded jwt token
+      const jwtToken = JSON.parse(window.atob(user.jwToken.split('.')[1]));
+      const expires = new Date(jwtToken.exp * 1000);
+      return expires.getTime() > Date.now();
+    } else return false;
+  }
 }
