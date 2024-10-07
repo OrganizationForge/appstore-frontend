@@ -75,7 +75,7 @@ export class FeatureCheckoutReviewComponent implements OnInit {
       // Recorremos el array de productos y agregamos los detalles a cada uno
       storedProducts.products.forEach((product: any) => {
         message += `\n* ${product.productName} *\n`;
-        message += `Descripción: ${product.description}\n`;
+        // message += `Descripción: ${product.description}\n`;
         message += `Precio: ${product.price}\n`;
         // Agrega más detalles del producto según tus necesidades
       });
