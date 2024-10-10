@@ -29,11 +29,13 @@ export class AuthService {
   }
 
   refreshToken() : Observable<ApiResponse<User>> {
+    console.log("Meto refresh token")
     return this.apiService.post<ApiResponse<User>, User>('/v1/Account/refreshtoken');
   }
 
-  logout() {
-    return this.apiService.post<ApiResponse<User>, User>('/v1/Account/revoke-token');
+  logout() : Observable<ApiResponse<boolean>> {
+    console.log("Meto revoke token")
+    return this.apiService.get<ApiResponse<boolean>>('/v1/Account/revoke-token');
   }
 
   tokenValido(user: User) {

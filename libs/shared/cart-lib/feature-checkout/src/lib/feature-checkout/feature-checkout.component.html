@@ -1,20 +1,41 @@
 <div class="row">
   <!-- List of items-->
   <section class="col-lg-8">
+
+          <!-- Steps-->
+          <div class="steps steps-light pt-2 pb-3 mb-5">
+          <a class="step-item active current" routerLink="/cart">
+            <div class="step-progress"><span class="step-count">1</span></div>
+            <div class="step-label"><i class="ci-cart"></i>Cart</div>
+          </a><a class="step-item " routerLink="/cart/checkout-details">
+            <div class="step-progress"><span class="step-count">2</span></div>
+            <div class="step-label"><i class="ci-user-circle"></i>Details</div>
+          </a><a class="step-item" routerLink="/cart/checkout-shipping">
+            <div class="step-progress"><span class="step-count">3</span></div>
+            <div class="step-label"><i class="ci-package"></i>Shipping</div>
+          </a><a class="step-item" routerLink="/cart/checkout-payment">
+            <div class="step-progress"><span class="step-count">4</span></div>
+            <div class="step-label"><i class="ci-card"></i>Payment</div>
+          </a><a class="step-item" routerLink="/cart/checkout-review">
+            <div class="step-progress"><span class="step-count">5</span></div>
+            <div class="step-label"><i class="ci-check-circle"></i>Review</div>
+          </a>
+        </div>
+
     <div
       class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1"
     >
-      <h2 class="h6 text-light mb-0">Products</h2>
+      <h2 class="h6 text-light mb-0">Productos</h2>
       <a class="btn btn-outline-primary btn-sm ps-2" routerLink="/shop/grid-ls"
-        ><i class="ci-arrow-left me-2"></i>Continue shopping</a
+        ><i class="ci-arrow-left me-2"></i>Continuar comprando</a
       >
     </div>
     <!-- Item-->
     <lib-cart-detail-ui [editOptions]="true"></lib-cart-detail-ui>
 
-    <button class="btn btn-outline-accent d-block w-100 mt-4" type="button">
+    <!-- <button class="btn btn-outline-accent d-block w-100 mt-4" type="button">
       <i class="ci-loading fs-base me-2"></i>Update cart
-    </button>
+    </button> -->
   </section>
   <!-- Sidebar-->
   <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
@@ -26,18 +47,24 @@
             <h3 class="fw-normal">${{ cartTotal }}</h3>
           }
         </div>
-        <div class="mb-3 mb-4">
-          <label class="form-label mb-3" for="order-comments"
-            ><span class="badge bg-info fs-xs me-2">Note</span
-            ><span class="fw-medium">Additional comments</span></label
-          >
-          <textarea
-            class="form-control"
-            rows="6"
-            id="order-comments"
-          ></textarea>
-        </div>
-
+        <form
+        class="needs-validation"
+        novalidate
+        [formGroup]="commentForm"
+        >
+          <div class="mb-3 mb-4">
+            <label class="form-label mb-3" for="cartComment"
+              ><span class="badge bg-info fs-xs me-2">Nota</span
+              ><span class="fw-medium">Comentarios adicionales</span></label
+            >
+            <textarea
+              class="form-control"
+              rows="6"
+              id="cartComment"
+              formControlName="cartComment"
+            ></textarea>
+          </div>
+        </form>
         <div
           ngbAccordion
           #acc="ngbAccordion"
@@ -169,11 +196,16 @@
           </div> -->
         </div>
 
+        <!-- <a
+          class="btn btn-primary btn-shadow d-block w-100 mt-4"
+          routerLink="/cart/checkout-details"
+          ><i class="ci-card fs-lg me-2"></i>Continuar</a> -->
+
         <a
           class="btn btn-primary btn-shadow d-block w-100 mt-4"
-          routerLink="/cart/checkout-shipping"
-          ><i class="ci-card fs-lg me-2"></i>Proceed to Checkout</a
-        >
+          (click)="save()"
+          ><i class="ci-card fs-lg me-2"></i>Continuar
+        </a>
         <!-- <a class="btn btn-primary btn-shadow d-block w-100 mt-4" routerLink="/cart/checkout-details"><i
                       class="ci-card fs-lg me-2"></i>Proceed to Checkout</a> -->
       </div>

@@ -3,10 +3,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-feature-checkout',
@@ -18,9 +18,13 @@ import { map } from 'rxjs';
 export class FeatureCheckoutComponent implements OnInit {
 
   private readonly store = inject(Store);
+  private readonly router = inject(Router);
+
+
 
   // Card Form
   cardForm!: UntypedFormGroup;
+  commentForm!: UntypedFormGroup;
   submitted = false;
 
   // Shipping Form
@@ -29,6 +33,7 @@ export class FeatureCheckoutComponent implements OnInit {
 
   cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
   cartTotal$ = this.store.select(ngrxCartQuery.selectTotal);
+  cartComment$ : Observable<string | ''> = this.store.select(ngrxCartQuery.selectComment);
 
   qty: any = 1;
   subTotal = 0;
@@ -42,6 +47,21 @@ export class FeatureCheckoutComponent implements OnInit {
     this.cardForm = this.formBuilder.group({
       code: ['', [Validators.required]],
     });
+
+    this.commentForm = this.formBuilder.group({
+      cartComment: [''],
+    });
+
+    this.cartComment$.pipe(
+      map(res => {
+        if (res) {
+          this.commentForm.patchValue({
+            cartComment: res,
+
+          });
+        }
+      })
+    ).subscribe()
 
     /**
      * Shipping Form Validatyion
@@ -98,6 +118,18 @@ export class FeatureCheckoutComponent implements OnInit {
     if (this.cardForm.invalid) {
       return;
     }
+  }
+
+  save() {
+
+    if (this.commentForm.valid) {
+
+       const comment = this.commentForm.get('cartComment')?.value;
+      this.store.dispatch(cartActions.postComment({comment: comment}));
+      this.router.navigate(['/cart/checkout-details'])
+    }
+    else
+    console.log('invalid form');
   }
 
   // convenience getter for easy access to form fields

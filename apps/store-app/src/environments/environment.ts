@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  // api_url: 'https://localhost:44331/api',
-  api_url: 'http://149.50.144.77:8080/api',
+  api_url: 'https://localhost:44331/api',
+  // api_url: 'http://149.50.144.77:8080/api',
 };

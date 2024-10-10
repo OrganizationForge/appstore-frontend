@@ -1,3 +1,4 @@
+import { FeatureShippingListComponent } from './../../../../../shipping-lib/feature-shipping-list/src/lib/feature-shipping-list/feature-shipping-list.component';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -10,18 +11,13 @@ import { OrderSummaryUiComponent } from '@angular-monorepo/shared/ui/order-summa
 @Component({
   selector: 'lib-feature-checkout-shipping',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, OrderSummaryUiComponent],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, OrderSummaryUiComponent, FeatureShippingListComponent],
   templateUrl: './feature-checkout-shipping.component.html',
   styleUrl: './feature-checkout-shipping.component.scss',
 })
 export class FeatureCheckoutShippingComponent implements OnInit {
-  shippingDatas: any;
-  paymentsDatas: any;
   promocodeForm!: UntypedFormGroup;
   submitted = false;
-
-  selectedPaymentMethod = 1;
-  selectedSendMethod = 1;
 
 
   constructor(private formBuilder: UntypedFormBuilder) { }
@@ -31,16 +27,12 @@ export class FeatureCheckoutShippingComponent implements OnInit {
   cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
 
   ngOnInit(): void {
-    this.shippingDatas = ShippingData;
-    this.paymentsDatas = PaymentData;
     /**
      * Form Validatyion
      */
     this.promocodeForm = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
-
-    localStorage.setItem('selectedSendMethod', JSON.stringify(this.shippingDatas[0]));
   }
 
   // convenience getter for easy access to form fields
@@ -55,11 +47,5 @@ export class FeatureCheckoutShippingComponent implements OnInit {
     if (this.promocodeForm.invalid) {
       return;
     }
-  }
-
-
-  onSendChange(sendMethod: any) {
-    this.selectedSendMethod = sendMethod.Id;
-    localStorage.setItem('selectedSendMethod', JSON.stringify(sendMethod));
   }
 }
