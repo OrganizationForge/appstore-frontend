@@ -1,13 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { cartActions, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 
 import Swal from 'sweetalert2';
 
-import { ShippingMethod, ShippingService, tableData } from "@angular-monorepo/shared/shipping-lib/data-access";
+import { ShippingMethod, ShippingService } from "@angular-monorepo/shared/shipping-lib/data-access";
 
 
 type NewType = UntypedFormGroup;
@@ -20,22 +22,32 @@ type NewType = UntypedFormGroup;
   styleUrl: './feature-shipping-list.component.scss',
 })
 export class FeatureShippingListComponent implements OnInit {
-  // tables$: Observable<Table[]>;
+
+  @Input() editable = true;
+  @Input() selectable = false;
+  @Input() allowNew = true;
   shippingList$!: Observable<ShippingMethod[]>;
-  // total$: Observable<number>;
   public isCollapsed = true;
+
+  selectedSendMethod!: ShippingMethod;
+
 
   // Form Submit
   userForm!: NewType;
   submitted = false;
 
   private readonly shippingService = inject(ShippingService)
+  private readonly store = inject(Store);
+
+  cartShippingMethod$ : Observable<ShippingMethod | null> = this.store.select(ngrxCartQuery.selectShipping);
+
 
   constructor(private modalService: NgbModal, private formBuilder: UntypedFormBuilder) {
     this.shippingList$ = this.shippingService.getShippingMethods();
   }
 
   ngOnInit(): void {
+
     /**
      * Form Validation
      */
@@ -46,6 +58,16 @@ export class FeatureShippingListComponent implements OnInit {
       description: ['',],
       price: ['', [Validators.required]]
     });
+
+    this.cartShippingMethod$.pipe(
+      map(res => {
+        if (res) {
+          console.log(res);
+          this.selectedSendMethod = res;
+        }
+      })
+    ).subscribe()
+
   }
 
   /**
@@ -58,6 +80,13 @@ export class FeatureShippingListComponent implements OnInit {
 
   get form() {
     return this.userForm.controls;
+  }
+
+  onShippingChange(shippingMethod: ShippingMethod) {
+    this.selectedSendMethod = shippingMethod;
+    // console.log(this.selectedSendMethod);
+    this.store.dispatch(cartActions.postShipping({shippingMethod: shippingMethod}));
+    // localStorage.setItem('selectedSendMethod', JSON.stringify(sendMethod));
   }
 
   /**
@@ -106,8 +135,8 @@ export class FeatureShippingListComponent implements OnInit {
   // Remove Data
   removeData(e: any) {
     Swal.fire({
-      title: 'Are you Sure ?',
-      text: 'Are you Sure You want to Remove this Product ?',
+      title: 'Estas seguro ?',
+      text: 'Seguro que deseas eliminar el metdo de envío?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: 'green',
@@ -115,7 +144,7 @@ export class FeatureShippingListComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-        Swal.fire({ title: 'Deleted!', text: 'Your file has been deleted.', confirmButtonColor: '#364574', icon: 'success', });
+        Swal.fire({ title: 'Eliminado!', text: 'EL metodo ha sido eliminado.', confirmButtonColor: '#364574', icon: 'success', });
         e.target.closest('tr').remove();
       }
     });

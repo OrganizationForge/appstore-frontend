@@ -3,10 +3,10 @@ import { OrderSummaryUiComponent } from '@angular-monorepo/shared/ui/order-summa
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { CartData } from './data';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { cartActions, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
+import { cartActions, CartService, ngrxCartQuery, Order, OrderItem, PaymentMethod, Shipping } from '@angular-monorepo/shared/cart-lib/data-access';
+import { ShippingMethod } from '@angular-monorepo/shared/shipping-lib/data-access';
 
 @Component({
   selector: 'lib-feature-checkout-review',
@@ -20,17 +20,18 @@ export class FeatureCheckoutReviewComponent implements OnInit {
 
   promocodeForm!: UntypedFormGroup;
   submitted = false;
-  paymentMethod: any;
-  sendMethod: any;
 
   private readonly store = inject(Store);
+  private readonly cartService = inject(CartService)
+  private readonly router = inject(Router)
 
-  cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
+  paymentMethod$ = this.store.select(ngrxCartQuery.selectPayment);
+  shippingMethod$ = this.store.select(ngrxCartQuery.selectShipping);
+  userDetails$ = this.store.select(ngrxCartQuery.selectDetails);
 
   constructor(private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit(): void {
-    this.reviewDatas = CartData;
 
     /**
      * Form Validatyion
@@ -38,16 +39,6 @@ export class FeatureCheckoutReviewComponent implements OnInit {
     this.promocodeForm = this.formBuilder.group({
       name: ['', [Validators.required]],
     });
-
-    const storedPaymentMethod = localStorage.getItem('selectedPaymentMethod');
-    if (storedPaymentMethod) {
-      this.paymentMethod = JSON.parse(storedPaymentMethod);
-    }
-
-    const storedSendMethod = localStorage.getItem('selectedSendMethod');
-    if (storedSendMethod) {
-      this.sendMethod = JSON.parse(storedSendMethod);
-    }
   }
 
   // convenience getter for easy access to form fields
@@ -64,30 +55,62 @@ export class FeatureCheckoutReviewComponent implements OnInit {
     }
   }
 
-  openWhatsApp() {
+  saveOrder() {
+
     const storedProductsString = localStorage.getItem('cart');
     let storedProducts : any;
     if (storedProductsString)
       storedProducts = JSON.parse(storedProductsString);
 
+    const orderItems : OrderItem[] = [];
+
+    const shipping : Shipping = {
+      shippingAddress: storedProducts.details.address,
+      shippingMethodId: storedProducts.shipping.id
+    }
+
       let message = `¡Hola! Estoy interesado en encargar:\n`;
 
       // Recorremos el array de productos y agregamos los detalles a cada uno
       storedProducts.products.forEach((product: any) => {
+
+        orderItems.push({
+          quantity: product.qty,
+          price: product.price,
+          productId: product.id
+        })
+
         message += `\n* ${product.productName} *\n`;
         // message += `Descripción: ${product.description}\n`;
         message += `Precio: ${product.price}\n`;
         // Agrega más detalles del producto según tus necesidades
       });
 
-      message += `\nMétodo de pago: ${this.paymentMethod.title}\nMétodo de envío: ${this.sendMethod.title}`;
+    // save order logic here
+    const newOrder : Order = {
+      shipping: shipping,
+      orderItems: orderItems
+    };
 
-      // Codifica el mensaje para la URL de WhatsApp
-      const encodedMessage = encodeURIComponent(message);
+  console.log(newOrder);
+  this.cartService.createOrder(newOrder).subscribe((res) => {
+    if (res.succeded) {
+      // this.messageToast = 'Producto guardado correctamente.';
+      // this.toastService.show({ template: this.template,  classname: 'bg-success text-light', delay: 2000 });
+      // this.productForm.reset();
+      // this.files = [];
+      // this.editor.clear();
 
+      this.openWhatsApp(message);
       this.store.dispatch(cartActions.clearCart());
+      this.router.navigate(['/cart/checkout-complete']);
+    }
+    else res.errors;
+    });
+  }
 
-      // Abre WhatsApp en una nueva pestaña
+  openWhatsApp(message : string) {
+      const encodedMessage = encodeURIComponent(message);
       window.open(`https://wa.me/+5491138880723?text=${encodedMessage}`, '_blank');
     }
   }

@@ -2,23 +2,23 @@
   <section class="col-lg-8">
     <!-- Steps-->
     <div class="steps steps-light pt-2 pb-3 mb-5">
-      <!-- <a class="step-item active" routerLink="/shop/cart">
+      <a class="step-item active" routerLink="/cart">
         <div class="step-progress"><span class="step-count">1</span></div>
         <div class="step-label"><i class="ci-cart"></i>Cart</div>
-      </a><a class="step-item active" routerLink="/shop/checkout-details">
+      </a><a class="step-item active" routerLink="/cart/checkout-details">
         <div class="step-progress"><span class="step-count">2</span></div>
         <div class="step-label"><i class="ci-user-circle"></i>Details</div>
-      </a><a class="step-item active" routerLink="/shop/checkout-shipping">
+      </a><a class="step-item active" routerLink="/cart/checkout-shipping">
         <div class="step-progress"><span class="step-count">3</span></div>
         <div class="step-label"><i class="ci-package"></i>Shipping</div>
-      </a><a class="step-item active current" routerLink="/shop/checkout-payment">
+      </a><a class="step-item active current" routerLink="/cart/checkout-payment">
         <div class="step-progress"><span class="step-count">4</span></div>
         <div class="step-label"><i class="ci-card"></i>Payment</div>
-      </a><a class="step-item" routerLink="/shop/checkout-review">
+      </a><a class="step-item" routerLink="/cart/checkout-review">
         <div class="step-progress"><span class="step-count">5</span></div>
         <div class="step-label"><i class="ci-check-circle"></i>Review</div>
-      </a> -->
-      <a class="step-item active" routerLink="/cart">
+      </a>
+      <!-- <a class="step-item active" routerLink="/cart">
         <div class="step-progress"><span class="step-count">1</span></div>
         <div class="step-label"><i class="ci-cart"></i>Carrito</div>
       </a>
@@ -33,14 +33,14 @@
       <a class="step-item active " routerLink="/cart/checkout-review">
         <div class="step-progress"><span class="step-count">4</span></div>
         <div class="step-label"><i class="ci-package"></i>Detalles</div>
-      </a>
+      </a> -->
     </div>
     <!-- Payment methods accordion-->
     <h2 class="h6 pb-3 mb-2">Elegí tu método de pago</h2>
 
     <div ngbAccordion #acc="ngbAccordion" activeIds="static-3" [closeOthers]="true">
       <!-- Shoes-->
-      <div ngbAccordionItem id="static-1">
+      <!-- <div ngbAccordionItem id="static-1">
         <h2 ngbAccordionHeader class="accordion-header">
 
           <button ngbAccordionButton (click)="setPayment('TJ');"><i class="ci-card fs-lg me-2 mt-n1 align-middle"></i> Pagos con tarjeta</button>
@@ -70,7 +70,7 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> -->
       <div ngbAccordionItem id="static-2">
         <h2 ngbAccordionHeader class="accordion-header">
 
@@ -118,7 +118,7 @@
                       (change)="onPaymentChange(data)"
                       [checked]="data.id === selectedPaymentMethod"
                     >
-                      <label class="form-check-label" for="{{data.id}}">{{data.title}}</label>
+                      <label class="form-check-label" for="{{data.id}}">{{data.description}}</label>
                     </div>
               }
             </ng-template>

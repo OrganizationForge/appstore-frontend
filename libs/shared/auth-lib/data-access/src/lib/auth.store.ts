@@ -62,11 +62,23 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
-      logout: () => {
-        patchState(store, { data: initialUserValue, loggedIn: false });
-        localStorageService.removeItem();
-        router.navigateByUrl('login');
-      },
+      logout:rxMethod<void>(
+        pipe(
+          concatLatestFrom(() => reduxStore.select(ngrxAuthQuery.selectData)),
+          exhaustMap(() =>
+            authService.logout().pipe(
+              tapResponse({
+                next: () => {
+                  patchState(store, { data: initialUserValue, loggedIn: false });
+                  localStorageService.removeItem();
+                  router.navigateByUrl('home');
+                },
+                error: ({ error }) => reduxStore.dispatch(authActions.setErrors({ errors: error.errors })),
+              }),
+            )
+          ),
+        ),
+      )
     }),
   ),
 );

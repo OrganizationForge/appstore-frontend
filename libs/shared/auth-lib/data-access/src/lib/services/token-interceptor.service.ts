@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHandlerFn, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
@@ -94,27 +94,24 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   }
 }
 
-export const tokenInterceptor = [
-  { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
-];
+// export const tokenInterceptor = [
+//   { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+// ];
 
-// export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
-//   let token: string | null = null;
+export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
+  let token: string | null = null;
 
-
-
-//   inject(LocalStorageJwtService)
-//     .getItem()
-//     .subscribe((t) => (token = t?.jwToken || null));
+  inject(LocalStorageJwtService)
+    .getItem()
+    .subscribe((t) => (token = t?.jwToken || null));
 
 
-
-//   if (token) {
-//     request = request.clone({
-//       setHeaders: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//   }
-//   return next(request);
-// };
+  if (token) {
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  return next(request);
+};

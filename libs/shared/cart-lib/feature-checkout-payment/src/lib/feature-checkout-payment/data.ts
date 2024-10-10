@@ -1,17 +1,11 @@
 const PaymentData = [
   {
     id: 1,
-    title: 'Efectivo',
-    content: '',
-    time: '',
-    fee: ''
+    description: 'Efectivo',
   },
   {
     id: 2,
-    title: 'Transferencia',
-    content: '',
-    time: '',
-    fee: ''
+    description: 'Transferencia',
   },
 ];
 

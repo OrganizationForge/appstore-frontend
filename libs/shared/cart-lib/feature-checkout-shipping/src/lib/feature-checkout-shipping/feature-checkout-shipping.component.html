@@ -1,28 +1,28 @@
 <div class="row">
   <section class="col-lg-8">
     <!-- Steps-->
-    <!-- <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" routerLink="/shop/cart">
+    <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" routerLink="/cart">
         <div class="step-progress"><span class="step-count">1</span></div>
         <div class="step-label"><i class="ci-cart"></i>Cart</div>
       </a>
-      <a class="step-item active" routerLink="/shop/checkout-details">
+      <a class="step-item active" routerLink="/cart/checkout-details">
         <div class="step-progress"><span class="step-count">2</span></div>
         <div class="step-label"><i class="ci-user-circle"></i>Details</div>
       </a>
-      <a class="step-item active current" routerLink="/shop/checkout-shipping">
+      <a class="step-item active current" routerLink="/cart/checkout-shipping">
         <div class="step-progress"><span class="step-count">3</span></div>
         <div class="step-label"><i class="ci-package"></i>Shipping</div>
       </a>
-      <a class="step-item" routerLink="/shop/checkout-payment">
+      <a class="step-item" routerLink="/cart/checkout-payment">
         <div class="step-progress"><span class="step-count">4</span></div>
         <div class="step-label"><i class="ci-card"></i>Payment</div>
       </a>
-      <a class="step-item" routerLink="shop/checkout-review">
+      <a class="step-item" routerLink="/cart/checkout-review">
         <div class="step-progress"><span class="step-count">5</span></div>
         <div class="step-label"><i class="ci-check-circle"></i>Review</div>
       </a>
-    </div> -->
-
+    </div>
+<!--
     <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" routerLink="/cart">
       <div class="step-progress"><span class="step-count">1</span></div>
       <div class="step-label"><i class="ci-cart"></i>Carrito</div>
@@ -39,11 +39,11 @@
       <div class="step-progress"><span class="step-count">4</span></div>
       <div class="step-label"><i class="ci-package"></i>Detalles</div>
     </a>
-  </div>
+  </div> -->
 
     <!-- Shipping methods table-->
     <h2 class="h6 pb-3 mb-2">Opciones de entrega</h2>
-    <div class="table-responsive">
+    <!-- <div class="table-responsive">
       <table class="table table-hover fs-sm border-top">
         <thead>
           <tr>
@@ -72,7 +72,9 @@
         }
         </tbody>
       </table>
-    </div>
+    </div> -->
+
+    <lib-feature-shipping-list [editable]="false" [selectable]="true" [allowNew]="true"></lib-feature-shipping-list>
 
     <!-- <h2 class="h6 pb-3 mb-2">Formas de pago</h2>
     <div class="table-responsive">
@@ -100,7 +102,7 @@
 
     <!-- Navigation (desktop)-->
     <div class="d-none d-lg-flex pt-4">
-      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver al carrito</span><span class="d-inline d-sm-none">Volver</span></a></div>
+      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-details"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver a detalles</span><span class="d-inline d-sm-none">Volver</span></a></div>
       <!-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-details"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Adresses</span><span class="d-inline d-sm-none">Back</span></a></div> -->
       <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-payment"><span class="d-none d-sm-inline">Continuar a pagos</span><span class="d-inline d-sm-none">Continuar</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
       <!-- <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-payment"><span class="d-none d-sm-inline">Proceed to Payment</span><span class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div> -->
@@ -116,7 +118,7 @@
 <div class="row d-lg-none">
   <div class="col-lg-8">
     <div class="d-flex pt-4 mt-3">
-      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver al carrito</span><span class="d-inline d-sm-none">Volver</span></a></div>
+      <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-details"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver a detalles</span><span class="d-inline d-sm-none">Volver</span></a></div>
 
       <!-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-details"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Adresses</span><span class="d-inline d-sm-none">Back</span></a></div> -->
       <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-payment"><span class="d-none d-sm-inline">Proceder a pagos</span><span class="d-inline d-sm-none">Continuar</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>

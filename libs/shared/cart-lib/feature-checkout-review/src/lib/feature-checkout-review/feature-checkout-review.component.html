@@ -1,49 +1,49 @@
 <div class="row">
   <section class="col-lg-8">
     <!-- Steps-->
-    <!-- <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" routerLink="/shop/cart">
-        <div class="step-progress"><span class="step-count">1</span></div>
-        <div class="step-label"><i class="ci-cart"></i>Cart</div>
-      </a><a class="step-item active" routerLink="/shop/checkout-details">
-        <div class="step-progress"><span class="step-count">2</span></div>
-        <div class="step-label"><i class="ci-user-circle"></i>Details</div>
-      </a><a class="step-item active" routerLink="/shop/checkout-shipping">
-        <div class="step-progress"><span class="step-count">3</span></div>
-        <div class="step-label"><i class="ci-package"></i>Shipping</div>
-      </a><a class="step-item active" routerLink="/shop/checkout-payment">
-        <div class="step-progress"><span class="step-count">4</span></div>
-        <div class="step-label"><i class="ci-card"></i>Payment</div>
-      </a><a class="step-item active current" routerLink="/shop/checkout-review">
-        <div class="step-progress"><span class="step-count">5</span></div>
-        <div class="step-label"><i class="ci-check-circle"></i>Review</div>
-      </a>
-    </div> -->
-
     <div class="steps steps-light pt-2 pb-3 mb-5">
       <a class="step-item active" routerLink="/cart">
         <div class="step-progress"><span class="step-count">1</span></div>
-        <div class="step-label"><i class="ci-cart"></i>Carrito</div>
-      </a>
-      <a class="step-item active" routerLink="/cart/checkout-shipping">
+        <div class="step-label"><i class="ci-cart"></i>Cart</div>
+      </a><a class="step-item active" routerLink="/cart/checkout-details">
         <div class="step-progress"><span class="step-count">2</span></div>
-        <div class="step-label"><i class="ci-user-circle"></i>Entregas</div>
-      </a>
-      <a class="step-item active " routerLink="/cart/checkout-payment">
+        <div class="step-label"><i class="ci-user-circle"></i>Details</div>
+      </a><a class="step-item active" routerLink="/cart/checkout-shipping">
         <div class="step-progress"><span class="step-count">3</span></div>
-        <div class="step-label"><i class="ci-package"></i>Pagos</div>
-      </a>
-      <a class="step-item active current" routerLink="/cart/checkout-review">
+        <div class="step-label"><i class="ci-package"></i>Shipping</div>
+      </a><a class="step-item active" routerLink="/cart/checkout-payment">
         <div class="step-progress"><span class="step-count">4</span></div>
-        <div class="step-label"><i class="ci-package"></i>Detalles</div>
+        <div class="step-label"><i class="ci-card"></i>Payment</div>
+      </a><a class="step-item active current" routerLink="/cart/checkout-review">
+        <div class="step-progress"><span class="step-count">5</span></div>
+        <div class="step-label"><i class="ci-check-circle"></i>Review</div>
       </a>
-  </div>
-
+    </div>
     <!-- Order details-->
     <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Revisá tu órden</h2>
     <!-- Item-->
     <lib-cart-detail-ui [editOptions]="false"></lib-cart-detail-ui>
     <!-- Client details-->
     <div class="bg-secondary rounded-3 px-4 pt-4 pb-2">
+      @if(userDetails$ | async; as userDetails){
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 class="h6">Datos comprador:</h4>
+            <ul class="list-unstyled fs-sm">
+              <li><span class="text-muted">Cliente:&nbsp;</span>{{userDetails.firstName}} {{userDetails.lastName}}</li>
+              <li><span class="text-muted">Dirección:&nbsp;</span>{{userDetails.address}} {{userDetails.country}}</li>
+              <li><span class="text-muted">Código postal:&nbsp;</span>{{userDetails.zipCode}}</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <h4 class="h6">Contacto:</h4>
+            <ul class="list-unstyled fs-sm">
+              <li><span class="text-muted">Email:&nbsp;</span>{{userDetails.email}}</li>
+              <li><span class="text-muted">Celular:&nbsp;</span>{{userDetails.phoneNumber}}</li>
+            </ul>
+          </div>
+        </div>
+      }
       <div class="row">
         <div class="col-sm-6">
           <h4 class="h6">Método de envio:</h4>
@@ -51,15 +51,21 @@
             <!-- <li><span class="text-muted">Client:&nbsp;</span>Susan Gardner</li>
             <li><span class="text-muted">Address:&nbsp;</span>44 Shirley Ave. West Chicago, IL 60185, USA</li>
             <li><span class="text-muted">Phone:&nbsp;</span>+1 (808) 764 554 330</li> -->
-            <li><span class="text-muted">&nbsp;</span>{{paymentMethod.title}}</li>
-            <li><span class="text-muted">&nbsp;</span>{{paymentMethod.content}}</li>
+            @if(shippingMethod$ | async; as shippingMethod){
+              <li><span class="text-muted">&nbsp;</span>{{shippingMethod.title}}</li>
+              <li><span class="text-muted">&nbsp;</span>{{shippingMethod.description}}</li>
+            }
           </ul>
         </div>
         <div class="col-sm-6">
           <h4 class="h6">Método de pago:</h4>
           <ul class="list-unstyled fs-sm">
-            <li><span class="text-muted">&nbsp;</span>{{sendMethod.title}}</li>
-            <li><span class="text-muted">&nbsp;</span>{{sendMethod.content}}</li>
+            @if(paymentMethod$ | async; as paymentMethod){
+              <!-- <li><span class="text-muted">&nbsp;</span>{{paymentMethod.id}}</li> -->
+              <li><span class="text-muted">&nbsp;</span>{{paymentMethod.description}}</li>
+            }
+            <!-- <li><span class="text-muted">&nbsp;</span>{{paymentMethod$.id}}</li>
+            <li><span class="text-muted">&nbsp;</span>{{paymentMethod$.description}}</li> -->
             <!-- <li><span class="text-muted">Credit Card:&nbsp;</span>**** **** **** 5300</li> -->
           </ul>
         </div>
@@ -69,7 +75,7 @@
     <div class="d-none d-lg-flex pt-4">
       <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-payment"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver a pagos</span><span class="d-inline d-sm-none">Volver</span></a></div>
       <!-- <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-payment"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div> -->
-      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-complete" (click)="openWhatsApp()"><span class="d-none d-sm-inline">Enviar </span><span class="d-inline d-sm-none">Enviar</span><i class="ci-whatsapp mt-sm-0 ms-1"></i></a></div>
+      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" (click)="saveOrder()"><span class="d-none d-sm-inline">Enviar </span><span class="d-inline d-sm-none">Enviar</span><i class="ci-whatsapp mt-sm-0 ms-1"></i></a></div>
       <!-- <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-complete"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div> -->
     </div>
   </section>
@@ -84,7 +90,7 @@
     <div class="d-flex pt-4 mt-3">
       <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" routerLink="/cart/checkout-payment"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Volver a pagos</span><span class="d-inline d-sm-none">Volver</span></a></div>
       <!-- <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-complete"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div> -->
-      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" routerLink="/cart/checkout-complete" (click)="openWhatsApp()"><span class="d-none d-sm-inline">Enviar </span><span class="d-inline d-sm-none">Enviar</span><i class="ci-whatsapp mt-sm-0 ms-1"></i></a></div>
+      <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" (click)="saveOrder()"><span class="d-none d-sm-inline">Enviar </span><span class="d-inline d-sm-none">Enviar</span><i class="ci-whatsapp mt-sm-0 ms-1"></i></a></div>
     </div>
   </div>
 </div>

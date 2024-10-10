@@ -1,10 +1,12 @@
 import { OrderSummaryUiComponent } from '@angular-monorepo/shared/ui/order-summary-ui';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentData } from './data';
+import { cartActions, PaymentMethod } from '@angular-monorepo/shared/cart-lib/data-access';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'lib-feature-checkout-payment',
@@ -18,7 +20,9 @@ export class FeatureCheckoutPaymentComponent implements OnInit {
   promocodeForm!: UntypedFormGroup;
   submitted = false;
   paymentsDatas : any;
-  selectedPaymentMethod = 1;
+  selectedPaymentMethod!: PaymentMethod;
+
+  private readonly store = inject(Store);
 
   constructor(private formBuilder: UntypedFormBuilder) {
     this.paymentsDatas = PaymentData;
@@ -34,7 +38,7 @@ export class FeatureCheckoutPaymentComponent implements OnInit {
       name: ['', [Validators.required]],
     });
 
-    localStorage.setItem('selectedPaymentMethod', JSON.stringify(this.paymentsDatas[0]));
+    // localStorage.setItem('selectedPaymentMethod', JSON.stringify(this.paymentsDatas[0]));
   }
 
   // convenience getter for easy access to form fields
@@ -51,9 +55,11 @@ export class FeatureCheckoutPaymentComponent implements OnInit {
     }
   }
 
-  onPaymentChange(paymentMethod: any) {
-    this.selectedPaymentMethod = paymentMethod.Id;
-    localStorage.setItem('selectedPaymentMethod', JSON.stringify(paymentMethod));
+  onPaymentChange(paymentMethod: PaymentMethod) {
+    this.selectedPaymentMethod = paymentMethod;
+    this.store.dispatch(cartActions.postPayment({paymentMethod: paymentMethod}));
+
+    // localStorage.setItem('selectedPaymentMethod', JSON.stringify(paymentMethod));
   }
 
   setPayment(type: any){
