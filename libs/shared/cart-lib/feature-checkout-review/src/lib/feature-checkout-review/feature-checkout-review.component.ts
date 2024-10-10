@@ -103,6 +103,7 @@ export class FeatureCheckoutReviewComponent implements OnInit {
 
       this.openWhatsApp(message);
       this.store.dispatch(cartActions.clearCart());
+      localStorage.removeItem('cart');
       this.router.navigate(['/cart/checkout-complete']);
     }
     else res.errors;
