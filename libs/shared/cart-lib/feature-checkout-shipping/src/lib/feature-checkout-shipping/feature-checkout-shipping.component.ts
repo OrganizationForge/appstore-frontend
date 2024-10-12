@@ -1,12 +1,12 @@
-import { FeatureShippingListComponent } from './../../../../../shipping-lib/feature-shipping-list/src/lib/feature-shipping-list/feature-shipping-list.component';
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { PaymentData, ShippingData } from './data';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 import { OrderSummaryUiComponent } from '@angular-monorepo/shared/ui/order-summary-ui';
+
+import { FeatureShippingListComponent } from "@angular-monorepo/shared/shipping-lib/feature-shipping-list";
 
 @Component({
   selector: 'lib-feature-checkout-shipping',

@@ -2,8 +2,8 @@ import { ApiPagedResponse, ApiResponse, ApiService } from '@angular-monorepo/htt
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { NewProduct, Product } from '../models/product.model';
-import { Category } from '../models/category.model';
-import { Brand } from '../models/brand.model';
+import { Category } from '../../../../../category-lib/data-access/src/lib/models/category.model';
+import { Brand } from '../../../../../brand-lib/data-access/src/lib/models/brand.model';
 import { NewProductComment } from '../models/comment.model';
 import { QuantityType } from '../models/quantityType.model';
 import { Availability } from '../models/availability.model';

@@ -36,7 +36,22 @@ export const featureDashboardRoutes: Route[] = [
       {
         path: 'shipping',
         loadComponent: () =>
-          import('@angular-monorepo/shared/shipping-lib/feature-shipping-list').then((m) => m.FeatureShippingListComponent)
+          import('@angular-monorepo/shared/dashboard-lib/feature-shipping-options').then((m) => m.FeatureShippingOptionsComponent)
+      },
+      {
+        path: 'brands',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-brands').then((m) => m.FeatureDashboardBrandsComponent)
+      },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-categories').then((m) => m.FeatureDashboardCategoriesComponent)
+      },
+      {
+        path: 'payment-options',
+        loadComponent: () =>
+          import('@angular-monorepo/shared/dashboard-lib/feature-payment-options').then((m) => m.FeaturePaymentOptionsComponent)
       },
       {
         path: 'orders',

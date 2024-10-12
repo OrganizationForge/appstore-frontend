@@ -1,6 +1,6 @@
 import { ShippingMethod } from '@angular-monorepo/shared/shipping-lib/data-access';
 import { Product } from "@angular-monorepo/shop-data-access";
-import { PaymentMethod } from '../models/payment-method.model';
+import { PaymentMethod } from '../../../../payment-lib/data-access/src/lib/models/payment-method.model';
 import { CartUserDetail } from '../models/user-details.model';
 
 

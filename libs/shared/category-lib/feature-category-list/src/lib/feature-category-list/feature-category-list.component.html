@@ -1,0 +1,210 @@
+  <!-- Toolbar-->
+  @if(editable){
+    <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+      <h6 class="fs-base text-light mb-0">Listado de categorías:</h6>
+      <!-- <a class="btn btn-primary btn-sm"
+        routerLink="/account/signin"><i class="ci-sign-out me-2"></i>Sign out</a> -->
+    </div>
+  }
+
+  <!-- Basic accordion -->
+<div ngbAccordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  @for(data of categoryList$ | async;track $index){
+    <div ngbAccordionItem>
+      <h2 ngbAccordionHeader>
+        <div class="row">
+          <div class="col-8">
+            <span style="font-size: 14px;" class="px-4">{{data.description}}</span>
+          </div>
+
+          <div class="col-2 d-flex align-items-center justify-content-end">
+
+            <a class="nav-link-style me-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit"
+              (click)="editModal(content,data)"><i style="font-size: 14px;" class="ci-edit"></i>
+            </a>
+
+            <a class="nav-link-style text-danger" href="javascript:void(0);" data-bs-toggle="tooltip" title="Remove"
+              (click)="removeData($event)">
+              <i style="font-size: 14px;" class="ci-trash"></i>
+            </a>
+          </div>
+          <div class="col-2">
+            <button ngbAccordionButton>
+
+            </button>
+          </div>
+        </div>
+      </h2>
+
+      <div ngbAccordionCollapse>
+        <div ngbAccordionBody>
+          <ng-template>
+            <div class="table-responsive fs-md">
+                <table class="table table-hover fs-sm border-top">
+                <tbody>
+
+                    @for(child of data.childrens;  track $index){
+                     <tr>
+                       @if(selectable){
+                         <td>
+                           <div class="form-check mb-4">
+                             <input class="form-check-input" type="radio" id="{{child.id}}" name="shipping-method">
+                             <label class="form-check-label" for="{{child.id}}"></label>
+                           </div>
+                         </td>
+                       }
+                       <td class="py-3 align-middle">
+                         <span class="text-dark fw-medium">{{child.description}}</span>
+                       </td>
+                       @if(editable){
+
+                       <td class="py-3 align-middle">
+                         <a class="nav-link-style me-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit"
+                           (click)="editModal(content,data)"><i class="ci-edit"></i></a>
+                         <a class="nav-link-style text-danger" href="javascript:void(0);" data-bs-toggle="tooltip" title="Remove"
+                           (click)="removeData($event)">
+                           <i class="ci-trash"></i>
+                           <!-- <div class="ci-trash"></div> -->
+                         </a>
+                       </td>
+                     }
+                    }
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  }
+  </div>
+
+ <!-- Addresses list-->
+ <!-- <div class="table-responsive fs-md">
+     <table class="table table-hover fs-sm border-top">
+
+     <thead>
+       <tr>
+         @if(selectable){
+           <th class="align-middle"></th>
+         }
+         <th class="align-middle">Descripcion</th>
+         <th class="align-middle">Categoría padre</th>
+         @if(editable){
+           <th class="align-middle">Acciones</th>
+         }
+       </tr>
+     </thead>
+     <tbody>
+       @for(data of categoryList$ | async;track $index){
+         <tr>
+           @if(selectable){
+             <td>
+               <div class="form-check mb-4">
+                 <input class="form-check-input" type="radio" id="{{data.id}}" name="shipping-method">
+                 <label class="form-check-label" for="{{data.id}}"></label>
+               </div>
+             </td>
+           }
+           <td class="py-3 align-middle">
+             <span class="text-dark fw-medium">{{data.description}}</span>
+           </td>
+           <td class="py-3 align-middle">
+          </td>
+         @if(editable){
+
+           <td class="py-3 align-middle">
+             <a class="nav-link-style me-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit"
+               (click)="editModal(content,data)"><i class="ci-edit"></i></a>
+             <a class="nav-link-style text-danger" href="javascript:void(0);" data-bs-toggle="tooltip" title="Remove"
+               (click)="removeData($event)">
+               <div class="ci-trash"></div>
+             </a>
+           </td>
+         }
+         </tr>
+         @for(child of data.childrens;  track $index){
+          <tr>
+            @if(selectable){
+              <td>
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="radio" id="{{child.id}}" name="shipping-method">
+                  <label class="form-check-label" for="{{child.id}}"></label>
+                </div>
+              </td>
+            }
+            <td class="py-3 align-middle">
+              <span class="text-dark fw-medium">{{child.description}}</span>
+            </td>
+            <td class="py-3 align-middle">
+            <span class="text-dark fw-medium">{{data.description}}</span>
+            </td>
+            @if(editable){
+
+            <td class="py-3 align-middle">
+              <a class="nav-link-style me-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit"
+                (click)="editModal(content,data)"><i class="ci-edit"></i></a>
+              <a class="nav-link-style text-danger" href="javascript:void(0);" data-bs-toggle="tooltip" title="Remove"
+                (click)="removeData($event)">
+                <div class="ci-trash"></div>
+              </a>
+            </td>
+          }
+         }
+       }
+     </tbody>
+   </table>
+ </div> -->
+ @if(allowNew){
+   <div class="text-sm-end pt-4"><a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal"
+     (click)="OpenModal(content)">Agregar</a>
+   </div>
+ }
+<!--Modal-->
+<ng-template #content let-modal>
+ <div class="modal-content">
+   <form (ngSubmit)="saveUser()" [formGroup]="categoryForm">
+     <input type="hidden" name="id" value="" formControlName="id" />
+     <div class="modal-header">
+       <h5 class="modal-title">Agregar nueva categoría</h5>
+       <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
+         (click)="modal.dismiss('Cross click')"></button>
+     </div>
+     <div class="modal-body">
+      @if(categoryList$ | async; as categories){
+       <div class="row gx-4 gy-3">
+
+         <div class="col-sm-6">
+           <label class="form-label" for="description">Descripción</label>
+           <input class="form-control" type="text" id="description" formControlName="description">
+         </div>
+         <div class="col-sm-6">
+          <label class="form-label" for="unp-category">Categoría</label>
+
+            <select
+            class="form-select me-2"
+            id="unp-category"
+            formControlName="parentId"
+            >
+            <option value="0">Seleccionar categoría</option>
+            @for(category of categories;track $index){
+              <option [value]="category.id">{{category.description}}</option>
+            }
+          </select>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="address-primary" (change)="onCheckboxChange($event)">
+            <label class="form-check-label" for="address-primary">Es una subcategoría (se deberá seleccionar una categoría principal!)</label>
+          </div>
+        </div>
+       </div>
+      }
+     </div>
+     <div class="modal-footer">
+       <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+       <button class="btn btn-primary btn-shadow" type="submit">Guardar</button>
+     </div>
+   </form>
+ </div>
+</ng-template>

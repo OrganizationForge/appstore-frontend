@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { cartActions, CartService, ngrxCartQuery, Order, OrderItem, PaymentMethod, Shipping } from '@angular-monorepo/shared/cart-lib/data-access';
-import { ShippingMethod } from '@angular-monorepo/shared/shipping-lib/data-access';
+import { cartActions, CartService, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
+import { CartOrder, CartShipping, OrderItem } from 'libs/shared/cart-lib/data-access/src/models/cart-order.model';
 
 @Component({
   selector: 'lib-feature-checkout-review',
@@ -64,7 +64,7 @@ export class FeatureCheckoutReviewComponent implements OnInit {
 
     const orderItems : OrderItem[] = [];
 
-    const shipping : Shipping = {
+    const shipping : CartShipping = {
       shippingAddress: storedProducts.details.address,
       shippingMethodId: storedProducts.shipping.id
     }
@@ -87,7 +87,7 @@ export class FeatureCheckoutReviewComponent implements OnInit {
       });
 
     // save order logic here
-    const newOrder : Order = {
+    const newOrder : CartOrder = {
       shipping: shipping,
       orderItems: orderItems
     };

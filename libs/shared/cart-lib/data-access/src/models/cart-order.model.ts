@@ -1,10 +1,10 @@
-export interface Order {
-  shipping: Shipping,
+export interface CartOrder {
+  shipping: CartShipping,
   orderItems: OrderItem[]
 }
 
 
-export interface Shipping {
+export interface CartShipping {
   shippingAddress: string,
   shippingMethodId: string
 }

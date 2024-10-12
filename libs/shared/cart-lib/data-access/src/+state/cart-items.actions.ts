@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { CartProduct } from './cart-items.models';
-import { PaymentMethod } from '../models/payment-method.model';
+import { PaymentMethod } from '../../../../payment-lib/data-access/src/lib/models/payment-method.model';
 import { ShippingMethod } from '@angular-monorepo/shared/shipping-lib/data-access';
 import { CartUserDetail } from '../models/user-details.model';
 

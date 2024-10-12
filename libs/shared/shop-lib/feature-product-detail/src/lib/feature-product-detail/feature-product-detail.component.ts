@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category, NewProductComment, Product, ProductComment, ProductService,  } from '@angular-monorepo/shop-data-access';
+import { NewProductComment, Product, ProductComment, ProductService,  } from '@angular-monorepo/shop-data-access';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgbRatingModule, NgbAccordionModule, NgbTooltipModule, NgbModule, NgbNavItem, NgbModal, NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralInfoComponent } from '../general-info/general-info.component';

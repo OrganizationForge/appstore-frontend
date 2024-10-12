@@ -1,7 +1,7 @@
-import { ApiPagedResponse, ApiResponse, ApiService } from '@angular-monorepo/http-client';
+import { ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { Injectable, inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ShippingMethod } from '../models/shippingMethod.model';
+import { ShippingMethod } from '../models/shipping-method.model';
 
 @Injectable({
   providedIn: 'root'

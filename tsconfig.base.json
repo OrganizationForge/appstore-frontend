@@ -53,6 +53,12 @@
       "@angular-monorepo/product-slider": [
         "libs/shared/ui/product-slider-lib/src/index.ts"
       ],
+      "@angular-monorepo/shared/brand-lib/data-access": [
+        "libs/shared/brand-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/brand-lib/feature-brand-list": [
+        "libs/shared/brand-lib/feature-brand-list/src/index.ts"
+      ],
       "@angular-monorepo/shared/cart-lib/data-access": [
         "libs/shared/cart-lib/data-access/src/index.ts"
       ],
@@ -74,17 +80,32 @@
       "@angular-monorepo/shared/cart-lib/feature-checkout-shipping": [
         "libs/shared/cart-lib/feature-checkout-shipping/src/index.ts"
       ],
+      "@angular-monorepo/shared/category-lib/data-access": [
+        "libs/shared/category-lib/data-access/src/index.ts"
+      ],
       "@angular-monorepo/shared/category-lib/feature-category": [
         "libs/shared/category-lib/feature-category/src/index.ts"
       ],
+      "@angular-monorepo/shared/category-lib/feature-category-list": [
+        "libs/shared/category-lib/feature-category-list/src/index.ts"
+      ],
       "@angular-monorepo/shared/dashboard-lib/data-access": [
         "libs/shared/dashboard-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-brands": [
+        "libs/shared/dashboard-lib/feature-brands/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-categories": [
+        "libs/shared/dashboard-lib/feature-categories/src/index.ts"
       ],
       "@angular-monorepo/shared/dashboard-lib/feature-dashboard": [
         "libs/shared/dashboard-lib/feature-dashboard/src/index.ts"
       ],
       "@angular-monorepo/shared/dashboard-lib/feature-orders": [
         "libs/shared/dashboard-lib/feature-orders/src/index.ts"
+      ],
+      "@angular-monorepo/shared/dashboard-lib/feature-payment-options": [
+        "libs/shared/dashboard-lib/feature-payment-options/src/index.ts"
       ],
       "@angular-monorepo/shared/dashboard-lib/feature-payouts": [
         "libs/shared/dashboard-lib/feature-payouts/src/index.ts"
@@ -101,11 +122,20 @@
       "@angular-monorepo/shared/dashboard-lib/feature-settings": [
         "libs/shared/dashboard-lib/feature-settings/src/index.ts"
       ],
+      "@angular-monorepo/shared/dashboard-lib/feature-shipping-options": [
+        "libs/shared/dashboard-lib/feature-shipping-options/src/index.ts"
+      ],
       "@angular-monorepo/shared/dashboard-lib/feature-users": [
         "libs/shared/dashboard-lib/feature-users/src/index.ts"
       ],
       "@angular-monorepo/shared/dashboard-lib/feature-wishlist": [
         "libs/shared/dashboard-lib/feature-wishlist/src/index.ts"
+      ],
+      "@angular-monorepo/shared/payment-lib/data-access": [
+        "libs/shared/payment-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/payment-lib/feature-payment-list": [
+        "libs/shared/payment-lib/feature-payment-list/src/index.ts"
       ],
       "@angular-monorepo/shared/shipping-lib/data-access": [
         "libs/shared/shipping-lib/data-access/src/index.ts"

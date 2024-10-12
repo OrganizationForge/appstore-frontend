@@ -1,6 +1,6 @@
 import { ApiResponse, ApiService } from "@angular-monorepo/http-client";
 import { inject, Injectable } from "@angular/core";
-import { Order } from "../models/order.model";
+import { CartOrder } from "../models/cart-order.model";
 import { map, Observable } from "rxjs";
 
 @Injectable({
@@ -28,8 +28,8 @@ export class CartService {
   //   return this.apiService.get<ApiResponse<Product>>(`/v1/Products/${id}`);
   // }
 
-  createOrder(newOrder: Order): Observable<ApiResponse<number>> {
-    return this.apiService.post<ApiResponse<number>,Order>('/v1/Checkout/Orders', newOrder)
+  createOrder(newOrder: CartOrder): Observable<ApiResponse<number>> {
+    return this.apiService.post<ApiResponse<number>,CartOrder>('/v1/Checkout/Orders', newOrder)
     .pipe(
       map(res => {
         return res

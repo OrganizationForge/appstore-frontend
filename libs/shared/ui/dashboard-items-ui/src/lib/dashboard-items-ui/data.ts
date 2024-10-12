@@ -6,6 +6,12 @@ const DashboardItemsData = [
     icon: 'ci-dollar',
   },
   {
+    id: 5,
+    route: '/dashboard/payouts',
+    name: 'Pagos',
+    icon: 'ci-currency-exchange',
+  },
+  {
     id: 1,
     route: '/dashboard/product-list',
     name: 'Productos',
@@ -17,18 +23,13 @@ const DashboardItemsData = [
     name: 'Nuevo producto',
     icon: 'ci-cloud-upload ci-bag',
   },
-  {
-    id: 3,
-    route: '/dashboard/orders',
-    name: 'Ordenes',
-    icon: 'ci-bag',
-  },
-  {
-    id: 4,
-    route: '/dashboard/users',
-    name: 'Usuarios',
-    icon: 'ci-user',
-  },
+  // {
+  //   id: 3,
+  //   route: '/dashboard/orders',
+  //   name: 'Ordenes',
+  //   icon: 'ci-bag',
+  // },
+
   {
     id: 5,
     route: '/dashboard/shipping',
@@ -37,10 +38,29 @@ const DashboardItemsData = [
   },
   {
     id: 5,
-    route: '/dashboard/payouts',
-    name: 'Pagos',
-    icon: 'ci-currency-exchange',
+    route: '/dashboard/payment-options',
+    name: 'Metodos de pago',
+    icon: 'ci-money-bag',
   },
+  {
+    id: 5,
+    route: '/dashboard/brands',
+    name: 'Marcas',
+    icon: 'ci-bookmark',
+  },
+  {
+    id: 5,
+    route: '/dashboard/categories',
+    name: 'Categorias',
+    icon: 'ci-list',
+  },
+  // {
+  //   id: 4,
+  //   route: '/dashboard/users',
+  //   name: 'Usuarios',
+  //   icon: 'ci-user',
+  // },
+
 ];
 
 const ProfileItemsData = [
