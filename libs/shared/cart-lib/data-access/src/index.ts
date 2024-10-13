@@ -6,7 +6,7 @@ export * from './+state/cart-items.selectors';
 export * from './+state/cart-items.actions';
 export * from './+state/cart-items.reducer';
 export * from './models/user-details.model';
-export * from '../../../payment-lib/data-access/src/lib/models/payment-method.model';
+export * from './models/payment-method.model';
 export * from './models/cart-order.model';
 
 //servicees

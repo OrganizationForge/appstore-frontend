@@ -29,7 +29,7 @@ export class CartService {
   // }
 
   createOrder(newOrder: CartOrder): Observable<ApiResponse<number>> {
-    return this.apiService.post<ApiResponse<number>,CartOrder>('/v1/Checkout/Orders', newOrder)
+    return this.apiService.post<ApiResponse<number>,CartOrder>('/v1/Orders', newOrder)
     .pipe(
       map(res => {
         return res

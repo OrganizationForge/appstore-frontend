@@ -16,3 +16,8 @@ export interface Shipping {
   shippingAddress: string,
   shippingMethod: ShippingMethod,
 }
+
+export interface NewOrderStatus {
+  orderId: string,
+  status: number
+}

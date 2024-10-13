@@ -14,7 +14,7 @@ export class NumberSliderUiComponent {
   @Input() minValue!: number;
   @Input() maxValue!: number;
   @Input() floor: number = 0;
-  @Input() ceil: number = 4000;
+  @Input() ceil: number = 100000;
   @Input() step!: number;
   @Input() returnString!: string;
   @Output() send: EventEmitter<number[]> = new EventEmitter();

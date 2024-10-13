@@ -1,6 +1,5 @@
+import { Brand, Category } from "@angular-monorepo/shop-data-access";
 import { Availability } from "./availability.model";
-import { Brand } from "../../../../../brand-lib/data-access/src/lib/models/brand.model";
-import { Category } from "../../../../../category-lib/data-access/src/lib/models/category.model";
 import { ProductComment } from "./comment.model";
 
 export interface Product {

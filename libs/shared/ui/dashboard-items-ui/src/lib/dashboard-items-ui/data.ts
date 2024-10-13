@@ -11,12 +11,12 @@ const DashboardItemsData = [
     name: 'Pagos',
     icon: 'ci-currency-exchange',
   },
-  {
-    id: 1,
-    route: '/dashboard/product-list',
-    name: 'Productos',
-    icon: 'ci-package',
-  },
+  // {
+  //   id: 1,
+  //   route: '/dashboard/product-list',
+  //   name: 'Productos',
+  //   icon: 'ci-package',
+  // },
   {
     id: 2,
     route: '/dashboard/add-product',

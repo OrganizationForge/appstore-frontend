@@ -1,7 +1,7 @@
 import { ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { map, Observable } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
-import { PaymentMethod } from '../models/payment-method.model';
+import { PaymentMethod } from '../../../../../cart-lib/data-access/src/models/payment-method.model';
 
 
 @Injectable({
