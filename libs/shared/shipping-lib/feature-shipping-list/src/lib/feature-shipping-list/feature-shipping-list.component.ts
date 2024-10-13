@@ -62,7 +62,6 @@ export class FeatureShippingListComponent implements OnInit {
     this.cartShippingMethod$.pipe(
       map(res => {
         if (res) {
-          console.log(res);
           this.selectedSendMethod = res;
         }
       })

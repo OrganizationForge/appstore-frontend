@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { cartActions, CartService, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
-import { CartOrder, CartShipping, OrderItem } from 'libs/shared/cart-lib/data-access/src/models/cart-order.model';
+import { cartActions, CartOrder, CartService, CartShipping, ngrxCartQuery, OrderItem } from '@angular-monorepo/shared/cart-lib/data-access';
 
 @Component({
   selector: 'lib-feature-checkout-review',
@@ -92,7 +91,6 @@ export class FeatureCheckoutReviewComponent implements OnInit {
       orderItems: orderItems
     };
 
-  console.log(newOrder);
   this.cartService.createOrder(newOrder).subscribe((res) => {
     if (res.succeded) {
       // this.messageToast = 'Producto guardado correctamente.';

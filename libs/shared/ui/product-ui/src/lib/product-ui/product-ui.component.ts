@@ -18,6 +18,7 @@ import { AppToastService } from "@angular-monorepo/shared/ui/toast-ui";
 export class ProductUiComponent {
 
   @Input() data: any;
+  @Input() layout!: string;
   @ViewChild('successToast', { static: true }) template!: TemplateRef<any>;
   messageToast! : string;
   toastService = inject(AppToastService);

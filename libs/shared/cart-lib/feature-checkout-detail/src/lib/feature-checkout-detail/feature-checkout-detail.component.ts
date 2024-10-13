@@ -42,7 +42,6 @@ export class FeatureCheckoutDetailComponent implements OnInit {
     this.cartUseDetails$.pipe(
       map(res => {
         if (res) {
-          console.log(res);
           this.userForm.patchValue({
             checkoutFn: res.firstName,
             checkoutLn: res.lastName,
@@ -96,7 +95,6 @@ export class FeatureCheckoutDetailComponent implements OnInit {
         zipCode: this.userForm.get('checkoutZip')?.value,
         address: this.userForm.get('checkoutAddress')?.value,
       }
-      console.log(dataUser);
       this.store.dispatch(cartActions.postUserDetail({userDetail: dataUser}));
       this.router.navigate(['/cart/checkout-shipping'])
     }

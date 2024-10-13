@@ -83,7 +83,6 @@ export class HeaderComponent implements OnInit {
     this.cartItems$ = this.store.select(ngrxCartQuery.selectProducts).pipe();
     this.cartTotal$ = this.store.select(ngrxCartQuery.selectTotal).pipe();
 
-    console.log( this.cartTotal$ )
 
     // Language set
     // this.cookieValue = this._cookiesService.get('lang');
@@ -109,18 +108,12 @@ export class HeaderComponent implements OnInit {
 
     this.cartItems$.pipe(
       map(res => {
-        console.log(res)
         res.forEach((element: CartProduct) => {
-          console.log(element.total)
           this.subTotal += element.total ? element.total : 0
         });
       })
     )
 
-    // this.cartItems$.forEach((element: any) => {
-    //   console.log(element);
-    //   this.subTotal += parseFloat(element.price)
-    // });
     return this.subTotal.toFixed(2)
   }
 

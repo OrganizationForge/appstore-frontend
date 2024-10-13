@@ -83,12 +83,10 @@ export class FeatureProductDetailComponent implements OnInit {
     this.detailProduct$ = this.productService.getProduct(this.productId).pipe(
       map( res => {
         if (res.succeded){
-          console.log(res);
           this.dataContent = JSON.parse(res.data.description);
           return res.data
         }
         else{
-          console.log(res.data);
           return null
         }
       })
@@ -143,7 +141,6 @@ export class FeatureProductDetailComponent implements OnInit {
       productId: this.productId
     };
 
-    console.log(newComment);
 
     this.productService.createComment(newComment).subscribe((res) => {
       if (res.succeded) {
@@ -217,7 +214,6 @@ export class FeatureProductDetailComponent implements OnInit {
   filterImg(e: any, image: any) {
     document.querySelectorAll('.product-gallery-thumblist a').forEach(element => {
       element.classList.remove('active')
-      console.log(element);
     });
     const img: any = (document.querySelector('#first img') as HTMLImageElement);
     img.src = image;

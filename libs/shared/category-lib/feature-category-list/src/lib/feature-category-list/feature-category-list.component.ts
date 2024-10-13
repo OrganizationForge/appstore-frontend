@@ -83,7 +83,6 @@ export class FeatureCategoryListComponent implements OnInit {
         parentId: this.categoryForm.get('parentId')?.value || null,
       }
 
-      console.log(newCategory)
 
       if (this.categoryForm.get('id')?.value) {
         //Aca iria el update

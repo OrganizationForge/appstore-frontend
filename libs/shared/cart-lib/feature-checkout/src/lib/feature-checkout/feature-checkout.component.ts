@@ -77,7 +77,6 @@ export class FeatureCheckoutComponent implements OnInit {
       map(res => {
         res.forEach((element: CartProduct) => {
 
-          console.log(element.price)
           element.total = element.price;
           element.qty = 1;
           this.subTotal += element.price
@@ -128,8 +127,6 @@ export class FeatureCheckoutComponent implements OnInit {
       this.store.dispatch(cartActions.postComment({comment: comment}));
       this.router.navigate(['/cart/checkout-details'])
     }
-    else
-    console.log('invalid form');
   }
 
   // convenience getter for easy access to form fields

@@ -168,7 +168,6 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
     const reader = new FileReader();
     reader.onload = () => {
       this.imageURL = reader.result as string;
-      console.log(this.imageURL);
     };
     reader.readAsDataURL(file);
   }
@@ -184,7 +183,6 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
     this.editor.save().then((outputData) => {
 
       const productFiles: NewProductFile[] = this.mapFilesToNewProductFiles(this.files);
-      console.log(outputData);
       const newProduct: NewProduct = {
         productName: this.productForm.value.productName,
         description: JSON.stringify(outputData),
@@ -200,7 +198,6 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
         barcode: this.productForm.value.barcode
       };
 
-      console.log(newProduct);
 
       this.productService.createProduct(newProduct).subscribe((res) => {
         if (res.succeded) {
@@ -271,7 +268,6 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
-    console.log(this.files);
 
   }
 

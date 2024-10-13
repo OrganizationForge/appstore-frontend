@@ -34,7 +34,7 @@ export class FeatureMenuComponent implements OnInit {
   * On menu click
   */
   onMenuClick(event: any) {
-    console.log('hkj')
+    ('hkj')
     const target = event.target as HTMLElement;
 
     if (target && target.nextElementSibling instanceof HTMLElement) {

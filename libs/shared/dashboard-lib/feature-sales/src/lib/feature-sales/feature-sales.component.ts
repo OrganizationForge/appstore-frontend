@@ -81,15 +81,12 @@ export class FeatureSalesComponent implements OnInit{
    * @param orderId scroll modal data
    */
    orderModal(ordertDetailModal: any, orderId : string) {
-    console.log(orderId);
     this.orderDetail$ = this.orderService.getOrder(orderId).pipe(
       map( res => {
         if (res.succeded){
-          console.log(res);
           return res.data
         }
         else{
-          console.log(res.data);
           return null
         }
       })

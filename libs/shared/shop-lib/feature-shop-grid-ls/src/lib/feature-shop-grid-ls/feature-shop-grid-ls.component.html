@@ -40,10 +40,10 @@
           <lib-number-slider-ui
             [title]="'Precio'"
             [floor]="0"
-            [ceil]="3000"
-            [step]="100"
-            [minValue]="100"
-            [maxValue]="1200"
+            [ceil]="8000"
+            [step]="10000"
+            [minValue]="1000"
+            [maxValue]="40000"
             [returnString]="'$'"
             (send)="filterPrice($event)"
           ></lib-number-slider-ui>
@@ -126,16 +126,16 @@
       <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
         <div class="d-flex flex-wrap">
           <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
-            <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sort by:</label>
+            <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Ordenar por:</label>
             <select class="form-select" id="sorting">
-              <option>Popularity</option>
-              <option>Low - Hight Price</option>
-              <option>High - Low Price</option>
-              <option>Average Rating</option>
-              <option>A - Z Order</option>
-              <option>Z - A Order</option>
-            </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of {{totalRecords}}
-              products</span>
+              <option>Mas populares</option>
+              <option>Menor - Mayor Precio</option>
+              <option>Mayor - Menor Precio</option>
+              <!-- <option>Average Rating</option> -->
+              <!-- <option>A - Z Order</option>
+              <option>Z - A Order</option> -->
+            </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">de {{totalRecords}}
+              productos</span>
           </div>
         </div>
         <div class="d-flex pb-3"><a class="nav-link-style nav-link-light me-3" href="javascript:void(0);"><i
@@ -153,8 +153,9 @@
         <!-- Product-->
         @if(gridList$ | async; as productList;){
           @for(data of productList;track $index){
+            <!-- <lib-product-ui [data]="data" [layout]="'list'"></lib-product-ui> -->
           <div class="col-md-4 col-sm-6 px-2 mb-4">
-              <lib-product-ui [data]="data"></lib-product-ui>
+            <lib-product-ui [data]="data" [layout]="'grid'"></lib-product-ui>
           </div>
           }
 
@@ -162,7 +163,7 @@
         }
         @else{
           <div class="spinner-border text-primary" role="status" >
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">Cargando...</span>
           </div>
         }
       </div>
@@ -183,8 +184,8 @@
         <div class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
           <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
             <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
-            <h3 class="mb-4">Make Your Day Comfortable</h3><a class="btn btn-primary btn-shadow btn-sm"
-              href="javascript:void(0);">Shop Now</a>
+            <h3 class="mb-4">Hace tu día mas confortable</h3><a class="btn btn-primary btn-shadow btn-sm"
+              href="javascript:void(0);">Comprar ahora</a>
           </div><img class="d-block ms-auto" src="assets/img/shop/catalog/banner.jpg" alt="Shop Converse">
         </div>
       </div>

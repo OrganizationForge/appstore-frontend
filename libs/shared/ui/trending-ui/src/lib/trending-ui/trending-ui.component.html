@@ -5,7 +5,7 @@
     <!-- Product-->
     @for(data of itemsData;track $index){
       <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-        <lib-product-ui [data]="data"></lib-product-ui>
+        <lib-product-ui [data]="data" [layout]="'grid'"></lib-product-ui>
       </div>
   }
   </div>
@@ -61,7 +61,7 @@
             <del class="text-muted fs-lg me-3">${{singleData.discount}}</del>
             }
 
-            @if(singleData.id == '2'){
+            @if(singleData.id === '2'){
             <span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
             }
           </div>

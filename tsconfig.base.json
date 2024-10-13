@@ -137,6 +137,12 @@
       "@angular-monorepo/shared/payment-lib/feature-payment-list": [
         "libs/shared/payment-lib/feature-payment-list/src/index.ts"
       ],
+      "@angular-monorepo/shared/profile-lib/data-access": [
+        "libs/shared/profile-lib/data-access/src/index.ts"
+      ],
+      "@angular-monorepo/shared/profile-lib/feature-user-profile": [
+        "libs/shared/profile-lib/feature-user-profile/src/index.ts"
+      ],
       "@angular-monorepo/shared/shipping-lib/data-access": [
         "libs/shared/shipping-lib/data-access/src/index.ts"
       ],
@@ -154,6 +160,9 @@
       ],
       "@angular-monorepo/shared/shop-lib/feature-shop-grid-ls": [
         "libs/shared/shop-lib/feature-shop-grid-ls/src/index.ts"
+      ],
+      "@angular-monorepo/shared/shop-lib/feature-shop-list-ls": [
+        "libs/shared/shop-lib/feature-shop-list-ls/src/index.ts"
       ],
       "@angular-monorepo/shared/ui/brand-logos-ui": [
         "libs/shared/ui/brand-logos-ui/src/index.ts"
