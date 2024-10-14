@@ -48,8 +48,13 @@ export class FeatureShopGridLsComponent implements OnInit {
       this.searchTerm = params['searchTerm'];
     });
 
+    let filter = "";
+    if(this.searchTerm != undefined && this.searchTerm != '')
+        filter = `ProductName=${this.searchTerm}&PageNumber=${this.page}&PageSize=${this.pageSize}`;
+      else
+        filter = `PageNumber=${this.page}&PageSize=${this.pageSize}`;
 
-    this.gridList$ = this.productService.getProducts(`ProductName=${this.searchTerm}&PageNumber=${this.page}&PageSize=${this.pageSize}`)
+    this.gridList$ = this.productService.getProducts(filter)
       .pipe(
         map(res => {
           if (res.succeded) {
@@ -60,8 +65,8 @@ export class FeatureShopGridLsComponent implements OnInit {
             return []
         })
       );
-    this.categoryList$ = this.productService.getCategories();
-    this.brandsList$ = this.productService.getBrands();
+    this.categoryList$ = this.productService.getCategories().pipe();
+    this.brandsList$ = this.productService.getBrands().pipe();
 
     this.AllGridlists = Object.assign([], this.gridList$);
     this.AllGridSize = Object.assign([]);
