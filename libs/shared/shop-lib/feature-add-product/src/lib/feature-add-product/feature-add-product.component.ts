@@ -276,9 +276,36 @@ export class FeatureAddProductComponent implements OnInit, AfterViewInit{
     const priceBase = this.productForm.get('priceBase')?.value;
 
     this.productForm.patchValue({
-      price: Number(priceBase / (1 - percent / 100)).toFixed(2),
+      price: Number(priceBase * (1 + percent / 100)).toFixed(2),
     });
   }
+
+  // onSelectChange() {
+  //   const percent = this.productForm.get('pricePercent')?.value;
+  //   const priceFinal = this.productForm.get('price')?.value;
+  //   const priceBase = this.productForm.get('priceBase')?.value;
+
+  //   // Si alguno de los valores cambia, realizamos los cálculos necesarios
+  //   if (priceFinal || priceBase || percent) {
+  //     // Calcular precio final si cambia el precio base o el porcentaje
+  //     if (priceBase && percent) {
+  //       const calculatedPriceFinal = priceBase * (1 + percent / 100);
+  //       this.productForm.patchValue({
+  //         price: calculatedPriceFinal.toFixed(2)
+  //       });
+  //     }
+
+  //     // Calcular porcentaje si cambia el precio final y el precio base
+  //     if (priceFinal && priceBase) {
+  //       const calculatedPercent = ((priceFinal / priceBase - 1) * 100).toFixed(2);
+  //       this.productForm.patchValue({
+  //         pricePercent: calculatedPercent
+  //       });
+  //     }
+  //   }
+  // }
+
+
 
 
 
