@@ -84,6 +84,7 @@ export class FeatureCheckoutDetailComponent implements OnInit {
 
   save() {
 
+    this.submitted = true;
     if (this.userForm.valid) {
       const dataUser : CartUserDetail = {
 
@@ -101,6 +102,5 @@ export class FeatureCheckoutDetailComponent implements OnInit {
     else
     console.log('invalid form');
     // this.userForm.reset();
-    // this.submitted = true;
   }
 }
