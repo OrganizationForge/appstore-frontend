@@ -23,8 +23,10 @@ export class OrderSummaryUiComponent implements OnInit {
   submitted = false;
   cartItems$ = this.store.select(ngrxCartQuery.selectProducts);
   cartTotal$ = this.store.select(ngrxCartQuery.selectTotal);
+  shipping$ = this.store.select(ngrxCartQuery.selectShipping);
 
   totalOrder = 0;
+  shippingPrice = 0;
 
   constructor(private formBuilder: UntypedFormBuilder){}
 
@@ -35,6 +37,10 @@ export class OrderSummaryUiComponent implements OnInit {
 
     this.cartTotal$.subscribe(total => {
       this.totalOrder = this.totalOrder + total;
+    });
+
+    this.shipping$.subscribe(ship => {
+      this.shippingPrice = this.totalOrder + (ship?.price || 0);
     });
   }
 
