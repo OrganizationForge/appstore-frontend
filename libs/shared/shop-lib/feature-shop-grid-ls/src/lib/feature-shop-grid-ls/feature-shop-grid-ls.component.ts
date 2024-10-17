@@ -7,15 +7,20 @@ import { Observable, map } from 'rxjs';
 import { FilterCheckedComponent, FilterCollapseComponent } from '@angular-monorepo/shared/ui/filter-ui';
 import { NumberSliderUiComponent } from '@angular-monorepo/shared/ui/number-slider-ui';
 import { ActivatedRoute } from '@angular/router';
+import { ChangeContext, NgxSliderModule, Options } from 'ngx-slider-v2';
 
 @Component({
   selector: 'lib-feature-shop-grid-ls',
   standalone: true,
-  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, FilterCheckedComponent, NumberSliderUiComponent],
+  imports: [CommonModule, ProductUiComponent, NgbPaginationModule, FilterCollapseComponent, FilterCheckedComponent, NumberSliderUiComponent, NgxSliderModule],
   templateUrl: './feature-shop-grid-ls.component.html',
   styleUrl: './feature-shop-grid-ls.component.scss',
 })
 export class FeatureShopGridLsComponent implements OnInit {
+
+  minValue =  4000;
+  maxValue = 35000;
+
   // Table data
   content?: any;
   // Gridlists?: any;
@@ -79,6 +84,28 @@ export class FeatureShopGridLsComponent implements OnInit {
       document.querySelector('.sidebar-filter')?.classList.remove('d-none')
     }, 0);
 
+  }
+
+  options: Options = {
+    floor: 0,
+    ceil: 100000,
+    step: 1000,
+    // translate: (value: number): string => {
+    //   return this.returnString + value;
+    // }
+  };
+
+  valueChange(value: number, boundary: boolean): void {
+    if (boundary) {
+      this.minValue = value;
+    } else {
+      this.maxValue = value;
+    }
+  }
+
+  onUserChangeEnd(changeContext: ChangeContext): void {
+    this.filterPrice([changeContext.value, changeContext.highValue != undefined ?  changeContext.highValue : this.maxValue]);
+    // this.send.emit([changeContext.value, changeContext.highValue != undefined ?  changeContext.highValue : this.maxValue]);
   }
 
   // Pagination data get

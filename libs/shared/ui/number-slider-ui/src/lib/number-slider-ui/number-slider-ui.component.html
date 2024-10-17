@@ -1,7 +1,10 @@
 <div class="widget mb-4 pb-4 border-bottom">
   <h3 class="widget-title">{{title}}</h3>
-    <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
+    <!-- <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
       (valueChange)="valueChange($event,true)" (highValueChange)="valueChange($event,false)" (userChangeEnd)="onUserChangeEnd($event)"
+      class="range-slider-ui">
+    </ngx-slider> -->
+    <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
       class="range-slider-ui">
     </ngx-slider>
     <div class="d-flex pb-1">

@@ -28,17 +28,17 @@
 
             <li class="d-flex justify-content-between align-items-center"><span class="me-2">Envío:</span><span class="text-end">${{shippingPrice}}</span></li>
 
-          <li class="d-flex justify-content-between align-items-center"><span class="me-2">Descuento:</span><span class="text-end">—</span></li>
+          <!-- <li class="d-flex justify-content-between align-items-center"><span class="me-2">Descuento:</span><span class="text-end">—</span></li> -->
         </ul>
       }
       <h3 class="fw-normal text-center my-4">${{totalOrder + shippingPrice}}</h3>
-      <form class="needs-validation" method="post" novalidate [formGroup]="promocodeForm" (ngSubmit)="onSubmit()">
+      <!-- <form class="needs-validation" method="post" novalidate [formGroup]="promocodeForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <input class="form-control" type="text" placeholder="Código promo" required formControlName="name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }">
           <div class="invalid-feedback">Please provide promo code.</div>
         </div>
         <button class="btn btn-outline-primary d-block w-100" type="submit">Aplicar código de promo</button>
-      </form>
+      </form> -->
     </div>
   </div>
 

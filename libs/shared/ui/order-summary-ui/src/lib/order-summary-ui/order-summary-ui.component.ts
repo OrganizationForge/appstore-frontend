@@ -40,7 +40,7 @@ export class OrderSummaryUiComponent implements OnInit {
     });
 
     this.shipping$.subscribe(ship => {
-      this.shippingPrice = this.totalOrder + (ship?.price || 0);
+      this.shippingPrice = ship?.price || 0;
     });
   }
 

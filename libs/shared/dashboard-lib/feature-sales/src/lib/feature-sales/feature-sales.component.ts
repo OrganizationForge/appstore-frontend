@@ -10,6 +10,8 @@ import { AccountListService } from './account-list.service';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { NewOrderStatus, Order, OrderService } from "@angular-monorepo/shared/dashboard-lib/data-access";
 import { StatusColorDirectoryDirective } from './status-color-directory.directive';
+import { FlatpickrModule } from 'angularx-flatpickr';
+
 
 
 
@@ -19,7 +21,7 @@ type NewType = UntypedFormGroup;
 @Component({
   selector: 'lib-feature-sales',
   standalone: true,
-  imports: [CommonModule, NgApexchartsModule, NgbPagination, FormsModule, StatusColorDirectoryDirective, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, NgApexchartsModule, NgbPagination, FormsModule, StatusColorDirectoryDirective, RouterLink, ReactiveFormsModule, FlatpickrModule ],
   providers: [AccountListService, DecimalPipe],
   templateUrl: './feature-sales.component.html',
   styleUrl: './feature-sales.component.scss',
