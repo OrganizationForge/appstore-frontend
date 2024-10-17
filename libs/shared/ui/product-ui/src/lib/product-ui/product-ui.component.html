@@ -88,7 +88,7 @@
           <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Agregar a favs" (click)="addToWishlist(data);"><i class="ci-heart"></i></button>
           <!-- <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" placement="left" ngbTooltip="Add to wishlist"><i class="ci-heart"></i></button> -->
           <div class="d-sm-flex align-items-center">
-            <a class="product-list-thumb" [routerLink]="['/shop/product-detail/', data.id]"><img class="img-product" src="{{data.productFiles[0].urlImage || ''}}" alt="Product"></a>
+            <a class="product-list-thumb" [routerLink]="['/shop/product-detail/', data.id]"><img style="min-height: 335px; max-height: 335px;" src="{{data.productFiles[0].urlImage || ''}}" alt="Product"></a>
             <div class="card-body py-2">
               <a class="product-meta d-block fs-xs pb-1" href="javascript:void(0);">{{data.category.description}}</a>
               <h3 class="product-title fs-base"><a [routerLink]="['/shop/product-detail/', data.id]">{{data.productName}}</a></h3>
