@@ -4,6 +4,8 @@ export * from './lib/services/local-storage-jwt.service';
 export * from './lib/services/auth.service';
 export * from './lib/services/auth-guard';
 
+export * from './lib/models/user';
+
 export { AuthStore } from './lib/+state/auth.store';
 
 export * from './lib/+state/auth.actions';

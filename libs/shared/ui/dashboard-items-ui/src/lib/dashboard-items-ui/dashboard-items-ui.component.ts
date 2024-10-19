@@ -1,11 +1,11 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItemsData, ProfileItemsData } from './data';
 
-import { AuthStore, ngrxAuthQuery } from '@angular-monorepo/auth-data-access';
+import { authActions, AuthStore, LocalStorageJwtService, ngrxAuthQuery, User } from '@angular-monorepo/auth-data-access';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -30,6 +30,8 @@ export class DashboardItemsUiComponent implements OnInit {
   currentUser$! : Observable<any>;
 
   private readonly store = inject(Store);
+  private readonly localStorageService = inject(LocalStorageJwtService);
+  private readonly router = inject(Router);
 
 
 
@@ -44,6 +46,24 @@ export class DashboardItemsUiComponent implements OnInit {
   }
 
   logout() {
-    this.authStore.logout();
+    // this.authStore.logout();
+
+    const emptyUser: User = {
+      userName: '',
+      nombre: '',
+      apellido: '',
+      email: '',
+      jwToken: '',
+      isVerified: false,
+      roles: [],
+      urlImage: '',
+    };
+
+
+    this.store.dispatch(authActions.setData({data: emptyUser, loggedIn: false}));
+
+    this.localStorageService.removeItem();
+    this.router.navigateByUrl('home');
+
   }
 }
