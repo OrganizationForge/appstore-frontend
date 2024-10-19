@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FeatureMenuComponent } from '@angular-monorepo/feature-menu';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { AuthStore, LocalStorageJwtService } from '@angular-monorepo/auth-data-access';
+import { AuthStore, LocalStorageJwtService, ngrxAuthQuery } from '@angular-monorepo/auth-data-access';
 import { Store } from '@ngrx/store';
 import { cartActions, CartProduct, ngrxCartQuery } from '@angular-monorepo/shared/cart-lib/data-access';
 import { filter, map, Observable, take } from 'rxjs';
@@ -58,7 +58,8 @@ export class HeaderComponent implements OnInit {
 
   cartItems$! : Observable<CartProduct[]>;
   cartTotal$! : Observable<number>;
-  isAuthenticated$ =  this.authStore.loggedIn;
+  isAuthenticated$ =   this.store.select(ngrxAuthQuery.selectLoggedIn).pipe();
+  // isAuthenticated$ =  this.authStore.loggedIn;
 
 
   // constructor(private router: Router, private modalService: NgbModal, private formBuilder: UntypedFormBuilder, public languageService: LanguageService,

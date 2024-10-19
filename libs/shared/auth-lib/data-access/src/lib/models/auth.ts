@@ -12,11 +12,6 @@ export interface NewUser {
   confirmPassword: string;
 }
 
-export interface LoginUserRequest {
-  email: string;
-  password: string;
-}
-
 export interface LoginUser {
   email: string;
   password: string;

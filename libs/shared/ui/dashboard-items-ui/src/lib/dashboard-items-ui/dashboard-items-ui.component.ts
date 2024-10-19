@@ -5,7 +5,9 @@ import { RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItemsData, ProfileItemsData } from './data';
 
-import { AuthStore } from '@angular-monorepo/auth-data-access';
+import { AuthStore, ngrxAuthQuery } from '@angular-monorepo/auth-data-access';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 
 
@@ -25,9 +27,20 @@ export class DashboardItemsUiComponent implements OnInit {
   dashboardItems: any;
   profileItems: any;
 
+  currentUser$! : Observable<any>;
+
+  private readonly store = inject(Store);
+
+
+
+
   ngOnInit(): void {
     this.dashboardItems = DashboardItemsData;
     this.profileItems = ProfileItemsData;
+
+
+    this.currentUser$ = this.store.select(ngrxAuthQuery.selectData).pipe();
+
   }
 
   logout() {

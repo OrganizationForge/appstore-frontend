@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthStore, authActions, ngrxAuthQuery } from "@angular-monorepo/auth-data-access";
@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './feature-login.component.html',
   styleUrl: './feature-login.component.css',
 })
-export class FeatureLoginComponent implements OnInit, OnDestroy {
+export class FeatureLoginComponent implements OnInit {
   private readonly authStore = inject(AuthStore);
   private readonly store = inject(Store);
 
@@ -64,14 +64,14 @@ export class FeatureLoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.invalid) {
       return;
     }
-    this.store.dispatch(authActions.updateData({ data: this.loginForm.value }));
+    this.store.dispatch(authActions.setLoginData({ data: this.loginForm.value }));
     this.authStore.login();
   }
 
 
-  ngOnDestroy() {
-    this.store.dispatch(authActions.initializeForm());
-  }
+  // ngOnDestroy() {
+  //   this.store.dispatch(authActions.initializeForm());
+  // }
 
   //------------------ Sign Up Form ---------------------//
 
@@ -88,7 +88,7 @@ export class FeatureLoginComponent implements OnInit, OnDestroy {
     if (this.SignupForm.invalid) {
       return;
     }
-    this.store.dispatch(authActions.updateData({ data: this.SignupForm.value }));
+    this.store.dispatch(authActions.setLoginData({ data: this.SignupForm.value }));
     this.authStore.register();
   }
 }

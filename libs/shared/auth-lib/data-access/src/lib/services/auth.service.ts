@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse, ApiService } from '@angular-monorepo/http-client';
 import { User } from '../models/user';
-import { LoginUser, LoginUserRequest, NewUser } from '../models/auth';
+import { LoginUser, NewUser } from '../models/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   login(credentials: LoginUser): Observable<ApiResponse<User>> {
-    return this.apiService.post<ApiResponse<User>, LoginUserRequest>('/v1/Account/authenticate', { email: credentials.email, password: credentials.password });
+    return this.apiService.post<ApiResponse<User>, LoginUser>('/v1/Account/authenticate', { email: credentials.email, password: credentials.password });
   }
 
   register(credentials: NewUser): Observable<ApiResponse<User>> {

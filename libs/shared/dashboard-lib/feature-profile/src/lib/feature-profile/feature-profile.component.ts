@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { ngrxAuthQuery } from '@angular-monorepo/auth-data-access';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-feature-profile',
@@ -8,12 +12,18 @@ import { CommonModule } from '@angular/common';
   templateUrl: './feature-profile.component.html',
   styleUrl: './feature-profile.component.css',
 })
-export class FeatureProfileComponent {
+export class FeatureProfileComponent implements OnInit {
   NPasswordType!: boolean;
   CPasswordType!: boolean;
   public isCollapsed = true;
+  currentUser$! : Observable<any>;
 
-  constructor() { }
+  private readonly store = inject(Store);
+
+  ngOnInit(): void {
+    this.currentUser$ = this.store.select(ngrxAuthQuery.selectData).pipe();
+  }
+
 
 
   /**

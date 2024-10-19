@@ -49,7 +49,7 @@ const structure: Field[] = [
   templateUrl: './feature-category.component.html',
   styleUrl: './feature-category.component.scss',
 })
-export class FeatureCategoryComponent implements OnInit {
+export class FeatureCategoryComponent{
   private readonly store = inject(Store);
 
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
@@ -58,11 +58,11 @@ export class FeatureCategoryComponent implements OnInit {
   data$ = '';
   touchedForm$ = '';
 
-  structure$ = this.store.select(ngrxAuthQuery.selectStructure);
+  // structure$ = this.store.select(ngrxAuthQuery.selectStructure);
 
-  ngOnInit() {
-    this.store.dispatch(authActions.setStructure({ structure }));
-  }
+  // ngOnInit() {
+  //   this.store.dispatch(authActions.setStructure({ structure }));
+  // }
   // updateForm(changes: any) {
   //   // this.store.dispatch(formsActions.updateData({ data: changes }));
   // }

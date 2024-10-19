@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { notification, paymentcards } from '@angular-monorepo/shared/dashboard-lib/data-access';
+
+import { ngrxAuthQuery } from '@angular-monorepo/auth-data-access';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-feature-settings',
@@ -18,15 +22,22 @@ export class FeatureSettingsComponent implements OnInit {
   public isCollapsed = true;
 
   cardForm!: UntypedFormGroup;
+  userForm!: UntypedFormGroup;
   masterSelected!: boolean;
   submitted = false;
   allnotification: any;
   allpayment: any;
 
+  currentUser$! : Observable<any>;
+
+  private readonly store = inject(Store);
+
+
+
   constructor(private modalService: NgbModal, private formBuilder: UntypedFormBuilder,) { }
 
   ngOnInit(): void {
-
+    this.currentUser$ = this.store.select(ngrxAuthQuery.selectData).pipe();
     // When the user clicks on the button, scroll to the top of the document
     document.documentElement.scrollTop = 0;
 
@@ -42,6 +53,30 @@ export class FeatureSettingsComponent implements OnInit {
       card_no: ['', [Validators.required]],
     });
 
+    this.userForm = this.formBuilder.group({
+      ids: [''],
+      accountFn: ['', [Validators.required]],
+      accountLn: ['', [Validators.required]],
+      accountEmail: ['', [Validators.required]],
+      accountPhone: ['', [Validators.required]],
+      accountPassword: [''],
+      accountConfirmPassword: [''],
+    });
+
+    this.currentUser$.pipe(
+      map(res => {
+        if (res) {
+          this.userForm.patchValue({
+            ids: res.id,
+            accountFn:  res.nombre,
+            accountLn:  res.apellido,
+            accountEmail:  res.email,
+            accountPhone:  '123456',
+          });
+        }
+      })
+    ).subscribe()
+
     // Fetch Data
     this.allnotification = notification
     this.allpayment = paymentcards
@@ -52,6 +87,10 @@ export class FeatureSettingsComponent implements OnInit {
   */
   get form() {
     return this.cardForm.controls;
+  }
+
+  get formUser() {
+    return this.userForm.controls;
   }
 
   // The master checkbox will check/ uncheck all items

@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { AuthService } from './auth.service';
-import { AuthStore } from '../auth.store';
+import { AuthStore } from '../+state/auth.store';
 import { Router, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
