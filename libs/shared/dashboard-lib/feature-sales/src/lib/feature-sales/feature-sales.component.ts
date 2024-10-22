@@ -170,4 +170,30 @@ export class FeatureSalesComponent implements OnInit{
       this.stateForm.reset();
       this.submitted = true;
     }
+
+    downloadOrder( data: any) {
+      this.orderService.downloadOrderPdf(data.id).subscribe((pdfBlob: Blob) => {
+        const blobUrl = URL.createObjectURL(pdfBlob);
+        window.open(blobUrl); // Abre el PDF en una nueva pestaña
+      });
+      // this.orderService.downloadOrderPdf(data.id).subscribe(
+      //   (blob) => {
+      //     const url = window.URL.createObjectURL(blob);
+      //     const a = document.createElement('a');
+      //     a.href = url;
+      //     a.download = `order_${data.id}.pdf`;
+      //     a.click();
+      //     window.URL.revokeObjectURL(url); // Clean up memory leak
+      //   },
+      //   (error) => {
+      //     console.log(error)
+      //   }
+      // );
+      // this.orderService.downloadOrderPdf(data.id).subscribe((res) => {
+      //   if (res.succeded) {
+      //     alert('impresion ok');
+      //   }
+      //   else res.errors;
+      // });
+    }
 }

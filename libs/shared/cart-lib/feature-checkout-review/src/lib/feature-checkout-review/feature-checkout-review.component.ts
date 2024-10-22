@@ -102,7 +102,7 @@ export class FeatureCheckoutReviewComponent implements OnInit {
       this.openWhatsApp(message);
       this.store.dispatch(cartActions.clearCart());
       localStorage.removeItem('cart');
-      this.router.navigate(['/cart/checkout-complete']);
+      this.router.navigate(['/cart/checkout-complete/' + res.data]);
     }
     else res.errors;
     });

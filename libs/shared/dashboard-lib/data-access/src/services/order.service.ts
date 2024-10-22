@@ -32,4 +32,13 @@ export class OrderService {
     )
   }
 
+  downloadOrderPdf(idOrder: string): Observable<Blob> {
+    return this.apiService.get('/v1/Orders/pdf/' + idOrder, { responseType: 'blob' })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
 }

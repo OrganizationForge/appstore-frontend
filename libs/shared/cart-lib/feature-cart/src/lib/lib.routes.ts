@@ -36,7 +36,7 @@ export const featureCartRoutes: Route[] = [
     ]
   },
   {
-    path: 'checkout-complete',
+    path: 'checkout-complete/:orderId',
     component: CheckoutCompleteComponent
   }
 ];

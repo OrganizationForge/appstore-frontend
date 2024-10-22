@@ -7,7 +7,7 @@
         <p class="fs-sm mb-2">Asegúrese de tomar nota de su número de pedido, que es <span class='fw-medium'>34VB5540K83.</span></p>
         <p class="fs-sm">En breve recibirás un correo electrónico con la confirmación de tu pedido y el recibo de compra. <u>Ahora podes:</u></p>
         <a class="btn btn-secondary mt-3 me-3" routerLink="/shop/grid-ls">Volver a comprar</a>
-        <a class="btn btn-secondary mt-3 me-3"> <i class="ci-cloud-download"></i>  Descargar comprobante</a>
+        <a class="btn btn-secondary mt-3 me-3" (click)="downloadOrder()"> <i class="ci-download"></i>  Descargar comprobante</a>
         <!-- <a class="btn btn-primary mt-3" routerLink="/shop/order-tracking"><i class="ci-location"></i>&nbsp;Track
           order</a> -->
       </div>
