@@ -46,24 +46,24 @@ export class DashboardItemsUiComponent implements OnInit {
   }
 
   logout() {
-    // this.authStore.logout();
+    this.authStore.logout();
 
-    const emptyUser: User = {
-      userName: '',
-      nombre: '',
-      apellido: '',
-      email: '',
-      jwToken: '',
-      isVerified: false,
-      roles: [],
-      urlImage: '',
-    };
+    // const emptyUser: User = {
+    //   userName: '',
+    //   nombre: '',
+    //   apellido: '',
+    //   email: '',
+    //   jwToken: '',
+    //   isVerified: false,
+    //   roles: [],
+    //   urlImage: '',
+    // };
 
 
-    this.store.dispatch(authActions.setData({data: emptyUser, loggedIn: false}));
+    // this.store.dispatch(authActions.setData({data: emptyUser, loggedIn: false}));
 
-    this.localStorageService.removeItem();
-    this.router.navigateByUrl('home');
+    // this.localStorageService.removeItem();
+    // this.router.navigateByUrl('home');
 
   }
 }

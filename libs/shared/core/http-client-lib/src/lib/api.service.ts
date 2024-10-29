@@ -14,8 +14,8 @@ export class ApiService {
     return this.http.get<T>(`${this.api_url}${url}`, {
       headers: this.headers,
       params,
-      responseType: responseType as 'json'
-      // withCredentials: true
+      responseType: responseType as 'json',
+      withCredentials: true
     });
   }
 
@@ -23,21 +23,21 @@ export class ApiService {
   post<T, D>(url: string, data?: D): Observable<T> {
     return this.http.post<T>(`${this.api_url}${url}`, JSON.stringify(data),
     { headers: this.headers,
-      // withCredentials: true
+      withCredentials: true
     });
   }
 
   put<T, D>(url: string, data: D): Observable<T> {
     return this.http.put<T>(`${this.api_url}${url}`, JSON.stringify(data), {
       headers: this.headers,
-      // withCredentials: true
+      withCredentials: true
     });
   }
 
   delete<T>(url: string): Observable<T> {
     return this.http.delete<T>(`${this.api_url}${url}`, {
       headers: this.headers,
-      // withCredentials: true
+      withCredentials: true
     });
   }
 

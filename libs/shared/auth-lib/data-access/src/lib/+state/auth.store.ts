@@ -74,7 +74,8 @@ export const AuthStore = signalStore(
             authService.logout().pipe(
               tapResponse({
                 next: () => {
-                  patchState(store, { data: initialUserValue, loggedIn: false });
+                  // patchState(store, { data: initialUserValue, loggedIn: false });
+                  reduxStore.dispatch(authActions.setData({data: initialUserValue, loggedIn: false}));
                   localStorageService.removeItem();
                   router.navigateByUrl('home');
                 },
