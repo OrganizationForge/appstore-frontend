@@ -49,4 +49,4 @@ jobs:
           docker load -i /home/mgiraudo/store-client.tar
           docker stop append-client || true
           docker rm append-client || true
-          docker run -d -p 80:80 --name append-client ${{ env.IMAGE_TAG }}
+          docker run -d -p 4200:80 --name append-client ${{ env.IMAGE_TAG }}
