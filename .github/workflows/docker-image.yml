@@ -50,3 +50,6 @@ jobs:
           sudo docker stop append-client || true
           sudo docker rm append-client || true
           sudo docker run -d -p 4200:80 --name append-client ${{ env.IMAGE_TAG }}
+          # Ajuste para eliminar imágenes de 'storeapi' y 'store' creadas hace más de 2 días
+          sudo docker images --format "{{.Repository}}:{{.Tag}} {{.ID}} {{.CreatedSince}}" | grep -E "^(store):" | awk '$3 ~ /[2-9]+ days/ {print $2}' | xargs -r sudo docker rmi
+
